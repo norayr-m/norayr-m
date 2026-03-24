@@ -43,6 +43,9 @@ Orbital transformer. Multi-agent graph Turing machine with DRT forward/backward 
 ### [Super Nova](https://norayr-m.github.io/drt-orbital-solver/)
 Just funny fun until the spherical graph decomposition with 2-pass construction — forward graph to ranked sphere nodes mapping and back the graph Turing 3×120 head compute.
 
+### [Ternary Lattice](https://norayr-m.github.io/ternary-lattice/)
+Fractal tetrahedral lattice with ternary (base-3) state logic. sp3 geometry, 4 neighbors per node, `sign(resonance - threshold)` snapping to {-1, 0, +1}. The most efficient integer radix on a self-similar topology that projects naturally onto 2.5D lithographic stacking. Neuromorphic biological simulation architecture.
+
 ---
 
 ## Research Interests
