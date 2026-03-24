@@ -1,8 +1,8 @@
 # Norayr Matevosyan
 
-**Mathematician.** Free boundary problems, distributed reconstruction, information theory.
+**Mathematician.** Free boundary problems, recent interests - distributed reconstruction, information theory.
 
-PhD KTH Stockholm. University of Vienna, University of Cambridge. Collaborated with Luis Caffarelli and Peter Markowich.
+PhD KTH Stockholm. University of Vienna, University of Cambridge. 
 
 ---
 
