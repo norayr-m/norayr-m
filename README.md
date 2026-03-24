@@ -65,9 +65,6 @@ Fractal tetrahedral lattice with ternary (base-3) state logic. sp3 geometry, 4 n
 
 ---
 
-## Acknowledgments
-
-The *Interstellar Harmony* project draws direct inspiration from Hans Zimmer's score for Christopher Nolan's *Interstellar* (2014). The organ tones reaching across spacetime, the treatment of time as a physical variable, the idea that information can propagate through dimensions we don't inhabit — Zimmer's harmonic architecture carries the same conviction as the DRT: incomplete projections, faithfully completed, reconstruct something larger than the original signal. We are grateful for the work that showed us what distributed reconstruction sounds like before we had the math.
 
 ---
 
