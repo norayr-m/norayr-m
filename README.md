@@ -71,7 +71,7 @@ The *Interstellar Harmony* project draws direct inspiration from Hans Zimmer's s
 
 ---
 
-All visualizations and demonstrations were co-authored with Claude (Anthropic).
+All visualizations and demonstrations were co-authored with Claude (Anthropic) and Gemini (Google).
 
 ---
 
