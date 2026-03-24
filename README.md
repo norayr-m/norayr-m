@@ -16,7 +16,7 @@ R(f) = Σ φᵢ · Cᵢ(Πᵢ f)    where ‖R(f)‖ > ‖f‖
 
 Observer graph with boundary projections Πᵢ and internal completions Cᵢ. Aggregate reconstruction exceeds original under sufficient observer orthogonality and faithful completion. Sequence is Cauchy. Memory is reconstruction, not replay.
 
-**Paper:** N. Matevosyan, C. Apidae, A. Petrosyan — *Distributed Reconstruction from Incomplete Boundary Projections with Non-Trivial Internal Completion* (2026)
+**Paper:** N. Matevosyan, C. Anoian, A. Petrosyan — *Distributed Reconstruction from Incomplete Boundary Projections with Non-Trivial Internal Completion* (2026)
 
 ---
 
@@ -41,7 +41,7 @@ Phase 4. Cellular automata on graph topology. Each cell is an observer with loca
 Orbital transformer. Multi-agent graph Turing machine with DRT forward/backward pass. Agents as nodes on a graph, local Turing transitions, distributed reconstruction in real-time. The architecture made visible. Inspired by Hans Zimmer's score for Christopher Nolan's *Interstellar* (2014) — the organ in the dust, time as a physical dimension, love as a variable that crosses the bulk. Zimmer proved that the right harmonic structure can carry information across dimensions. We borrowed the name and the conviction.
 
 ### [Super Nova](https://norayr-m.github.io/drt-orbital-solver/)
-Just funny fun for Nova until the spherical graph decomposition with 2-pass construction — forward graph to ranked sphere nodes mapping and back the graph Turing 3×120 head compute.
+Just funny fun until the spherical graph decomposition with 2-pass construction — forward graph to ranked sphere nodes mapping and back the graph Turing 3×120 head compute.
 
 ---
 
