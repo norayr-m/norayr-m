@@ -73,8 +73,3 @@ All visualizations and demonstrations were co-authored with Claude (Anthropic).
 ---
 
 *Mathematician. Builder. Chicago, IL.*
-
-
----
-### 🤖 Authorship & Architecture Disclosure
-*The underlying mathematical topologies, Socratic Agentic frameworks, and WebGL Partial Differential Equation (PDE) matrices in this repository were collaboratively architected and generated alongside the **Anthropic Gemini/Claude Triad (Nova Math Antigyan, DPA, GT)**.*
