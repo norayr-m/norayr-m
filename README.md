@@ -1,8 +1,8 @@
 # Norayr Matevosyan
 
-**Mathematician.** Free boundary problems, recent interests - distributed reconstruction, information theory.
+**Mathematician.** Free boundary problems, distributed reconstruction, graph Turing computation.
 
-PhD KTH Stockholm. University of Vienna, University of Cambridge. 
+PhD KTH Stockholm. University of Vienna, University of Cambridge. Collaborated with Luis Caffarelli and Peter Markowich. Currently working on the Distributed Reconstruction Theorem — Turing computation on graphs, with applications to bio-digital twins, medical imaging, and multi-agent reconstruction.
 
 ---
 
@@ -16,7 +16,7 @@ R(f) = Σ φᵢ · Cᵢ(Πᵢ f)    where ‖R(f)‖ > ‖f‖
 
 Observer graph with boundary projections Πᵢ and internal completions Cᵢ. Aggregate reconstruction exceeds original under sufficient observer orthogonality and faithful completion. Sequence is Cauchy. Memory is reconstruction, not replay.
 
-**Paper:** N. Matevosyan, C. Anoian, A. Petrosyan — *Distributed Reconstruction from Incomplete Boundary Projections with Non-Trivial Internal Completion* (2026)
+**Paper:** N. Matevosyan, C. Apidae, A. Petrosyan — *Distributed Reconstruction from Incomplete Boundary Projections with Non-Trivial Internal Completion* (2026)
 
 ---
 
@@ -40,11 +40,17 @@ Phase 4. Cellular automata on graph topology. Each cell is an observer with loca
 ### [Interstellar Harmony](https://norayr-m.github.io/interstellar-harmony/)
 Orbital transformer. Multi-agent graph Turing machine with DRT forward/backward pass. Agents as nodes on a graph, local Turing transitions, distributed reconstruction in real-time. The architecture made visible. Inspired by Hans Zimmer's score for Christopher Nolan's *Interstellar* (2014) — the organ in the dust, time as a physical dimension, love as a variable that crosses the bulk. Zimmer proved that the right harmonic structure can carry information across dimensions. We borrowed the name and the conviction.
 
-### [Super Nova](https://norayr-m.github.io/drt-orbital-solver/)
-Just funny fun until the spherical graph decomposition with 2-pass construction — forward graph to ranked sphere nodes mapping and back the graph Turing 3×120 head compute.
+### [Supernova 3D Solver](https://norayr-m.github.io/drt-orbital-solver/)
+Phase 6. 35 Z-dimensional graph mathematics. Eigenvectors, matrix operations, multi-agent pathfinding across hierarchical 3D structures. The orbital solver — concentric spheres of interconnected nodes.
+
+### [Graph-DRT](https://norayr-m.github.io/graph-drt/)
+DRT on physical graph topologies. Nodes as observers, rank boundaries as isolating surfaces, local measurements as projections, distributed reconstruction of global state. Companion: CityDRT — urban macro-scale simulation.
 
 ### [Ternary Lattice](https://norayr-m.github.io/ternary-lattice/)
-Fractal tetrahedral lattice with ternary (base-3) state logic. sp3 geometry, 4 neighbors per node, `sign(resonance - threshold)` snapping to {-1, 0, +1}. The most efficient integer radix on a self-similar topology that projects naturally onto 2.5D lithographic stacking. Neuromorphic biological simulation architecture.
+4D onto 2.5D. Fractal trisistor matrix — recursive tetrahedral network where nodes operate in three states (-1, 0, +1). Macroscopic ether polyphonic wave sweeps through 3D space. GPU vec4 constraints on a tetrahedron topology.
+
+### [Three Basket Egg Save](https://norayr-m.github.io/three-basket-backup_one-liner/)
+One-line distributed backup scheduler. `tick = lambda f, d: (baskets[d%3].i_frame() if not f else baskets[f%3].p_frame())` — coprime rotation distributes I-frames (full snapshots) and P-frames (incremental deltas) across three independent storage targets. The same `(mod 3, period 12)` abstract machine appears in DNA codon reading frames, 3-phase power grids, MPEG GOP structure, Raft consensus, ZFS scrub rotation, Postgres replica sync, and the kissing number in R³. Includes a [volumetric lattice gas automaton](https://norayr-m.github.io/three-basket-backup_one-liner/volume.html) running the same lambda as a zero-loss 3D physics simulation on a 16³ tetrahedron lattice.
 
 ---
 
@@ -52,7 +58,9 @@ Fractal tetrahedral lattice with ternary (base-3) state logic. sp3 geometry, 4 n
 
 **Free boundary problems** — tangential touch between free and fixed boundaries (KTH thesis, 2003). Almost monotonicity formulas for elliptic and parabolic operators with variable coefficients (with A. Petrosyan, CPAM 2011). Two-phase semilinear free boundary problem with degenerate phase (with A. Petrosyan, Calc. Var. PDE 2011).
 
-**Distributed reconstruction** — formalizing how incomplete observers collectively reconstruct representations exceeding the original. Rooted in Arakelian approximation theory (tangential approximation, Arakelian sets). Application to multi-agent systems and information theory.
+**Distributed reconstruction** — formalizing how incomplete observers collectively reconstruct representations exceeding the original. Rooted in Arakelian approximation theory (tangential approximation, Arakelian sets). Applications to bio-digital twins, multi-agent systems, and information theory.
+
+**Graph Turing computation** — Turing machines on graph topologies. Multi-agent computation where each node executes local transitions and distributed reconstruction emerges from the interaction. DRT as a computational substrate.
 
 **Information theory** — attention as resource allocation under bandwidth constraints. Kelvin inversion eliminating search cost. Missing data as signal.
 
@@ -65,10 +73,15 @@ Fractal tetrahedral lattice with ternary (base-3) state logic. sp3 geometry, 4 n
 
 ---
 
+## Acknowledgments
+
+The *Interstellar Harmony* project draws direct inspiration from Hans Zimmer's score for Christopher Nolan's *Interstellar* (2014). The organ tones reaching across spacetime, the treatment of time as a physical variable, the idea that information can propagate through dimensions we don't inhabit — Zimmer's harmonic architecture carries the same conviction as the DRT: incomplete projections, faithfully completed, reconstruct something larger than the original signal. We are grateful for the work that showed us what distributed reconstruction sounds like before we had the math.
 
 ---
 
-All visualizations and demonstrations were co-authored with Claude (Anthropic) and Gemini (Google).
+## AI Co-Authorship
+
+All interactive demonstrations were co-authored with AI assistants: [Claude](https://claude.ai) (Anthropic) and [Gemini](https://gemini.google.com) (Google). The math is mine. The code was built collaboratively. Both are credited.
 
 ---
 
