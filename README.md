@@ -20,6 +20,24 @@ Observer graph with boundary projections Πᵢ and internal completions Cᵢ. Ag
 
 ---
 
+## Eigencone Constellations on Ranked Spheres
+
+**Repository:** [eigencone-constellations](https://github.com/norayr-m/eigencone-constellations)
+
+A framework for embedding bounded-degree spatial graphs into concentric spherical shells and partitioning each shell into spectrally weighted territories. The construction starts from the graph Laplacian eigenbasis and assigns vertices to shells by BFS distance from a root, then tessellates each shell into "eigencone" regions whose solid angles reflect the spectral mass of the corresponding subgraph.
+
+We do not claim theoretical optimality. What we share is an intuition — that the natural ordering encoded in biological sequence (backbone connectivity) combined with spatial proximity (contact edges) produces graphs whose spectral structure aligns with physically meaningful geometry — and empirical evidence that appears to support it:
+
+- A backbone-sequence graph of the *E. coli* 70S ribosome (PDB 4V9D, 20,907 atoms) is constructed with **zero free parameters**: sequential backbone edges + Cα/P contacts at 8 Å + a deterministic minimum bridge rule.
+- The isomorphic walk — a greedy forward-only descent on the ternary state space — converges with **k/d_L = 1.000** on 14,906 shared backbone atoms between two ribosomal conformations (4V9D → 4V9C, 10,284 steps). We observe perfect ratchet efficiency but make no claim this generalizes beyond the structures tested.
+- SpMV gradient computation runs at **162 µs/flip** on Apple M2 silicon (1.67 s total, < 5 MB RSS), suggesting the sparse structure is hardware-friendly.
+
+The paper and all code, data, and benchmarks are in the repository under Apache 2.0.
+
+**Paper:** N. Matevosyan — *Eigencone Constellations on Ranked Spheres* (2026, preprint)
+
+---
+
 ## Live Demonstrations
 
 ### [decoder-of-the-encoder](https://norayr-m.github.io/decoder-of-the-encoder/)
