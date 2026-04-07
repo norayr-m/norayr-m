@@ -6,18 +6,7 @@ PhD KTH Stockholm. University of Vienna, University of Cambridge. Collaborated w
 
 ---
 
-## Distributed Reconstruction Theorem
-
-**Core result:** Incomplete observers interacting iteratively reconstruct representations that exceed the original.
-
-```
-R(f) = Σ φᵢ · Cᵢ(Πᵢ f)    where ‖R(f)‖ > ‖f‖
-```
-
-Observer graph with boundary projections Πᵢ and internal completions Cᵢ. Aggregate reconstruction exceeds original under sufficient observer orthogonality and faithful completion. Sequence is Cauchy. Memory is reconstruction, not replay.
-
-**Paper:** N. Matevosyan, C. Apidae, A. Petrosyan — *Distributed Reconstruction from Incomplete Boundary Projections with Non-Trivial Internal Completion* (2026)
-
+## Some Fun Dashboards
 ---
 
 ## Live Demonstrations
