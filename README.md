@@ -11,6 +11,9 @@ PhD KTH Stockholm. University of Vienna, University of Cambridge. Currently work
 
 ## Live Demonstrations
 
+### [DagDB Engine](https://github.com/norayr-m/dagdb-engine) — 6-Bounded Ranked DAG Database
+GPU-accelerated graph database on Apple Silicon. Every node has a programmable LUT6 (64-bit lookup table). Ranked DAG evaluation, Morton Z-curve, 7-coloring parallelism, Carlos Delta persistence. Daemon architecture with POSIX shared memory for zero-copy UMA access. PostgreSQL extension via Rust/pgrx. 27/27 tests, 1M nodes at 0.71 GCUPS. [**Presentation**](https://norayr-m.github.io/DagDB/) | [**SQL Architecture**](https://norayr-m.github.io/DagDB/sql-architecture.html) | [**Podcast (30 min)**](https://norayr-m.github.io/DagDB/podcast.html) | [**Grid Demo**](https://norayr-m.github.io/DagDB/grid-demo.html)
+
 ### [Savanna Engine](https://github.com/norayr-m/savanna-engine) — 100 Billion Cells on One Laptop
 Ultra-scale spatial lattice engine. 107,374,182,400 autonomous cells (predator-prey ecosystem on hex grid) simulated on Apple M5 Max. 15.8 GCUPS peak. Morton Z-curve memory layout (2.11× at 1B cells). GPU state init in 3.8ms (genesis.metal). 7-coloring lock-free parallelism. WebGL real-time playback. Lossless delta compression: 50× via XOR + Zstandard ([Carlos Mateo architecture](https://github.com/carlosmateo10/delta-compression-demo), MIT License). [**YouTube: 100B test**](https://youtu.be/6QiU7kUD3Os) | [**About**](https://norayr-m.github.io/savanna-engine/about.html) | [**Morton charts**](https://norayr-m.github.io/savanna-engine/morton_charts.html)
 
