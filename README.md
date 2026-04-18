@@ -11,6 +11,9 @@ PhD KTH Stockholm. University of Vienna, University of Cambridge. Currently work
 
 ## Live Demonstrations
 
+### [finance_sp500](https://github.com/norayr-m/finance_sp500) — Super-Exponential S&P 500 Regime Study
+A year ago I predicted the S&P 500 would hit 7000 in spring 2026. On April 17, 2026 it closed at 7041. The math I derived by eye (ln(ln(price)) linearity on the post-2010 leg) turns out to be Didier Sornette's **Log-Periodic Power Law Singularity** model, published since 1996. Includes three interactive decks: [**slides**](https://norayr-m.github.io/finance_sp500/html/slides.html) (Emma narrated) | [**George + Emma podcast**](https://norayr-m.github.io/finance_sp500/html/interview.html) (synced charts) | [**technical dive with citations**](https://norayr-m.github.io/finance_sp500/html/technical_dive.html). Amateur notebook, nothing is investment advice.
+
 ### [DagDB Engine](https://github.com/norayr-m/dagdb-engine) — 6-Bounded Ranked DAG Database
 GPU-accelerated graph database on Apple Silicon. Every node has a programmable LUT6 (64-bit lookup table). Ranked DAG evaluation, Morton Z-curve, 7-coloring parallelism, Carlos Delta persistence. Daemon architecture with POSIX shared memory for zero-copy UMA access. PostgreSQL extension via Rust/pgrx. 27/27 tests, 1M nodes at 0.71 GCUPS. [**Presentation**](https://norayr-m.github.io/DagDB/) | [**SQL Architecture**](https://norayr-m.github.io/DagDB/sql-architecture.html) | [**Podcast (30 min)**](https://norayr-m.github.io/DagDB/podcast.html) | [**Grid Demo**](https://norayr-m.github.io/DagDB/grid-demo.html)
 
