@@ -6,6 +6,10 @@ PhD KTH Stockholm. University of Vienna, University of Cambridge. Currently work
 
 ---
 
+> This is an amateur engineering project. We are not HPC professionals and make no competitive claims. Numbers speak; ego doesn't. Errors are likely.
+
+---
+
 ## Some Fun Dashboards
 ---
 
@@ -40,9 +44,6 @@ Orbital transformer. Multi-agent graph Turing machine with DRT forward/backward 
 
 ### [Supernova 3D Solver](https://norayr-m.github.io/drt-orbital-solver/)
 Phase 6. 35 Z-dimensional graph mathematics. Eigenvectors, matrix operations, multi-agent pathfinding across hierarchical 3D structures. The orbital solver — concentric spheres of interconnected nodes.
-
-### [Graph-DRT](https://norayr-m.github.io/graph-drt/)
-DRT on physical graph topologies. Nodes as observers, rank boundaries as isolating surfaces, local measurements as projections, distributed reconstruction of global state. Companion: CityDRT — urban macro-scale simulation.
 
 ### [Ternary Lattice](https://norayr-m.github.io/ternary-lattice/)
 4D onto 2.5D. Fractal trisistor matrix — recursive tetrahedral network where nodes operate in three states (-1, 0, +1). Macroscopic ether polyphonic wave sweeps through 3D space. GPU vec4 constraints on a tetrahedron topology.
