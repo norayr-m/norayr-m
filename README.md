@@ -2,7 +2,7 @@
 
 **Mathematician.** Free boundary problems, distributed reconstruction, graph Turing computation.
 
-PhD KTH Stockholm. University of Vienna, University of Cambridge. Currently working on the Distributed Reconstruction Theorem — Turing computation on graphs, with applications to bio-digital twins, medical imaging, and multi-agent reconstruction.
+PhD KTH Stockholm. University of Vienna, University of Cambridge. Currently working on high performance bio computational algorythms, graph database enignes with native apple GPU acceleration. Motivation is applications to bio-digital twins, medical imaging, and multi-agent reconstruction.
 
 ---
 
