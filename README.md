@@ -28,10 +28,10 @@ Ultra-scale spatial lattice engine. 107,374,182,400 autonomous cells (predator-p
 Bach's Fugue No.2 in C minor (BWV 847) mapped to a navigable graph tree. Each voice becomes a branch, each note a leaf. The fugue IS the DRT: subject = f, voice entries = projections Πᵢ, contrapuntal development = internal completion Cᵢ, the full fugue = R(f) > f. Temporal glow, Penrose chainmail curtain, fiber-optic light strands. Single self-contained HTML file.
 
 ### [DRT Generator](https://norayr-m.github.io/drt-generator/)
-The 7-column signal generator. Produces observer configurations and tests reconstruction fidelity across varying orthogonality conditions.
+A 7-column sparse matrix-vector pipeline drawn two ways — as a rigid logic flowchart and as a deep graph — making the equivalence between rule-based pipelines and neural networks visible on one example. **[Live demo →](https://norayr-m.github.io/drt-generator/)** | **[Trio white paper →](https://norayr-m.github.io/drt-generator/whitepaper.html)** explains the generator-cell-simulator-scanner workflow tied to bio digital twins.
 
 ### [DRT Scanner](https://norayr-m.github.io/drt-scanner/)
-The 7-column signal scanner. Analyzes reconstruction quality, identifies hallucination boundaries, measures faithful completion convergence.
+The transpose-pass companion to the Generator. Runs the same matrices in reverse to produce a per-configuration inversion-fidelity diagnostic — green columns where reconstruction is faithful, red where information has been lost. The bio-digital-twin retrodiction question (*what stimulus produced this measured tissue state?*) on a small enough example to fit in a browser tab. **[Live demo →](https://norayr-m.github.io/drt-scanner/)** | **[White paper →](https://norayr-m.github.io/drt-scanner/whitepaper.html)**.
 
 ### [DRT Pipeline](https://norayr-m.github.io/drt-pipeline/)
 The Bach BWV 847 pipeline — composer and decomposer working in parallel. Forward pass: composition → decomposition. Backward pass: decomposition → reconstruction. Visual proof that R(f) > f.
