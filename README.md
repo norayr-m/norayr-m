@@ -39,11 +39,8 @@ The Bach BWV 847 pipeline — composer and decomposer working in parallel. Forwa
 ### [Cellular Graph Simulator](https://norayr-m.github.io/drt-cell-simulator/)
 Phase 4. Cellular automata on graph topology. Each cell is an observer with local rules. Emergent global behavior from distributed local transitions. DRT as biology.
 
-### [Interstellar Harmony](https://norayr-m.github.io/interstellar-harmony/)
-Orbital transformer. Multi-agent graph Turing machine with DRT forward/backward pass. Agents as nodes on a graph, local Turing transitions, distributed reconstruction in real-time. The architecture made visible. Inspired by Hans Zimmer's score for Christopher Nolan's *Interstellar* (2014) — the organ in the dust, time as a physical dimension, love as a variable that crosses the bulk. Zimmer proved that the right harmonic structure can carry information across dimensions. We borrowed the name and the conviction.
-
-### [Supernova 3D Solver](https://norayr-m.github.io/drt-orbital-solver/)
-Phase 6. 35 Z-dimensional graph mathematics. Eigenvectors, matrix operations, multi-agent pathfinding across hierarchical 3D structures. The orbital solver — concentric spheres of interconnected nodes.
+### [Bio Digital Twin](https://norayr-m.github.io/drt-cell-simulator/digital_twin.html)
+Real-time digital twin of biological organs on consumer hardware. A huge zoom-out where bio-brain-like structures tile millions of times all working at the same time — sort of a Savanna prototype. Each cell is a Graph Turing Machine: sense → compute → emit. Ternary metabolic states (active / resting / refractory). Chromatic parallel scheduling at **17 billion ops per second on M5 Max**. Scent diffusion stands in for molecular transport and blood flow. The chromatic-scheduling and ternary-state choices made here informed Savanna's architecture later. Scale on M5 Max: liver lobule 1M cells at 1,250 ticks/sec; brain cortical column 100K cells at 12,500 ticks/sec; full liver at 100M cells, 12 ticks/sec. Real-time across the table. **[Live demo →](https://norayr-m.github.io/drt-cell-simulator/digital_twin.html)** | The trio's [white paper](https://norayr-m.github.io/drt-generator/whitepaper.html) explains the math (sparse mat-vec generator, receptor-cell field, transpose-pass scanner) tied to the bio digital twin application.
 
 ### [Ternary Lattice](https://norayr-m.github.io/ternary-lattice/)
 4D onto 2.5D. Fractal trisistor matrix — recursive tetrahedral network where nodes operate in three states (-1, 0, +1). Macroscopic ether polyphonic wave sweeps through 3D space. GPU vec4 constraints on a tetrahedron topology.
@@ -69,12 +66,6 @@ One-line distributed backup scheduler. `tick = lambda f, d: (baskets[d%3].i_fram
 
 - [Google Scholar](https://scholar.google.com/citations?user=qV1NHwkAAAAJ)
 - [Math Genealogy](https://www.mathgenealogy.org/id.php?id=83126)
-
----
-
-## Acknowledgments
-
-The *Interstellar Harmony* project draws direct inspiration from Hans Zimmer's score for Christopher Nolan's *Interstellar* (2014). The organ tones reaching across spacetime, the treatment of time as a physical variable, the idea that information can propagate through dimensions we don't inhabit — Zimmer's harmonic architecture carries the same conviction as the DRT: incomplete projections, faithfully completed, reconstruct something larger than the original signal. We are grateful for the work that showed us what distributed reconstruction sounds like before we had the math.
 
 ---
 
