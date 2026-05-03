@@ -12,6 +12,12 @@
 }
 /* Palette themes — Norayr 2026-05-03 iteration 2.7 directive: test color schemes, away from heavy black+gold */
 /* Default theme = current dark gold (kept as base in :root from golden.css) */
+/* Cover-backdrop scrim vars — themed per palette so the gradient blends rather than fights bg */
+:root {
+  --scrim-strong: rgba(11,10,8,0.85);
+  --scrim-mid:    rgba(11,10,8,0.55);
+  --scrim-soft:   rgba(11,10,8,0.35);
+}
 [data-theme="cream"] {
   --bg: #faf6ec;
   --bg-2: #ffffff;
@@ -20,6 +26,9 @@
   --gold-soft: #8a6d20;
   --muted: #6a6a6a;
   --border: rgba(0,0,0,0.10);
+  --scrim-strong: rgba(250,246,236,0.92);
+  --scrim-mid:    rgba(250,246,236,0.65);
+  --scrim-soft:   rgba(250,246,236,0.35);
 }
 [data-theme="petrol"] {
   --bg: #0e2227;
@@ -29,6 +38,9 @@
   --gold-soft: #b8853a;
   --muted: #a8a294;
   --border: rgba(212,160,74,0.18);
+  --scrim-strong: rgba(14,34,39,0.85);
+  --scrim-mid:    rgba(14,34,39,0.55);
+  --scrim-soft:   rgba(14,34,39,0.35);
 }
 [data-theme="warm-dark"] {
   --bg: #1c1814;
@@ -38,6 +50,9 @@
   --gold-soft: #b8983a;
   --muted: #b5ad9e;
   --border: rgba(212,175,55,0.15);
+  --scrim-strong: rgba(28,24,20,0.85);
+  --scrim-mid:    rgba(28,24,20,0.55);
+  --scrim-soft:   rgba(28,24,20,0.35);
 }
 /* Palette switcher in masthead — Norayr 2026-05-03 iteration 2.8 single-page selector */
 .palette-switcher {
@@ -331,7 +346,7 @@ article.slide.cover {
   content: "";
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(to right, rgba(11,10,8,0.85) 0%, rgba(11,10,8,0.55) 50%, rgba(11,10,8,0.35) 100%);
+  background: linear-gradient(to right, var(--scrim-strong) 0%, var(--scrim-mid) 50%, var(--scrim-soft) 100%);
 }
 article.slide.cover > *:not(.cover-backdrop) {
   position: relative;
@@ -608,8 +623,8 @@ article.slide.current-chapter.divider {
   <span class="doc-title"><strong>The Work</strong> — assembled deck</span>
   <div class="palette-switcher" role="group" aria-label="Colour scheme">
     <span class="palette-label">Theme</span>
-    <button type="button" data-set-theme="dark">Dark</button>
     <button type="button" data-set-theme="cream">Cream</button>
+    <button type="button" data-set-theme="dark">Dark</button>
     <button type="button" data-set-theme="petrol">Petrol</button>
     <button type="button" data-set-theme="warm-dark">Warm</button>
   </div>
