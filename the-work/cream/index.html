@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Work — assembled deck</title>
-<link rel="stylesheet" href="golden.css">
+<link rel="stylesheet" href="../golden.css">
 <style>
 :root {
   --nav-w: 280px;
@@ -284,7 +284,7 @@ article.slide.cover {
 .cover-backdrop {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background-image: url('assets/vangogh_simplex_4x.png');
+  background-image: url('../assets/vangogh_simplex_4x.png');
   background-size: cover;
   background-position: center center;
   z-index: 0;
@@ -565,7 +565,7 @@ article.slide.current-chapter.divider {
 }
 </style>
 </head>
-<body>
+<body data-theme="cream">
 <header class="deck-header">
   <span class="kicker">A peculiar piece of software · and the substrate underneath it</span>
   <span class="sep">·</span>
@@ -626,7 +626,7 @@ article.slide.current-chapter.divider {
     </div>
 
     <audio id="deckAudio" preload="metadata">
-      <source src="audio/deck_master.mp3" type="audio/mpeg">
+      <source src="../audio/deck_master.mp3" type="audio/mpeg">
     </audio>
 
     <div class="player-controls">
@@ -3508,7 +3508,7 @@ demo run plan + technical encoding).</em></p>
 <hr />
 <h2 id="what">What</h2>
 <div style="text-align:center;margin:18px 0;">
-<p><img src="assets/tokyo_ca_voronoi_t160.png" alt="Tokyo CA at tick 160 — Voronoi tessellation visible as bright yellow ridges crossing the field" style="max-width:600px;width:100%;border:1px solid #3a3225;border-radius:4px;"/></p>
+<p><img src="../assets/tokyo_ca_voronoi_t160.png" alt="Tokyo CA at tick 160 — Voronoi tessellation visible as bright yellow ridges crossing the field" style="max-width:600px;width:100%;border:1px solid #3a3225;border-radius:4px;"/></p>
 </div>
 <p>A 200×200 hex-grid cellular automaton, <strong>encoded as a ranked
 DagDB DAG</strong> with the Greenberg-Hastings 3-state excitable
