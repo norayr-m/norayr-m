@@ -15,6 +15,9 @@ PhD KTH Stockholm. University of Vienna, University of Cambridge. Currently work
 
 ## Live Demonstrations
 
+### [the work](https://norayr-m.github.io/norayr-m/the-work/) — interactive substrate preview
+Documentation-style chaptered presentation of the bio-digital-twin substrate. Sticky left contents-tree with scroll-spy, top-right quicknav strip, 27 chapters of audio narration (49 min master), 13+ inline visualizations spanning the Savanna engine, DagDB engine, isomorphic-walk proteins, applied math lineage, architecture details, and theoretical-math open directions. Calibration discipline throughout — every numeric claim labelled verified, spec, or overclaim-risk. The deck reports the headline number: **14.4 GCUPS at 1 billion hex cells, 522 ms/tick on M5 Max, 10-run published with 95% CI**. Companion [wiki](https://github.com/norayr-m/norayr-m/wiki) has the same content as static text for reading and search.
+
 ### [finance_sp500](https://github.com/norayr-m/finance_sp500) — S&P 500 eyeball
 Interactive charts on Shiller 1871–2026 monthly data: a [main chart](https://norayr-m.github.io/finance_sp500/html/sp500_shiller_1871_2026.html) with 3-segment PWLF, two-minima eyeball trend, L¹ fit from 2009, and a [log-log transform](https://norayr-m.github.io/finance_sp500/html/sp500_loglog.html) with draggable anchor circles and live slope/CAGR readout. In April 2025 I drew a line by eye that said 7000 in spring 2026; on April 17 2026 it closed at 7041. One correct call is not a track record. Amateur notebook. Nothing is investment advice.
 
