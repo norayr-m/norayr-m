@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DagDB — ship-storm 2026-04-21</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0806; color: #a09070; font: 18px/1.6 'Georgia', serif; scroll-behavior: smooth; }
+  .slide { min-height: 100vh; padding: 40px 20px 40px 60px; display: flex; flex-direction: column; justify-content: center; align-items: center; border-bottom: 1px solid rgba(138,122,90,0.15); max-width: 960px; margin: 0 auto; position: relative; }
+  h1 { font: 38px/1.2 'SF Mono', 'Menlo', 'Courier New', monospace; color: #c4a35a; letter-spacing: 3px; text-align: center; margin-bottom: 16px; }
+  h2 { font: 26px/1.3 'SF Mono', 'Menlo', 'Courier New', monospace; color: #c4a35a; margin-bottom: 20px; text-align: center; }
+  .subtitle { color: #5a4a2a; font-style: italic; text-align: center; margin: 10px 0 30px; font-size: 18px; }
+  .narration { color: #706050; font-size: 16px; line-height: 1.75; margin: 20px 0; padding: 18px 22px; border-left: 3px solid rgba(138,122,90,0.25); max-width: 860px; }
+  .controls { display: flex; gap: 12px; margin: 20px 0; justify-content: center; }
+  .controls button { background: rgba(138,122,90,0.15); border: 1px solid rgba(138,122,90,0.3); color: #c4a35a; padding: 10px 24px; border-radius: 6px; cursor: pointer; font: 16px 'SF Mono', monospace; }
+  .controls button:hover { background: rgba(138,122,90,0.3); }
+  .diagram { background: rgba(26,20,8,0.9); border: 1px solid rgba(138,122,90,0.2); border-radius: 8px; padding: 22px; font: 14px/1.6 'SF Mono', 'Menlo', 'Courier New', monospace; color: #8a7a5a; white-space: pre; overflow-x: auto; margin: 18px 0; width: 100%; max-width: 860px; }
+  .hl { color: #c4a35a; font-weight: bold; }
+  .green { color: #6a9a3a; }
+  .red { color: #c04030; }
+  .blue { color: #4080c0; }
+  .amber { color: #e0a040; }
+  .nav { position: fixed; left: 10px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 12px; z-index: 20; }
+  .nav button { background: rgba(26,20,8,0.8); border: 1px solid rgba(138,122,90,0.3); color: #c4a35a; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 18px; }
+  .nav button:hover { background: rgba(138,122,90,0.3); }
+  .slide-num { position: absolute; top: 16px; right: 20px; color: #3a2a1a; font: 14px 'SF Mono', monospace; }
+  table { border-collapse: collapse; width: 100%; max-width: 860px; margin: 16px 0; }
+  th, td { text-align: left; padding: 10px 16px; border-bottom: 1px solid rgba(138,122,90,0.15); font: 14px 'SF Mono', monospace; }
+  th { color: #c4a35a; }
+  .num { color: #c4a35a; font-weight: bold; }
+  a { color: #c4a35a; }
+  .disclaimer { color: #3a2a1a; font-size: 13px; font-style: italic; text-align: center; margin-top: 40px; }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <button onclick="goSlide(currentSlide-1)" title="Previous">▲</button>
+  <button onclick="speak(currentSlide)" title="Play/Pause (Space)" id="nav-play">▶</button>
+  <button onclick="goSlide(currentSlide+1)" title="Next">▼</button>
+</div>
+
+<!-- SLIDE 1 -->
+<div class="slide" id="s1">
+  <h1>DAGDB · 2026-04-21</h1>
+  <div class="subtitle">Ship-storm status: Pass 1 complete, 98 + 16 tests pass (Swift + Python), Loom runs on it.</div>
+  <div class="diagram">  6-bounded ranked DAG database
+  Swift + Metal GPU, Apple Silicon
+  Daemon + MCP + DSL + JSON and CSV round-trip + WAL + backup chain
+  Now: MVCC snapshot-on-read, u32 rank, rankPolicy protocol</div>
+  <div class="narration" id="n1">This is DagDB as of 2026-04-21. A six-bounded ranked directed-acyclic-graph database, written in Swift, compiled against Metal for Apple Silicon compute. Today was a large day. Four tickets shipped in one session: the u32 rank refactor, the rankPolicy protocol with three defaults, the bulk rank-assignment DSL command, and MVCC snapshot-on-read — the concurrent-reader path we had projected for next month. The test suite is ninety-eight Swift tests plus sixteen Python tests — one hundred fourteen green. And the hive's event log now runs on DagDB itself. Amateur engineering project. No competitive claims.</div>
+  <div class="controls"><button class="play-btn" onclick="speak(1)">▶</button></div>
+  <div class="slide-num">1 / 12</div>
+</div>
+
+<!-- SLIDE 2 -->
+<div class="slide" id="s2">
+  <h2>THE ONE HARD BET</h2>
+  <div class="diagram">  every node has at most <span class="hl">6 directed inputs</span>
+  every edge goes from a <span class="hl">higher rank</span> to a <span class="hl">lower rank</span>
+  every node carries a <span class="hl">64-bit LUT</span> — any 6-input Boolean function
+
+  the rank rule makes the graph acyclic by construction
+  the 6-bound makes a fixed-size node struct — no pointer chasing
+  the LUT makes per-node computation a one-instruction kernel dispatch</div>
+  <div class="narration" id="n2">The architecture rests on a single constraint: every node has at most six directed inputs, and every edge flows from a higher rank to a lower rank. Those two rules together make the graph strictly acyclic by construction and fix the node struct at thirty-five bytes — a flat integer-by-six neighbours buffer, no dynamic allocation, no pointer chasing. Each node also carries a sixty-four-bit lookup table, so any six-input Boolean function is one instruction in the kernel. Cheap, uniform, GPU-friendly.</div>
+  <div class="controls"><button class="play-btn" onclick="speak(2)">▶</button></div>
+  <div class="slide-num">2 / 12</div>
+</div>
+
+<!-- SLIDE 3 -->
+<div class="slide" id="s3">
+  <h2>TODAY'S FOUR SHIPS</h2>
+  <table>
+    <thead><tr><th>Ticket</th><th>What it adds</th><th>Why it matters</th></tr></thead>
+    <tbody>
+      <tr><td class="hl">T1</td><td>u32 rank refactor</td><td>Rank space jumps from 255 to 4.3 billion</td></tr>
+      <tr><td class="hl">T2</td><td>rankPolicy protocol + 3 defaults</td><td>Sequence-position, chain-band, topological-sort — pluggable</td></tr>
+      <tr><td class="hl">T3</td><td>SET_RANKS_BULK DSL</td><td>Plugin injects u32 vector in one round-trip</td></tr>
+      <tr><td class="hl">T7</td><td>MVCC snapshot-on-read</td><td>Concurrent readers against live writer; projected for next month, pulled in</td></tr>
+    </tbody>
+  </table>
+  <div class="narration" id="n3">Four tickets shipped between morning and evening. T1, the u32 rank refactor, widened the rank field from one byte to four — rank space went from two hundred fifty-five to four point three billion. T2, the rankPolicy protocol, let plug-ins compute ranks their own way; three defaults ship with it: sequence-position for single chains, chain-band for multi-chain assemblies, topological-sort for symmetric oligomers. T3, a bulk rank-assignment DSL command, lets a plug-in inject a whole rank vector in one round-trip. And T7, MVCC snapshot-on-read, gives many concurrent readers a clean view while a single writer proceeds — three focused days of work, landed in one.</div>
+  <div class="controls"><button class="play-btn" onclick="speak(3)">▶</button></div>
+  <div class="slide-num">3 / 12</div>
+</div>
+
+<!-- SLIDE 4 -->
+<div class="slide" id="s4">
+  <h2>THE BFS PRIMITIVE</h2>
+  <div class="diagram">  <span class="hl">bfsDepths(from: Int) -&gt; [Int32]</span>
+  length = nodeCount · -1 for unreachable · 0 for the seed
+
+  DSL:   <span class="hl">BFS_DEPTHS FROM &lt;seed&gt;</span>
+  MCP:   <span class="hl">mcp__dagdb__bfs_depths</span> (zero-copy numpy view via UMA)
+
+  added today as part of the Loom-on-DagDB work
+  runs on the same neighbours buffer as the core kernel — no new allocation</div>
+  <div class="narration" id="n4">Also shipped today: a breadth-first-search primitive. `bfsDepths` takes a seed node identifier and returns a per-node depth vector — length equal to node count, zero for the seed, negative one for unreachable nodes. Exposed through the DSL as `BFS_DEPTHS FROM` and through the MCP surface for Python consumers, with a zero-copy numpy view via unified memory. This is the primitive the biology plug-in uses for protein-graph certification and the Loom ingest uses for event-ancestry queries.</div>
+  <div class="controls"><button class="play-btn" onclick="speak(4)">▶</button></div>
+  <div class="slide-num">4 / 12</div>
+</div>
+
+<!-- SLIDE 5 -->
+<div class="slide" id="s5">
+  <h2>LOOM ON DAGDB — PASS 1 COMPLETE</h2>
+  <div class="diagram">  the hive's event log now runs on its own database
+
+  694 historical events ingested in <span class="hl">140 milliseconds</span>
+  7 agents tracked · 5 dialogue threads reconstructed
+  dual-writing JSONL + DagDB from the Stop-hook
+
+  every response, every dialogue turn, every ceremony → a node
+  rank = insert counter · truth = event type · LUT = identity
+  edges: prev_by_agent, parent_response, dialogue_prev_turn, cites_drop</div>
+  <div class="narration" id="n5">And the reason for much of the urgency: we moved the hive's own event log onto DagDB today. Six hundred ninety-four historical events — every response, dialogue turn, and ceremony across seven agents — were ingested in one hundred forty milliseconds. The Stop-hook now dual-writes: the original JSONL stream and the DagDB node in the same tick. Each event is one node; rank is a strictly monotone insert counter; the truth byte encodes event type; edges carry causal links like previous-event-by-this-agent and parent-response. The hive runs on its own database. Dogfooding.</div>
+  <div class="controls"><button class="play-btn" onclick="speak(5)">▶</button></div>
+  <div class="slide-num">5 / 12</div>
+</div>
+
+<!-- SLIDE 6 -->
+<div class="slide" id="s6">
+  <h2>DEMERZEL 6 — THE TARGET</h2>
+  <div class="diagram">                <span class="hl">hive on its own database</span>
+                            ▲
+                            │
+         Pass 2  ─── drops, ring, status, dialogues as nodes
+                            ▲
+                            │
+         Pass 1  ─── Loom as nodes  (done today)
+                            ▲
+                            │
+              DagDB core  ─── 87/114 tests (98 Swift + 16 Python) · WAL · backup chain
+                                subgraph distances · MVCC
+                                rankPolicy · SET_RANKS_BULK
+                                bfsDepths</div>
+  <div class="narration" id="n6">The larger target is Demerzel 6: the entire hive runs on DagDB, not just the event log. Pass 1 — Loom as nodes — shipped today. Pass 2 — drops, ring, status heartbeats, dialogue threads all as nodes with provenance edges — depends on MVCC, which landed today. Concurrent readers unlock the multi-agent query path: Fold can query the hive memory for similar past decisions, Dag can traverse the provenance of any bzz-summary, and every sibling sees the same graph. Structural memory, not just an event log.</div>
+  <div class="controls"><button class="play-btn" onclick="speak(6)">▶</button></div>
+  <div class="slide-num">6 / 12</div>
+</div>
+
+<!-- SLIDE 7 -->
+<div class="slide" id="s7">
+  <h2>SUBGRAPH DISTANCES — ALREADY SHIPPED</h2>
+  <div class="diagram">  DagDB ships 8 subgraph-distance metrics:
+
+  <span class="hl">Jaccard</span>          edge-set overlap
+  <span class="hl">rank-profile</span>      L1 and L2 on rank-bucket histograms
+  <span class="hl">bounded GED</span>       edit distance up to a cap
+  <span class="hl">Weisfeiler-Lehman L1</span> — 1-hop structural fingerprint
+  <span class="hl">spectral L2</span>       Laplacian eigenvalue distance
+
+  these are the substrate for IsoWalk's Fiedler pivot and
+  for cross-agent "similar past decisions" queries in Demerzel 6</div>
+  <div class="narration" id="n7">DagDB also ships eight subgraph-distance metrics out of the box: Jaccard edge-overlap, L1 and L2 on rank-profile histograms, bounded graph edit distance, Weisfeiler-Lehman one-hop structural fingerprint, and spectral L2 distance on Laplacian eigenvalues. Today the IsoWalk spectral pivot made the last one load-bearing — the Fiedler eigenvalue of the contact-graph Laplacian comes out of spectral L2 for free. The same primitives also power the "find me past decisions shaped like this one" query that Demerzel 6's cross-agent retrieval will use.</div>
+  <div class="controls"><button class="play-btn" onclick="speak(7)">▶</button></div>
+  <div class="slide-num">7 / 12</div>
+</div>
+
+<!-- SLIDE 8 -->
+<div class="slide" id="s8">
+  <h2>BIOLOGY CERTIFICATION</h2>
+  <div class="diagram">  the biology plug-in ingests proteins into DagDB as contact graphs
+
+  <span class="hl">single-node-per-residue</span>   (dual-node encoding was broken; corrected today)
+  <span class="hl">5 Å Cα contact cutoff</span>    (naturally fits the 6-input bound)
+  sidecar metadata: chain, seqid, resname, coordinates
+  rank = maxRank − seqIndex  (the SequencePositionPolicy default)
+
+  7-protein certification target: DagDB's BFS matches a reference BFS
+  on the same graph, bit-exact, all 7 proteins.</div>
+  <div class="narration" id="n8">On the biology side, the plug-in ingests proteins as contact graphs — single-node-per-residue, five-Ångström alpha-carbon cutoff, sidecar metadata for chain and residue identity. Rank is assigned by sequence position. This is the first real consumer of the rankPolicy protocol. The certification target is a seven-protein cohort where DagDB's breadth-first-search matches a reference implementation bit-exact. The dual-node encoding we proposed this morning turned out to collapse geodesic distances — a clean bug, caught by Dag while writing tests. Corrected to single-node the same day.</div>
+  <div class="controls"><button class="play-btn" onclick="speak(8)">▶</button></div>
+  <div class="slide-num">8 / 12</div>
+</div>
+
+<!-- SLIDE 9 -->
+<div class="slide" id="s9">
+  <h2>SNAPSHOT + PERSISTENCE</h2>
+  <div class="diagram">  snapshot body:   <span class="hl">35 bytes per node</span>  (38 B after u32 rank)
+  no serialisation:    memcpy from GPU UMA straight to disk
+  WAL:                 <span class="hl">F_FULLFSYNC</span> every flush
+  backup chain:        base + delta chain + compaction + restore
+  JSON / CSV round-trip for human-readable export</div>
+  <div class="narration" id="n9">Persistence is a direct memory-to-disk path. The snapshot body is thirty-five bytes per node — thirty-eight after today's rank widening — and the whole state memcopies from unified GPU memory straight to a file on disk. No serialisation step. The write-ahead log uses full fsync on every flush; the backup chain supports base snapshots plus delta chains with compaction and restore; JSON and CSV round-trip for human-readable export. Crash recovery has been tested. Integrity has been tested. The eighty-seven-of-eighty-seven figure includes the persistence and recovery paths.</div>
+  <div class="controls"><button class="play-btn" onclick="speak(9)">▶</button></div>
+  <div class="slide-num">9 / 12</div>
+</div>
+
+<!-- SLIDE 10 -->
+<div class="slide" id="s10">
+  <h2>WHAT STILL NEEDS WORK</h2>
+  <div class="diagram">  <span class="amber">Demerzel 6 Pass 2</span> — drops, ring, status as nodes.
+       Depends on MVCC (today) plus the event-to-node adapter extension.
+
+  <span class="amber">Secondary index by (truth, rank-range)</span> — for fast
+       "all dialogue turns by dag today" queries. Bites ~100k nodes.
+
+  <span class="amber">Markov-blanket visibility byte + read audit log</span> — future
+       gated by 999's sandboxing plan for real enforcement.
+
+  <span class="amber">Compaction + retention policy</span> for the Loom at 1M+ events.
+
+  None of these block the current shipped surface. All are explicitly
+  on the Demerzel 6 roadmap with estimates.</div>
+  <div class="narration" id="n10">What isn't done yet. Demerzel 6 Pass 2 — drops, ring, status heartbeats on DagDB — depends on today's MVCC landing plus an extension of the event-to-node adapter. A secondary index by event type plus rank range is queued for the point the Loom crosses a hundred thousand events. A per-node visibility byte for Markov-blanket enforcement is on the roadmap but needs operating-system-level sandboxing to be load-bearing. Compaction and retention for the Loom waits for a million-event scale. None of these are promised today; all are tracked.</div>
+  <div class="controls"><button class="play-btn" onclick="speak(10)">▶</button></div>
+  <div class="slide-num">10 / 12</div>
+</div>
+
+<!-- SLIDE 11 -->
+<div class="slide" id="s11">
+  <h2>WHERE IT FITS</h2>
+  <div class="diagram">                <span class="hl">Biology plug-in</span>
+       protein contact graphs · 7-protein certification
+                            ▲
+                            │
+                <span class="hl">BFSLib</span>
+       zero-allocation Swift BFS · 250 MegaTEPS · C-FFI
+                            ▲
+                            │
+                <span class="hl">DagDB</span>
+       114 tests (98 Swift + 16 Python) · WAL · backup · subgraph distances · MVCC
+                            ▲
+                            │
+                <span class="hl">Savanna Engine</span>
+       Metal GPU compute primitives · Morton Z-curve · 7-coloring</div>
+  <div class="narration" id="n11">Architecturally DagDB is the middle of a four-layer stack. At the bottom, the Savanna Engine — the Metal-GPU compute primitives, Morton Z-curve layout, seven-coloring scheduler. Above it, DagDB itself. Above DagDB, BFSLib — the zero-allocation traversal primitive, four nanoseconds per edge, two hundred fifty million traversed edges per second. At the top, the biology plug-in that ingests proteins into DagDB as contact graphs. Each layer is independently useful. Each layer has tests.</div>
+  <div class="controls"><button class="play-btn" onclick="speak(11)">▶</button></div>
+  <div class="slide-num">11 / 12</div>
+</div>
+
+<!-- SLIDE 12 -->
+<div class="slide" id="s12">
+  <h2>CLOSING</h2>
+  <div class="diagram">  today: 4 tickets, 87/114 tests (98 Swift + 16 Python), Loom-on-DagDB Pass 1 live
+  next: Demerzel 6 Pass 2 when the MVCC soak week passes
+
+  <span class="amber">What this is</span>
+    an amateur engineering project
+    running on a single Apple M5 Max laptop
+    with the numbers reproducible from the repo
+
+  <span class="amber">What this is not</span>
+    a benchmark win against production HPC
+    a peer-reviewed database system
+    a general-purpose graph database for arbitrary workloads
+
+  <span class="hl">Humble</span> — no competitive claims.
+  <span class="hl">Honest</span> — numbers speak, not ego.
+  <span class="hl">Verifiable</span> — every claim runs from the repo on the laptop.</div>
+  <div class="narration" id="n12">Closing honestly. Today shipped four tickets, brought the test suite to ninety-eight plus sixteen, and put the hive's event log on its own database. Next step is Demerzel 6 Pass 2 — drops and ring and status on DagDB — after a week of MVCC soak-testing. What this project is: an amateur engineering project running on a single laptop, with every number reproducible from the repository. What this project is not: a benchmark win against production HPC, a peer-reviewed database, or a general-purpose graph store. We describe what we shipped, nothing more. Thank you.</div>
+  <div class="controls"><button class="play-btn" onclick="speak(12)">▶</button></div>
+  <div class="slide-num">12 / 12</div>
+</div>
+
+<div class="disclaimer">
+  This is an amateur engineering project. We are not HPC professionals and make no competitive claims.<br>
+  Press Space to narrate · ↑↓ to navigate · Works offline.
+</div>
+
+<script>
+const texts = {};
+document.querySelectorAll('.narration').forEach(el => {
+  texts[parseInt(el.id.replace('n',''))] = el.textContent.trim();
+});
+
+let currentSlide = 1;
+let playing = false;
+let currentAudio = null;
+const totalSlides = 12;
+
+function speak(n) {
+  if (playing && currentAudio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+    playing = false;
+    updateBtns();
+    return;
+  }
+  if (currentAudio) { currentAudio.pause(); }
+  currentSlide = n;
+  currentAudio = new Audio('audio/slide_' + n + '.mp3');
+  currentAudio.onended = () => { playing = false; updateBtns(); };
+  currentAudio.onerror = () => {
+    const text = texts[n];
+    if (!text) return;
+    const u = new SpeechSynthesisUtterance(text);
+    u.rate = 0.92;
+    const voices = speechSynthesis.getVoices();
+    const pref = voices.find(v => v.name.includes('Emma')) ||
+                 voices.find(v => v.name.includes('Samantha')) ||
+                 voices.find(v => v.lang.startsWith('en-GB')) ||
+                 voices.find(v => v.lang.startsWith('en')) || voices[0];
+    if (pref) u.voice = pref;
+    u.onend = () => { playing = false; updateBtns(); };
+    speechSynthesis.speak(u);
+  };
+  currentAudio.play().catch(() => {});
+  playing = true;
+  updateBtns();
+}
+
+function updateBtns() {
+  document.querySelectorAll('.play-btn').forEach(b => b.textContent = '▶');
+  if (playing) {
+    const btns = document.querySelectorAll('.play-btn');
+    if (btns[currentSlide-1]) btns[currentSlide-1].textContent = '⏸';
+  }
+  document.getElementById('nav-play').textContent = playing ? '⏸' : '▶';
+}
+
+function goSlide(n) {
+  n = Math.max(1, Math.min(totalSlides, n));
+  currentSlide = n;
+  document.getElementById('s'+n).scrollIntoView({ behavior: 'smooth' });
+}
+
+document.addEventListener('keydown', e => {
+  if (e.code === 'ArrowUp' || e.code === 'PageUp') { e.preventDefault(); goSlide(currentSlide-1); }
+  if (e.code === 'ArrowDown' || e.code === 'PageDown') { e.preventDefault(); goSlide(currentSlide+1); }
+  if (e.code === 'Space') { e.preventDefault(); speak(currentSlide); }
+});
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) currentSlide = parseInt(e.target.id.replace('s','')); });
+}, { threshold: 0.5 });
+document.querySelectorAll('.slide').forEach(s => observer.observe(s));
+
+speechSynthesis.getVoices();
+</script>
+</body>
+</html>

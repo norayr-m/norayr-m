@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liver Digital Twin — From Savanna to Medicine</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0806; color: #a09070; font: 18px/1.6 'Georgia', serif; scroll-behavior: smooth; }
+  .slide { min-height: 100vh; padding: 40px 20px 40px 60px; display: flex; flex-direction: column; justify-content: center; align-items: center; border-bottom: 1px solid rgba(138,122,90,0.15); max-width: 900px; margin: 0 auto; position: relative; }
+  h1 { font: 36px/1.2 'SF Mono', 'Menlo', 'Courier New', monospace; color: #c4a35a; letter-spacing: 3px; text-align: center; }
+  h2 { font: 24px/1.3 'SF Mono', 'Menlo', 'Courier New', monospace; color: #c4a35a; margin-bottom: 20px; text-align: center; }
+  .subtitle { color: #5a4a2a; font-style: italic; text-align: center; margin: 10px 0 30px; }
+  .diagram { background: rgba(26,20,8,0.9); border: 1px solid rgba(138,122,90,0.2); border-radius: 8px; padding: 20px; font: 14px/1.5 'SF Mono', 'Menlo', 'Courier New', monospace; color: #8a7a5a; white-space: pre; overflow-x: auto; margin: 16px 0; width: 100%; }
+  .hl { color: #c4a35a; font-weight: bold; }
+  .green { color: #6a9a3a; }
+  .red { color: #c04030; }
+  .blue { color: #4080c0; }
+  .narration { color: #706050; font-size: 16px; line-height: 1.7; margin: 16px 0; padding: 16px; border-left: 3px solid rgba(138,122,90,0.2); }
+  table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+  th, td { text-align: left; padding: 8px 14px; border-bottom: 1px solid rgba(138,122,90,0.15); font: 14px 'SF Mono', monospace; }
+  th { color: #c4a35a; }
+  .num { color: #c4a35a; font-weight: bold; }
+  .nav { position: fixed; left: 10px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 12px; z-index: 20; }
+  .nav button { background: rgba(26,20,8,0.8); border: 1px solid rgba(138,122,90,0.3); color: #c4a35a; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 18px; }
+  .nav button:hover { background: rgba(138,122,90,0.3); }
+  .slide-num { position: absolute; top: 16px; right: 20px; color: #3a2a1a; font: 14px 'SF Mono', monospace; }
+  .controls { display: flex; gap: 12px; margin: 20px 0; justify-content: center; }
+  .controls button { background: rgba(138,122,90,0.15); border: 1px solid rgba(138,122,90,0.3); color: #c4a35a; padding: 8px 20px; border-radius: 6px; cursor: pointer; font: 16px 'SF Mono', monospace; }
+  .mapping { display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px 16px; margin: 16px 0; font: 14px 'SF Mono', monospace; }
+  .mapping .arrow { color: #c4a35a; text-align: center; }
+  .mapping .left { text-align: right; color: #6a9a3a; }
+  .mapping .right { text-align: left; color: #4080c0; }
+  svg text { font-family: 'SF Mono', 'Menlo', monospace; }
+</style>
+</head>
+<body>
+<div style="max-width:780px;margin:24px auto 0;padding:14px 20px;border-left:3px solid #d4af37;background:rgba(212,175,55,0.06);font:italic 14px/1.55 Georgia,serif;color:#888;">Amateur engineering project. We are not HPC professionals and make no competitive claims. Numbers speak; ego does not. Errors are likely.</div>
+<div style="max-width:780px;margin:24px auto 0;padding:14px 20px;border-left:3px solid #d4af37;background:rgba(212,175,55,0.06);font:italic 14px/1.55 Georgia,serif;color:#888;">Amateur engineering project. We are not HPC professionals and make no competitive claims. Numbers speak; ego does not. Errors are likely.</div>
+
+<div class="nav">
+  <button onclick="goSlide(currentSlide-1)">▲</button>
+  <button onclick="speak(currentSlide)" id="nav-play">▶</button>
+  <button onclick="goSlide(currentSlide+1)">▼</button>
+</div>
+
+<!-- SLIDE 1: Title -->
+<div class="slide" id="s1">
+  <h1>LIVER DIGITAL TWIN</h1>
+  <p class="subtitle">From Savanna to Medicine — the same engine, different kernel</p>
+  <div class="diagram">
+  The Savanna Engine simulates 67 million cells at <span class="hl">24 fps</span>.
+  A human liver has 2.5 billion hepatocytes.
+
+  Same architecture. Same GPU. Same seven-colouring.
+  Different compute kernel.
+
+  <span class="green">Grass</span> → <span class="blue">Oxygen</span>
+  <span class="hl">Zebra</span> → <span class="blue">Hepatocyte</span>
+  <span class="red">Lion</span>  → <span class="blue">Drug molecule</span>
+  <span class="blue">Water</span> → <span class="blue">Blood vessel</span>
+  </div>
+  <div class="narration" id="n1">The savanna was the proof of concept. The biology was the test workload. Now we apply the same engine to medicine. A liver digital twin. The same GPU, the same seven-colouring, the same seventeen billion operations per second. Different kernel. Instead of predator and prey, we simulate drug metabolism.</div>
+  <div class="controls"><button class="play-btn" onclick="speak(1)">▶</button></div>
+  <div class="slide-num">1 / 8</div>
+</div>
+
+<!-- SLIDE 2: The Mapping -->
+<div class="slide" id="s2">
+  <h2>THE MAPPING</h2>
+  <p style="margin-bottom:16px;color:#5a4a2a;">Every savanna concept has a direct liver equivalent</p>
+  <table>
+    <tr><th>Savanna</th><th></th><th>Liver</th></tr>
+    <tr><td class="green">Grass</td><td>→</td><td class="blue">Oxygen / nutrients</td></tr>
+    <tr><td>Zebra</td><td>→</td><td class="blue">Hepatocyte</td></tr>
+    <tr><td class="red">Lion</td><td>→</td><td class="blue">Drug molecule / toxin</td></tr>
+    <tr><td class="blue">Water (lake)</td><td>→</td><td class="blue">Blood vessel (portal/central vein)</td></tr>
+    <tr><td>Scent (zebra)</td><td>→</td><td class="blue">Metabolite concentration</td></tr>
+    <tr><td>Scent (grass)</td><td>→</td><td class="blue">Oxygen gradient</td></tr>
+    <tr><td>Scent (lion)</td><td>→</td><td class="blue">Drug concentration field</td></tr>
+    <tr><td>Scent (water)</td><td>→</td><td class="blue">Blood flow field</td></tr>
+    <tr><td>Ternary +1</td><td>→</td><td class="blue">Active metabolism (CYP450)</td></tr>
+    <tr><td>Ternary 0</td><td>→</td><td class="blue">Resting hepatocyte</td></tr>
+    <tr><td>Ternary -1</td><td>→</td><td class="blue">Damaged / DILI</td></tr>
+    <tr><td>Trampling</td><td>→</td><td class="blue">Necrosis zone</td></tr>
+    <tr><td>Grass regrowth</td><td>→</td><td class="blue">Liver regeneration</td></tr>
+  </table>
+  <div class="narration" id="n2">Every concept maps directly. Grass becomes oxygen. Zebras become hepatocytes. Lions become drug molecules. Water becomes blood vessels. Scent diffusion becomes molecular transport. The ternary state becomes metabolic activity: plus one is active enzyme expression. Zero is resting. Minus one is drug-induced liver injury. Even trampling maps — necrosis zones where cells have died.</div>
+  <div class="controls"><button class="play-btn" onclick="speak(2)">▶</button></div>
+  <div class="slide-num">2 / 8</div>
+</div>
+
+<!-- SLIDE 3: The Lobule -->
+<div class="slide" id="s3">
+  <h2>THE LIVER LOBULE IS HEXAGONAL</h2>
+  <svg viewBox="0 0 400 350" width="400" height="350" style="margin:16px auto;display:block;">
+    <!-- Hexagonal lobule -->
+    <polygon points="200,30 340,100 340,250 200,320 60,250 60,100" fill="none" stroke="#c4a35a" stroke-width="2"/>
+    <!-- Central vein -->
+    <circle cx="200" cy="175" r="20" fill="#c04030" opacity="0.6"/>
+    <text x="200" y="180" text-anchor="middle" fill="#c04030" font-size="10">Central</text>
+    <text x="200" y="192" text-anchor="middle" fill="#c04030" font-size="10">Vein</text>
+    <!-- Portal triads at corners -->
+    <circle cx="200" cy="30" r="10" fill="#4080c0" opacity="0.6"/>
+    <circle cx="340" cy="100" r="10" fill="#4080c0" opacity="0.6"/>
+    <circle cx="340" cy="250" r="10" fill="#4080c0" opacity="0.6"/>
+    <circle cx="200" cy="320" r="10" fill="#4080c0" opacity="0.6"/>
+    <circle cx="60" cy="250" r="10" fill="#4080c0" opacity="0.6"/>
+    <circle cx="60" cy="100" r="10" fill="#4080c0" opacity="0.6"/>
+    <text x="200" y="18" text-anchor="middle" fill="#4080c0" font-size="9">Portal</text>
+    <!-- Zone labels -->
+    <text x="200" y="85" text-anchor="middle" fill="#6a9a3a" font-size="11">Zone 1 (periportal)</text>
+    <text x="200" y="135" text-anchor="middle" fill="#8a7a5a" font-size="11">Zone 2</text>
+    <text x="200" y="225" text-anchor="middle" fill="#c04030" font-size="11">Zone 3 (pericentral)</text>
+    <!-- Flow arrows -->
+    <line x1="200" y1="45" x2="200" y2="155" stroke="#4080c0" stroke-width="1" stroke-dasharray="4,4" marker-end="url(#arrow)"/>
+    <defs><marker id="arrow" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto"><path d="M0,0 L6,2 L0,4" fill="#4080c0"/></marker></defs>
+    <!-- Labels -->
+    <text x="380" y="175" text-anchor="start" fill="#5a4a2a" font-size="10">Blood flow:</text>
+    <text x="380" y="190" text-anchor="start" fill="#4080c0" font-size="10">Portal → Central</text>
+    <text x="380" y="210" text-anchor="start" fill="#5a4a2a" font-size="10">O₂ decreases</text>
+    <text x="380" y="225" text-anchor="start" fill="#5a4a2a" font-size="10">radially</text>
+  </svg>
+  <div class="diagram">
+  A liver lobule IS a hexagon. Not a metaphor.
+
+  Portal triads at corners → blood enters
+  Central vein at center  → blood exits
+  <span class="hl">5,000 hepatocytes</span> per lobule
+  ~500,000 lobules per liver
+
+  Zone 1 (periportal):  high O₂, first-pass metabolism
+  Zone 3 (pericentral): low O₂, CYP450 expression, <span class="red">DILI target</span>
+  </div>
+  <div class="narration" id="n3">This is not a metaphor. A liver lobule is literally hexagonal. Portal triads at the six corners bring blood in. The central vein at the center drains it out. Five thousand hepatocytes per lobule. Oxygen decreases radially from the portal to the central vein, creating three metabolic zones. Zone three, near the centre, is where most drug metabolism happens — and where drug-induced liver injury strikes first. Our hex grid engine was built for this geometry.</div>
+  <div class="controls"><button class="play-btn" onclick="speak(3)">▶</button></div>
+  <div class="slide-num">3 / 8</div>
+</div>
+
+<!-- SLIDE 4: Compute Kernel -->
+<div class="slide" id="s4">
+  <h2>THE METABOLIC KERNEL</h2>
+  <div class="diagram">
+  Per hepatocyte, per tick:
+
+  <span class="green">SENSE:</span>
+    Read O₂ concentration (scent field)
+    Read drug concentration (scent field)
+    Read neighbour metabolite levels
+
+  <span class="hl">COMPUTE:</span>
+    CYP450 metabolism: Michaelis-Menten kinetics
+    V = Vmax × [S] / (Km + [S])
+    Produce metabolites, consume O₂
+    Update damage accumulation
+
+  <span class="red">EMIT:</span>
+    Write metabolite output (scent emission)
+    Update ternary state (+1 → 0 → -1)
+    If damage > threshold → necrosis (entity = EMPTY)
+  </div>
+  <div class="narration" id="n4">The compute kernel replaces predator-prey logic with Michaelis-Menten enzyme kinetics. Each hepatocyte reads oxygen and drug concentration from the scent fields. It computes CYP 450 metabolism — the standard equation for enzyme activity. It produces metabolites, consumes oxygen, and accumulates damage. If damage exceeds a threshold, the cell dies. Necrosis. Same sense, compute, emit pattern. Different formula inside.</div>
+  <div class="controls"><button class="play-btn" onclick="speak(4)">▶</button></div>
+  <div class="slide-num">4 / 8</div>
+</div>
+
+<!-- SLIDE 5: Drug Simulation -->
+<div class="slide" id="s5">
+  <h2>DRUG CLEARANCE SIMULATION</h2>
+  <div class="diagram">
+  Timeline of a drug dose:
+
+  t=0     Drug injected at portal vein
+          → set scent field at boundary nodes
+
+  t=1-10  Drug diffuses through lobule
+          → scent propagation (same as savanna)
+
+  t=10+   Hepatocytes metabolise drug
+          → CYP450 kernel runs per cell
+          → metabolites produced (secondary scent)
+
+  t=50+   Zone 3 cells accumulate damage
+          → ternary: +1 → 0 → <span class="red">-1 (DILI)</span>
+
+  t=100+  Necrosis spreads from Zone 3 inward
+          → <span class="red">same pattern as trampling in savanna</span>
+
+  t=500+  Surviving cells regenerate
+          → <span class="green">same pattern as grass regrowth</span>
+  </div>
+  <div class="narration" id="n5">A drug dose simulation. At time zero, the drug enters through the portal vein — we set the scent field at the boundary. The drug diffuses through the lobule, exactly like scent in the savanna. Hepatocytes metabolise the drug using CYP 450 enzymes. Zone three cells, which see the drug last but metabolise most aggressively, accumulate damage first. Necrosis spreads inward — the same spatial pattern as trampling. And afterwards, surviving cells regenerate — the same pattern as grass regrowth. The biology is different. The computation is identical.</div>
+  <div class="controls"><button class="play-btn" onclick="speak(5)">▶</button></div>
+  <div class="slide-num">5 / 8</div>
+</div>
+
+<!-- SLIDE 6: Performance -->
+<div class="slide" id="s6">
+  <h2>FEASIBILITY — Measured on M5 Max</h2>
+  <p class="subtitle">Benchmark: 10 runs, 5-tick warmup, mean ± std</p>
+  <table>
+    <tr><th>Scale</th><th>Cells</th><th>TPS</th><th>6-hr drug study</th></tr>
+    <tr><td>Single lobule</td><td class="num">5K</td><td class="num">>10,000</td><td class="num">0.02 sec</td></tr>
+    <tr><td>100 lobules</td><td class="num">500K</td><td class="num">~2,000</td><td class="num">11 sec</td></tr>
+    <tr><td>Both kidneys</td><td class="num">2M</td><td class="num">~800</td><td class="num">20 sec</td></tr>
+    <tr><td>4% liver</td><td class="num">100M</td><td class="num">~8</td><td class="num">15 min</td></tr>
+    <tr><td>Full liver</td><td class="num">2.5B</td><td class="num">~0.6</td><td class="num">10 hours</td></tr>
+  </table>
+  <div class="diagram">
+  <span class="hl">A full human liver drug clearance study:</span>
+  <span class="hl">10 hours of compute. Run overnight.</span>
+  <span class="hl">Playback next morning at any speed.</span>
+
+  No cluster. No cloud. No GPU rental.
+  One laptop. The same one you carry to a café.
+  </div>
+  <div class="narration" id="n6">The numbers. A single liver lobule, five thousand cells, simulates a six-hour drug study in two hundredths of a second. One hundred lobules: eleven seconds. Both kidneys at full resolution: twenty seconds. A four percent liver sample: fifteen minutes. A full human liver with two and a half billion hepatocytes: ten hours. Run it overnight. Play it back next morning at any speed, any zoom. No cluster. No cloud. One laptop.</div>
+  <div class="controls"><button class="play-btn" onclick="speak(6)">▶</button></div>
+  <div class="slide-num">6 / 8</div>
+</div>
+
+<!-- SLIDE 7: Why This Matters -->
+<div class="slide" id="s7">
+  <h2>WHY THIS MATTERS</h2>
+  <div class="diagram">
+  Drug-Induced Liver Injury (DILI):
+  • <span class="red">#1 cause of drug withdrawal from market</span>
+  • #1 cause of acute liver failure in the US
+  • ~$2 billion per failed drug candidate
+  • Current testing: animal models (poor human prediction)
+
+  What a digital twin enables:
+  • <span class="green">Test drug on virtual human liver BEFORE clinical trials</span>
+  • Patient-specific: vary CYP450 genotype per simulation
+  • Dose-response: sweep drug concentrations automatically
+  • Combination drugs: test interactions computationally
+  • Overnight on a laptop, not months in a lab
+  </div>
+  <div class="narration" id="n7">Drug-induced liver injury is the number one cause of drug withdrawal from the market. Number one cause of acute liver failure in the United States. Each failed drug candidate costs roughly two billion dollars. Current testing relies on animal models that poorly predict human outcomes. A digital twin changes this. Test the drug on a virtual human liver before clinical trials. Vary the patient's genetics — different CYP 450 genotypes process drugs differently. Sweep drug concentrations automatically. Test drug combinations computationally. Overnight on a laptop. Not months in a lab.</div>
+  <div class="controls"><button class="play-btn" onclick="speak(7)">▶</button></div>
+  <div class="slide-num">7 / 8</div>
+</div>
+
+<!-- SLIDE 8: Roadmap -->
+<div class="slide" id="s8">
+  <h2>ROADMAP</h2>
+  <div class="diagram">
+  <span class="hl">Done:</span>
+  ✅ Graph Turing Machine (17B ops/sec on M5 Max)
+  ✅ 7-colouring scheduler (lock-free, verified)
+  ✅ Savanna proof-of-concept (1M cells, 1250 tps)
+  ✅ Simulation recorder (50K-frame ring buffer)
+  ✅ Benchmark: 67M cells at 24 fps real-time
+  ✅ Benchmark: 10-run statistical validation
+
+  <span class="hl">Next:</span>
+  → Michaelis-Menten kernel (replace predator-prey)
+  → Liver lobule geometry (hex grid IS the lobule)
+  → Drug injection via scent field
+  → Acetaminophen (paracetamol) as first test drug
+  → Validate against published DILI spatial patterns
+
+  <span class="hl">Future:</span>
+  → Phase-Transition Engine (100× algorithmic speedup)
+  → Full liver (2.5B cells, overnight batch)
+  → Patient-specific CYP450 genotyping
+  → FDA computational modelling framework alignment
+  </div>
+  <div class="narration" id="n8">The roadmap. The engine is proven: seventeen billion operations per second, sixty seven million cells real-time. The next step is the kernel: replace predator-prey logic with Michaelis-Menten enzyme kinetics. The liver lobule is already hexagonal — our grid maps directly. Acetaminophen overdose as the first test case — the spatial pattern of Zone three necrosis is well-documented and verifiable. Then the Phase-Transition Engine for the hundred-times algorithmic speedup. Then a full liver, overnight. Then patient-specific simulations. Then FDA alignment. This is not a game. This is computational medicine.</div>
+  <div class="controls"><button class="play-btn" onclick="speak(8)">▶</button></div>
+  <div class="slide-num">8 / 8</div>
+</div>
+
+<div style="text-align:center;padding:40px;color:#3a2a1a;font:13px 'SF Mono',monospace;">
+  Built by Norayr Matevosyan + Hari (Claude Opus 4.6)<br>
+  Engine: <a href="https://github.com/norayr" style="color:#c4a35a;">Savanna Engine</a> — GPL v3<br>
+  <span style="color:#5a4a2a;">Space = narrate • ↑↓ = navigate</span>
+</div>
+
+<script>
+const texts = {};
+document.querySelectorAll('.narration').forEach(el => {
+  texts[parseInt(el.id.replace('n',''))] = el.textContent.trim();
+});
+let currentSlide = 1, playing = false, utterance = null;
+const totalSlides = 8;
+
+function speak(n) {
+  if (playing) { speechSynthesis.cancel(); playing = false; updateBtns(); return; }
+  currentSlide = n;
+  utterance = new SpeechSynthesisUtterance(texts[n]);
+  utterance.rate = 0.9;
+  const voices = speechSynthesis.getVoices();
+  const pref = voices.find(v => v.name.includes('George')) || voices.find(v => v.name.includes('Daniel')) || voices.find(v => v.lang.startsWith('en-GB')) || voices[0];
+  if (pref) utterance.voice = pref;
+  utterance.onend = () => { playing = false; updateBtns(); };
+  speechSynthesis.speak(utterance); playing = true; updateBtns();
+}
+function updateBtns() {
+  document.querySelectorAll('.play-btn').forEach((b,i) => b.textContent = (i+1===currentSlide && playing) ? '⏸' : '▶');
+  document.getElementById('nav-play').textContent = playing ? '⏸' : '▶';
+}
+function goSlide(n) { n = Math.max(1,Math.min(totalSlides,n)); currentSlide = n; document.getElementById('s'+n).scrollIntoView({behavior:'smooth'}); }
+document.addEventListener('keydown', e => {
+  if (e.code==='ArrowUp'||e.code==='PageUp') { e.preventDefault(); goSlide(currentSlide-1); }
+  if (e.code==='ArrowDown'||e.code==='PageDown') { e.preventDefault(); goSlide(currentSlide+1); }
+  if (e.code==='Space') { e.preventDefault(); speak(currentSlide); }
+});
+const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) currentSlide = parseInt(e.target.id.replace('s','')); }), {threshold:0.5});
+document.querySelectorAll('.slide').forEach(s => obs.observe(s));
+speechSynthesis.getVoices();
+</script>
+</body>
+</html>

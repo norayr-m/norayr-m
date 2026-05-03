@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Isomorphic Walk — what we built, what works, what doesn't</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+:root {
+  --bg: #faf8f5;
+  --text: #2a2520;
+  --dim: #8a8580;
+  --accent: #1a5276;
+  --pass: #196f3d;
+  --reject: #a02020;
+  --line: #d8d4cf;
+  --code-bg: #f3efe7;
+  --note-bg: #fff8e1;
+  --note-border: #856404;
+  --note-text: #5d4408;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Georgia', 'Palatino', 'Times New Roman', serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+.progress-bar {
+  position: fixed; top: 0; left: 0; height: 3px;
+  background: var(--accent);
+  z-index: 100; transition: width 0.1s;
+  width: 0%;
+}
+.section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px;
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.section.visible { opacity: 1; transform: translateY(0); }
+.content { max-width: 760px; width: 100%; }
+.section-num {
+  font-family: 'SF Mono', 'Menlo', 'Fira Code', monospace;
+  font-size: 11px;
+  color: var(--dim);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+h2 {
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1.3;
+  margin-bottom: 20px;
+  letter-spacing: -0.3px;
+}
+h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 1.4em;
+  margin-bottom: 0.4em;
+  color: var(--text);
+}
+p { font-size: 17px; margin-bottom: 14px; }
+p.dim { color: var(--dim); font-size: 15px; }
+ul, ol { padding-left: 1.6em; margin-bottom: 14px; }
+li { margin-bottom: 0.4em; font-size: 16px; }
+code, .mono {
+  font-family: 'SF Mono', 'Menlo', 'Fira Code', monospace;
+  font-size: 14px;
+  background: var(--code-bg);
+  padding: 1px 6px;
+  border-radius: 3px;
+}
+.fig {
+  margin: 24px 0 8px;
+  padding: 24px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+}
+.fig svg { max-width: 100%; height: auto; }
+.fig-cap {
+  font-size: 14px;
+  color: var(--dim);
+  font-style: italic;
+  margin-top: 8px;
+  text-align: center;
+}
+.note {
+  margin: 22px 0;
+  padding: 14px 18px;
+  background: var(--note-bg);
+  border-left: 4px solid var(--note-border);
+  border-radius: 0 4px 4px 0;
+  color: var(--note-text);
+  font-size: 15px;
+}
+.note-label {
+  display: block;
+  font-family: 'Menlo', monospace;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--note-border);
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+.verdict {
+  display: inline-block;
+  font-family: 'Menlo', monospace;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  padding: 3px 10px;
+  border-radius: 3px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+.verdict.pass { background: #e8f3ec; color: var(--pass); border: 1px solid #b9d9c4; }
+.verdict.reject { background: #f8e6e6; color: var(--reject); border: 1px solid #d9b9b9; }
+.verdict.open { background: #f0eee8; color: var(--dim); border: 1px solid var(--line); }
+table.results {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 18px 0;
+  font-family: 'SF Mono', 'Menlo', monospace;
+  font-size: 13px;
+}
+table.results th, table.results td {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--line);
+}
+table.results th { color: var(--dim); font-weight: 600; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
+table.results td.num { text-align: right; font-variant-numeric: tabular-nums; }
+table.results tr.win td { color: var(--pass); }
+table.results tr.lose td { color: var(--reject); }
+.title-section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 24px;
+}
+.title-section h1 {
+  font-size: 36px;
+  font-weight: 400;
+  letter-spacing: -0.6px;
+  margin-bottom: 14px;
+  max-width: 720px;
+}
+.title-section .subtitle {
+  font-size: 15px;
+  color: var(--dim);
+  font-style: italic;
+  max-width: 700px;
+}
+.title-section .scroll-hint {
+  margin-top: 50px;
+  font-size: 12px;
+  color: var(--dim);
+  letter-spacing: 2px;
+  animation: bob 2s infinite;
+}
+@keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+.final {
+  background: white;
+  border-top: 1px solid var(--line);
+}
+.footer {
+  text-align: center;
+  font-size: 13px;
+  color: var(--dim);
+  padding: 40px 24px 60px;
+  background: white;
+}
+@media print {
+  body { background: white; font-size: 11pt; line-height: 1.55; }
+  .progress-bar { display: none; }
+  .title-section { min-height: auto; padding: 0 0 16pt; text-align: left; align-items: flex-start; }
+  .title-section h1 { font-size: 22pt; }
+  .title-section .scroll-hint { display: none; }
+  .section { min-height: auto; opacity: 1 !important; transform: none !important; padding: 10pt 0; page-break-inside: avoid; }
+  .section h2 { font-size: 14pt; }
+  .content { max-width: 100%; }
+  .footer { border-top: 1px solid var(--line); padding: 16pt 0 0; }
+}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="title-section">
+  <h1>Isomorphic Walk</h1>
+  <div class="subtitle">A graph-traversal experiment on protein conformational change. What we built on the M5, what passed pre-registered tests, what got rejected, and what we'll try next. No prior context required beyond basic protein structure.</div>
+  <div class="subtitle" style="margin-top: 8px; font-style: normal; font-family: 'Menlo', monospace; font-size: 12px; letter-spacing: 2px;">v0.1 — APRIL 2026 — LOCAL DRAFT</div>
+  <div class="scroll-hint">scroll ↓</div>
+</div>
+
+<!-- FRAMING -->
+<div class="section" id="frame">
+  <div class="content">
+    <div class="section-num">framing</div>
+    <h2>The question</h2>
+    <p>AlphaFold gave us static structures. The harder problem — the one that matters for binding, allostery, and drug action — is the <em>motion</em>: how a protein moves between conformational states. Molecular dynamics is the gold standard but expensive; classical normal-mode analysis is cheap but coarse.</p>
+    <p>This work asks a small, concrete question:</p>
+    <p style="font-style: italic; color: var(--accent);">If you treat the residue contact graph of a folded protein as a discrete graph and run a single-source breadth-first search from a chosen residue, does the BFS frame-of-arrival correlate with biological displacement during a known conformational change?</p>
+    <p>We picked it because the answer is testable in days, not months, and because the engine that runs it is useful regardless of whether the answer is yes.</p>
+  </div>
+</div>
+
+<!-- PLAIN WORDS — for the reader who wants the upshot first -->
+<div class="section" id="plain">
+  <div class="content">
+    <div class="section-num">in plain words</div>
+    <h2>What passed and how — no jargon</h2>
+
+    <h3>What we built</h3>
+    <p>A small program that takes a protein structure (the kind crystallographers deposit in the PDB), turns it into a network of "this residue touches that residue," and runs a fast graph search on it. Written in Swift, runs on the M5 laptop, no GPU cluster. The graph search itself is roughly 2–4× faster than the equivalent in SciPy and 2–9× faster than PyTorch Geometric's k-hop subgraph extraction. The bigger win is structural: at the scale of the 313,236-atom HIV-1 capsid (the largest atomistic structure people routinely study), the standard biomolecular tool — ProDy's Gaussian Network Model — cannot run at all, because its dense matrix would need 784 GB of memory. Our BFS finishes the same-shape problem in <strong>6 milliseconds</strong>, which is what makes the experiments below feasible at biological scale.</p>
+
+    <h3>The biological question we asked first</h3>
+    <p>Many proteins work by <em>allostery</em>: a signal arrives at one place on the molecule (a binding pocket, say) and somehow propagates to a second, distant place where the actual functional change happens. For a few dozen well-studied proteins, biologists have spent years identifying which specific residues carry that signal — the "allosteric pathway." Those residue lists are published in the literature.</p>
+    <p><strong>Our test:</strong> if we draw the residue contact network and grow a tube of nearest neighbors from the first site toward the second, do the residues inside that tube match the published pathway? And does our network-based answer beat the obvious geometric alternative — drawing a straight cylinder through 3D space between the two sites and asking which residues fall inside?</p>
+
+    <h3>What passed (the headline)</h3>
+    <p style="font-style: italic; color: var(--accent);">On a cohort of 10 published allosteric proteins, the network-based BFS-tube beat the straight-cylinder baseline on <strong>6 of the 7</strong> systems we could evaluate. (Three were lost to data-parsing failures and dropped per the locked protocol — no substitution allowed.) The pre-registered acceptance gate was "more than 70% wins" plus "median improvement above +0.05 in F1 score." Both cleared. The hypothesis was registered with a neutral arbiter (Gemini DeepThink) before any data was collected, with the gate values fixed in advance — no moving the goalposts.</p>
+
+    <h3>Why this is interesting</h3>
+    <p>The straight-line baseline is not a strawman. For many proteins, the residues that mediate allostery <em>are</em> roughly along the line between the two sites, and the cylinder picks them up trivially. The result says: the contact network carries extra information that the straight line misses — likely because real signal travels along the protein's chain and through specific side-chain contacts, not through empty space. Six of seven means the effect is consistent across protein families (kinases, GPCRs, transporters, chaperones), not a one-off.</p>
+
+    <h3>What also got tested, and failed honestly</h3>
+    <p>A more ambitious second hypothesis asked: can the same graph predict <em>how much</em> each residue moves when the protein switches between two known shapes (open ↔ closed)? Pre-registered gate: median Spearman correlation ≥ +0.35 across 10 proteins. Observed: +0.146. Reject. By the locked protocol, no second shot, no parameter tweaks, no reframing. The neutral arbiter's post-mortem: this version of the algorithm finds the hinge between two protein domains correctly, but doesn't carry enough physics to predict the actual amount of motion. We publish the rejection alongside the success.</p>
+
+    <p class="dim" style="margin-top: 18px;">The rest of this document walks through the construction, the engine, the benchmarks, and the per-system data behind both results. Read on for detail; stop here if the headline was enough.</p>
+  </div>
+</div>
+
+<!-- ACT 1 — THE GRAPH -->
+<div class="section" id="s1">
+  <div class="content">
+    <div class="section-num">act 01 — the graph</div>
+    <h2>From PDB to CSR in one pass</h2>
+    <h3>Construction</h3>
+    <p>Take a PDB structure. Extract one backbone atom per residue (Cα for protein, P or C1' for RNA). Build a $k$-nearest-neighbor graph in 3D Å distance, $k = 12$. Store as compressed sparse row (CSR) — the standard cache-friendly graph layout: an <code>offsets</code> array of length $n+1$ and an <code>indices</code> array of length $2|E|$.</p>
+    <h3>Why KNN, not a distance cutoff</h3>
+    <p>A cutoff (e.g. 8 Å) gives wildly varying degree across a structure — buried residues get ~25 neighbors, surface residues get ~4. KNN gives uniform degree, which makes BFS frontier behavior comparable across nodes. Both choices are common in elastic network models; we picked KNN for predictability.</p>
+    <div class="fig">
+      <svg viewBox="0 0 600 200" width="600" height="200">
+        <!-- left: 3D dots -->
+        <g transform="translate(110, 100)">
+          <circle cx="0" cy="0" r="4" fill="#1a5276"/>
+          <circle cx="-30" cy="-15" r="4" fill="#a04000"/>
+          <circle cx="25" cy="-25" r="4" fill="#a04000"/>
+          <circle cx="35" cy="20" r="4" fill="#a04000"/>
+          <circle cx="-20" cy="30" r="4" fill="#a04000"/>
+          <circle cx="50" cy="-5" r="3" fill="#bbb"/>
+          <circle cx="-55" cy="10" r="3" fill="#bbb"/>
+          <circle cx="10" cy="-55" r="3" fill="#bbb"/>
+          <line x1="0" y1="0" x2="-30" y2="-15" stroke="#1a5276" stroke-width="1"/>
+          <line x1="0" y1="0" x2="25" y2="-25" stroke="#1a5276" stroke-width="1"/>
+          <line x1="0" y1="0" x2="35" y2="20" stroke="#1a5276" stroke-width="1"/>
+          <line x1="0" y1="0" x2="-20" y2="30" stroke="#1a5276" stroke-width="1"/>
+          <text x="-50" y="80" font-family="serif" font-size="13" font-style="italic">3D Cα cloud, $k=4$ neighbors</text>
+        </g>
+        <!-- arrow -->
+        <text x="265" y="105" font-family="serif" font-size="22">→</text>
+        <!-- right: CSR -->
+        <g transform="translate(330, 60)">
+          <text x="0" y="0" font-family="Menlo,monospace" font-size="12" fill="#666">offsets</text>
+          <rect x="0" y="8" width="40" height="22" fill="#fde6cc" stroke="#a04000"/>
+          <rect x="40" y="8" width="40" height="22" fill="#fde6cc" stroke="#a04000"/>
+          <rect x="80" y="8" width="40" height="22" fill="#fde6cc" stroke="#a04000"/>
+          <rect x="120" y="8" width="40" height="22" fill="#fde6cc" stroke="#a04000"/>
+          <rect x="160" y="8" width="40" height="22" fill="#fde6cc" stroke="#a04000"/>
+          <text x="14" y="24" font-family="Menlo,monospace" font-size="12">0</text>
+          <text x="54" y="24" font-family="Menlo,monospace" font-size="12">4</text>
+          <text x="94" y="24" font-family="Menlo,monospace" font-size="12">8</text>
+          <text x="130" y="24" font-family="Menlo,monospace" font-size="12">12</text>
+          <text x="170" y="24" font-family="Menlo,monospace" font-size="12">…</text>
+          <text x="0" y="60" font-family="Menlo,monospace" font-size="12" fill="#666">indices</text>
+          <rect x="0" y="68" width="28" height="22" fill="#dde9f5" stroke="#1a5276"/>
+          <rect x="28" y="68" width="28" height="22" fill="#dde9f5" stroke="#1a5276"/>
+          <rect x="56" y="68" width="28" height="22" fill="#dde9f5" stroke="#1a5276"/>
+          <rect x="84" y="68" width="28" height="22" fill="#dde9f5" stroke="#1a5276"/>
+          <rect x="112" y="68" width="28" height="22" fill="#dde9f5" stroke="#1a5276"/>
+          <rect x="140" y="68" width="28" height="22" fill="#dde9f5" stroke="#1a5276"/>
+          <rect x="168" y="68" width="28" height="22" fill="#dde9f5" stroke="#1a5276"/>
+          <text x="8" y="84" font-family="Menlo,monospace" font-size="12">1</text>
+          <text x="36" y="84" font-family="Menlo,monospace" font-size="12">3</text>
+          <text x="64" y="84" font-family="Menlo,monospace" font-size="12">7</text>
+          <text x="92" y="84" font-family="Menlo,monospace" font-size="12">9</text>
+          <text x="120" y="84" font-family="Menlo,monospace" font-size="12">0</text>
+          <text x="148" y="84" font-family="Menlo,monospace" font-size="12">5</text>
+          <text x="176" y="84" font-family="Menlo,monospace" font-size="12">…</text>
+          <text x="0" y="120" font-family="serif" font-size="13" font-style="italic">CSR — flat, cache-friendly, mmap-able</text>
+        </g>
+      </svg>
+    </div>
+    <p>The graph file format is the same on disk that the engine reads at runtime. No deserialization, no parsing — <code>mmap</code> and run.</p>
+  </div>
+</div>
+
+<!-- ACT 2 — THE ENGINE -->
+<div class="section" id="s2">
+  <div class="content">
+    <div class="section-num">act 02 — the engine</div>
+    <h2>Single-source BFS, Swift on Apple Silicon</h2>
+    <p>The compute kernel is a 70-line Swift function: classic two-frontier BFS, ping-pong buffers, ternary <code>{−1, 0, +1}</code> visited state, monotone frame counter. Compiled <code>release</code>, exposed via <code>@_cdecl</code> for ctypes binding into Python.</p>
+    <p>Why Swift? Apple Silicon's unified memory architecture: the same buffer the CPU writes is the buffer the GPU sees, no copy. The Python wrapper hands NumPy arrays directly to the Swift dylib at zero marshalling cost.</p>
+    <h3>Numbers (best of 10 runs, M5 Max)</h3>
+    <table class="results">
+      <thead><tr><th>System</th><th class="num">Nodes</th><th class="num">Edges</th><th class="num">Swift BFS</th><th class="num">SciPy BFS</th><th class="num">ratio</th></tr></thead>
+      <tbody>
+        <tr><td>4AKE (AK kinase)</td><td class="num">214</td><td class="num">2,948</td><td class="num">5.8 µs</td><td class="num">18 µs</td><td class="num">3.1×</td></tr>
+        <tr><td>1OMP (MBP)</td><td class="num">370</td><td class="num">5,056</td><td class="num">5.8 µs</td><td class="num">19.8 µs</td><td class="num">3.4×</td></tr>
+        <tr><td>2HZ4 (Abl kinase)</td><td class="num">262</td><td class="num">3,630</td><td class="num">5.0 µs</td><td class="num">20.0 µs</td><td class="num">4.0×</td></tr>
+        <tr><td>4V9D (ribosome subset)</td><td class="num">10,739</td><td class="num">152,946</td><td class="num">128 µs</td><td class="num">287 µs</td><td class="num">2.25×</td></tr>
+      </tbody>
+    </table>
+    <p class="dim">Output is bit-exact identical to SciPy's compiled <code>breadth_first_order</code>. Both implement the same algorithm; we just spend less time on memory traffic. The 2–4× margin is real but modest — SciPy's C backend is competitive on small graphs. The bigger structural advantage shows up at HIV-capsid scale (Act 04) where the alternative tool stops fitting in memory entirely.</p>
+    <div class="note">
+      <span class="note-label">honest caveat</span>
+      A GPU port (Metal compute shader) was attempted. At biomolecule scale, dispatch overhead dominates and it's <strong>13× slower</strong> than the CPU version on single-source BFS. We kept the GPU code in the repo with a comment explaining why; it would win for multi-source dispatch or graphs ≥ 10⁶ nodes with frontier ≥ 10⁵.
+    </div>
+  </div>
+</div>
+
+<!-- ACT 3 — INFRASTRUCTURE WIN -->
+<div class="section" id="s3">
+  <div class="content">
+    <div class="section-num">act 03 — infrastructure result</div>
+    <h2>Beats PyG k-hop subgraph extraction</h2>
+    <p>GNN training pipelines extract $k$-hop neighborhoods around target nodes millions of times per epoch. The slowest step is often this CPU graph traversal, not the GPU forward pass. We benchmarked our BFS (full traversal, post-filter to depth $k$) against <code>torch_geometric.utils.k_hop_subgraph</code> on the ribosome graph, $k \in \{2, 3, 4\}$.</p>
+    <table class="results">
+      <thead><tr><th>$k$</th><th class="num">PyG</th><th class="num">Swift full BFS</th><th class="num">Swift clipped</th><th class="num">SciPy</th><th class="num">Swift / PyG</th></tr></thead>
+      <tbody>
+        <tr class="win"><td>2</td><td class="num">681 µs</td><td class="num">118 µs</td><td class="num">267 µs</td><td class="num">279 µs</td><td class="num">2.55×</td></tr>
+        <tr class="win"><td>3</td><td class="num">666 µs</td><td class="num">134 µs</td><td class="num">123 µs</td><td class="num">355 µs</td><td class="num">5.40×</td></tr>
+        <tr class="win"><td>4</td><td class="num">967 µs</td><td class="num">124 µs</td><td class="num">110 µs</td><td class="num">369 µs</td><td class="num">8.78×</td></tr>
+      </tbody>
+    </table>
+    <p>Swift wins at every $k$, with the margin growing as $k$ increases (from <strong>2.5× at k=2 to 8.8× at k=4</strong>). PyG's overhead is in repeated edge-mask construction; our BFS amortizes the same work over the whole frontier. Same algorithm class, Apple-Silicon-native dylib, no copy at the Python language boundary.</p>
+    <p class="dim">Caveat: this measures wall-clock on a single contact-graph CSR, not throughput in a real GNN training loop. The dataloader path inside Lightning or PyG-Sampler has additional overheads we don't measure.</p>
+  </div>
+</div>
+
+<!-- ACT 4 — SCALING -->
+<div class="section" id="s4">
+  <div class="content">
+    <div class="section-num">act 04 — scaling <span class="verdict pass">established</span></div>
+    <h2>HIV-1 capsid runs in 6 ms; ProDy GNM cannot run at all</h2>
+    <p>BFS is $O(V + E)$. With KNN-12 the graph is sparse, so $E \sim 12V$, and we expect linear wall-clock in node count. The five-system benchmark confirms it. ProDy's GNM (Gaussian Network Model) is the standard incumbent baseline; it solves an eigenvalue problem on the dense Kirchhoff matrix, $O(V^2)$ memory and $O(V^3)$ time.</p>
+    <table class="results">
+      <thead><tr><th>System</th><th class="num">$N$</th><th class="num">edges</th><th class="num">Swift BFS</th><th class="num">SciPy BFS</th><th class="num">ProDy GNM</th></tr></thead>
+      <tbody>
+        <tr><td>4AKE (AK)</td><td class="num">428</td><td class="num">5,832</td><td class="num">8.6 µs</td><td class="num">22.4 µs</td><td class="num">36.7 ms</td></tr>
+        <tr><td>1OMP (MBP)</td><td class="num">370</td><td class="num">5,056</td><td class="num">7.3 µs</td><td class="num">27.8 µs</td><td class="num">32.6 ms</td></tr>
+        <tr><td>2HZ4 (Abl)</td><td class="num">782</td><td class="num">10,792</td><td class="num">9.0 µs</td><td class="num">31.9 µs</td><td class="num">79.0 ms</td></tr>
+        <tr><td>4V9D (ribosome)</td><td class="num">20,908</td><td class="num">298,174</td><td class="num">431 µs</td><td class="num">711 µs</td><td class="num">217,534 ms (≈ 3.6 min)</td></tr>
+        <tr class="win"><td><strong>3J3Q (HIV-1 capsid)</strong></td><td class="num"><strong>313,236</strong></td><td class="num"><strong>4,269,528</strong></td><td class="num"><strong>5,998 µs (≈ 6 ms)</strong></td><td class="num">10,496 µs</td><td class="num"><strong>cannot run — 784 GB matrix</strong></td></tr>
+      </tbody>
+    </table>
+    <p>The 3J3Q row is the one that matters. ProDy's dense Kirchhoff at $N = 313{,}236$ requires $313{,}236^2 \times 8$ bytes $\approx$ 784 GB of memory — well above any commodity hardware. This is a <em>memory-exclusion</em> claim, not a wall-clock comparison: at scales where the incumbent tool fits, it produces more biologically informative output (vibrational modes, not graph distances). At scales where it does not fit, the BFS engine still does. 6 ms on a single M5 Max laptop. Sustained throughput ≈ 250 million traversed edges per second; ≈ 4 ns per edge.</p>
+    <p class="dim">The ribosome row is also notable: ProDy GNM takes 3.6 minutes; Swift BFS takes 0.4 milliseconds. Five-orders-of-magnitude gap, but the two tools answer different questions — the comparison only tells you which question is feasible at a given scale.</p>
+  </div>
+</div>
+
+<!-- ACT 5 — THE DISCIPLINE -->
+<div class="section" id="s5">
+  <div class="content">
+    <div class="section-num">act 05 — the discipline</div>
+    <h2>Pre-registration with a neutral arbiter</h2>
+    <p>Engine in hand, we asked the biological questions. To avoid HARKing (hypothesizing after results known) every hypothesis was pre-registered with Gemini DeepThink as a neutral arbiter <em>before</em> the data was collected. The arbiter locked the protocol: graph construction, gate thresholds for ESTABLISH and REJECT, cohort composition, dropped-system rules.</p>
+    <p><strong>Null commitment.</strong> No retry on rejection. No parameter tweaks after seeing data. No reframing of the hypothesis. If the gate misses, the result publishes as-is. Two distinct hypothesis classes were tested; one cleared its gate, one did not.</p>
+    <h3>Test cohort</h3>
+    <p>Two N=10 cohorts of well-studied paired conformers from the literature (open/closed, apo/holo, T/R), spanning kinases, GPCRs, transporters, chaperones, and synthases. Standard structural biology benchmark systems with published allosteric-pathway annotations.</p>
+  </div>
+</div>
+
+<!-- ACT 6 — ALLOSTERIC PATHWAY: ESTABLISHED -->
+<div class="section" id="s6">
+  <div class="content">
+    <div class="section-num">act 06 — biological result A <span class="verdict pass">established</span></div>
+    <h2>BFS suboptimal-tube recovers published allosteric residues</h2>
+    <p>The first hypothesis: a BFS suboptimal-tube on the residue contact graph, seeded at one functional site and grown toward another, identifies known allosteric-pathway residues better than the obvious geometric baseline (a Euclidean cylinder between the two sites).</p>
+    <p>Cohort: IGPS, PTP1B, β₂-adrenergic receptor, Hsp70, PKA, GlmS, ATCase, tryptophan synthase, PFK, Abl kinase. Three systems were pipeline-failures from seed-residue parsing and were dropped without substitution per the locked protocol.</p>
+    <h3>Result on 7 evaluated systems</h3>
+    <ul>
+      <li><strong>BFS-tube beats Euclidean-cylinder baseline in 6 of 7 systems.</strong></li>
+      <li>Median ΔF1 = +0.0707.</li>
+      <li>Pre-registered acceptance gate: ΔF1 ≥ +0.05 AND ≥ 70% wins. Both cleared.</li>
+      <li>Verdict: <strong>ESTABLISH</strong>.</li>
+    </ul>
+    <p class="dim">Ground-truth residue lists drawn from primary literature: Rivalta 2012 (IGPS), Wiesmann 2004 (PTP1B), Venkatakrishnan 2013 (β₂-AR), Zhuravleva 2012 (Hsp70), Taylor 2012 (PKA), Lipscomb 2008 (ATCase), Schirmer & Evans 1990 (PFK), Azam 2008 (Abl).</p>
+    <p>The interpretation we publish: <em>the contact graph carries enough geometric information to localize allosteric communication when the question is "which residues lie between two functional sites" rather than "how much will each residue move."</em></p>
+  </div>
+</div>
+
+<!-- ACT 7 — SPECTRAL SNAP: REJECTED, with structure -->
+<div class="section" id="s7">
+  <div class="content">
+    <div class="section-num">act 07 — biological result B <span class="verdict reject">rejected</span></div>
+    <h2>Spectral snap walk does not predict per-residue displacement</h2>
+    <p>The second hypothesis was bolder: drive a discrete walk along the Fiedler vector $\lambda_2$ of the contact-graph Laplacian, give it both the start and end conformer, and ask whether the per-residue snap counts predict the actual Kabsch-aligned Cα displacement.</p>
+    <p>Two pre-registered measurements with named gates:</p>
+    <table class="results">
+      <thead><tr><th></th><th class="num">observed</th><th class="num">ESTABLISH gate</th><th class="num">REJECT gate</th><th>verdict</th></tr></thead>
+      <tbody>
+        <tr class="lose"><td>H₁a — median ρ(PMS, displacement) across N=10</td><td class="num">+0.146</td><td class="num">≥ +0.35</td><td class="num">&lt; +0.20</td><td><strong>REJECT</strong></td></tr>
+        <tr class="lose"><td>H₁b — Spearman ρ(snap count, 1−TM-score), N=10</td><td class="num">−0.358</td><td class="num">≥ +0.65</td><td class="num">≤ +0.35</td><td><strong>REJECT</strong></td></tr>
+      </tbody>
+    </table>
+    <p>Both gates miss. By the null-commitment rule, the algorithm does not get a second shot in this study.</p>
+    <h3>The structure inside the rejection</h3>
+    <p>The arbiter asked for a sub-analysis after the formal verdict: how often did the snap walk beat the natural Euclidean-distance-from-hinge baseline on the same per-system per-residue test?</p>
+    <table class="results">
+      <thead><tr><th>system</th><th class="num">ρ_snap</th><th class="num">ρ_euclid</th><th class="num">Δρ</th><th>snap beats euclid?</th></tr></thead>
+      <tbody>
+        <tr class="win"><td>HIV-1 Protease</td><td class="num">+0.108</td><td class="num">−0.104</td><td class="num">+0.212</td><td>yes</td></tr>
+        <tr class="lose"><td>Klenow Pol I</td><td class="num">+0.110</td><td class="num">+0.363</td><td class="num">−0.252</td><td>no</td></tr>
+        <tr class="win"><td>Lactoferrin</td><td class="num">+0.187</td><td class="num">−0.006</td><td class="num">+0.193</td><td>yes</td></tr>
+        <tr class="lose"><td>Yeast Hexokinase</td><td class="num">−0.493</td><td class="num">−0.259</td><td class="num">−0.234</td><td>no</td></tr>
+        <tr class="lose"><td>GlutamineBP</td><td class="num">+0.226</td><td class="num">+0.545</td><td class="num">−0.319</td><td>no</td></tr>
+        <tr class="win"><td>RiboseBP</td><td class="num">+0.157</td><td class="num">−0.046</td><td class="num">+0.203</td><td>yes</td></tr>
+        <tr class="lose"><td>Citrate Synthase</td><td class="num">−0.279</td><td class="num">+0.668</td><td class="num">−0.947</td><td>no</td></tr>
+        <tr class="win"><td>T4 Lysozyme</td><td class="num">+0.296</td><td class="num">+0.180</td><td class="num">+0.116</td><td>yes</td></tr>
+        <tr class="win"><td>Enolase</td><td class="num">+0.318</td><td class="num">+0.053</td><td class="num">+0.265</td><td>yes</td></tr>
+        <tr class="win"><td>GroEL subunit</td><td class="num">+0.136</td><td class="num">−0.586</td><td class="num">+0.722</td><td>yes</td></tr>
+        <tr><td><strong>tally</strong></td><td class="num"></td><td class="num"></td><td class="num"></td><td><strong>6 of 10 wins</strong></td></tr>
+      </tbody>
+    </table>
+    <p>The snap walk beats the Euclidean baseline on 6 of 10 systems on the per-residue Δρ measure. <em>That is not the formal pre-registered gate</em> — H₁a was on absolute correlation strength, and absolute correlation is weak across the cohort. The Δρ result says snap walk carries some signal beyond raw geometric distance, just not enough absolute predictive power to clear the +0.35 floor.</p>
+    <h3>DeepThink's diagnosis</h3>
+    <p>The arbiter's plain-words verdict on the post-mortem: spectral snap walk is a <em>rigid-body hinge detector</em>. Where two domains rotate as solids around a hinge, the Fiedler vector cleanly identifies the hinge axis — but rigid-body motion has near-zero internal Cα displacement, so the correlation between snap count and displacement is exactly where the algorithm has nothing to say. The 4 losing systems (Klenow, Hexokinase, GlutamineBP, Citrate Synthase) are precisely the ones where the natural Euclidean baseline is already strong because the motion is dominated by translation of one domain.</p>
+    <div class="note">
+      <span class="note-label">what we did not do</span>
+      We did not retry with different $k$, different graph construction, different seed, different displacement metric, or different protein subset. The pre-registration locked the test; one shot, honest report. The repo carries both the rejection result and the per-pair raw data so anyone can re-run.
+    </div>
+  </div>
+</div>
+
+<!-- ACT 8 — WHAT WE LEARNED -->
+<div class="section" id="s8">
+  <div class="content">
+    <div class="section-num">act 08 — what we learned</div>
+    <h2>Two complementary signals — pathway vs displacement</h2>
+    <p>Holding the two biological results next to each other:</p>
+    <ol>
+      <li><strong>BFS-tube → allosteric pathway.</strong> When the question is "which residues lie on the geometric corridor between two functional sites," the contact graph holds the answer. ESTABLISHED, 6/7 wins.</li>
+      <li><strong>Spectral snap → displacement.</strong> When the question is "how much will each residue move," the contact graph alone is insufficient. REJECTED on the formal gate, 6/10 wins on the secondary baseline-beat measure.</li>
+    </ol>
+    <p>The two questions are mechanistically distinct. Allostery is a communication problem about <em>which residues participate</em>. Displacement is a thermodynamic problem about <em>how much they move</em>. Topology helps with the first; thermodynamics dominates the second. The arbiter's hinge-detector framing makes the same point: the algorithm sees domain partitioning, which is communication-relevant, not motion-magnitude-relevant.</p>
+    <p>The honest takeaway: <em>the engine and the BFS-tube discipline established a real allosteric-pathway tool. The spectral snap walk taught us where the contact-graph signal stops carrying.</em></p>
+  </div>
+</div>
+
+<!-- ACT 9 — NEXT -->
+<div class="section" id="s9">
+  <div class="content">
+    <div class="section-num">act 09 — what's next <span class="verdict open">open</span></div>
+    <h2>Two threads worth pulling</h2>
+    <h3>Fiedler zero-crossings as allosteric-axis predictor</h3>
+    <p>The Fiedler vector failed at predicting displacement magnitude, but its <em>zero-crossing set</em> — the residues where the eigenvector flips sign — is a candidate complement to the established BFS-tube. Allostery is a communication problem; the zero-crossing set is the spectral analog of a hinge surface, and there is small but real literature (Erman & Bahar 2010; Yao et al. 2016) suggesting it tracks experimentally identified allosteric residues. The combination — BFS-tube (connectivity) + Fiedler zero-crossing (mechanical bend axis) — is the next pre-registered hypothesis. Plan in draft.</p>
+    <h3>Multi-source dispatch on the GPU</h3>
+    <p>The GPU port loses on single-source BFS. It would win on the all-pairs problem: BFS from every residue as a seed, in one Metal kernel launch. The output is an $N \times N$ frame matrix — a graph-distance kernel that GNNs can consume directly as a node embedding. Same form needed for the Fiedler zero-crossing analysis above.</p>
+    <h3>The discipline carries</h3>
+    <p>Whatever gets tested next goes through the same protocol: pre-register the hypothesis with a neutral arbiter, name the gates in advance, single-shot, accept the verdict.</p>
+  </div>
+</div>
+
+<!-- WHAT'S IN THE REPO -->
+<div class="section" id="repo">
+  <div class="content">
+    <div class="section-num">repository</div>
+    <h2>What's in the public release</h2>
+    <p>Public at <code>github.com/&lt;org&gt;/isomorphic-walk</code>, version <code>v0.1.0</code>, GPLv3.</p>
+    <h3>Ships</h3>
+    <ul>
+      <li>Swift BFS engine (<code>BFSLib.dylib</code>, <code>KowalskiCrush</code> CLI), Metal GPU port with honest caveat.</li>
+      <li>Python ctypes wrapper (<code>bfslib.py</code>).</li>
+      <li>Five reproducible benchmarks: dataloader duel (vs SciPy + PyG), scaling vs ProDy, GAP-BS comparison, allosteric cohort N=10.</li>
+      <li>Graph-builder for any PDB / mmCIF (gemmi-backed).</li>
+      <li>Full README with three sections: <em>what works</em>, <em>what doesn't</em>, <em>what we tried</em>.</li>
+    </ul>
+    <h3>Does not ship</h3>
+    <ul>
+      <li>The retired NovaFold experiment (replaced by this work).</li>
+      <li>The internal pre-registration drops and arbiter conversations (kept private to preserve the discipline for future runs).</li>
+    </ul>
+  </div>
+</div>
+
+<!-- CLOSE -->
+<div class="section final" id="close">
+  <div class="content">
+    <div class="section-num">close</div>
+    <h2>Summary in six lines</h2>
+    <ol>
+      <li>BFS on a residue-contact graph, written native on Apple Silicon: 2–4× over SciPy on direct BFS, 2.5–8.8× over PyG's k-hop subgraph (margin grows with $k$).</li>
+      <li>Asymptotic scaling — ESTABLISHED. HIV-1 capsid (313,236 atoms, 4.27 M edges) traverses in 6 ms on a single M5 Max; the standard incumbent (ProDy GNM) cannot run because its dense matrix would need 784 GB of memory.</li>
+      <li>Allosteric pathway recovery — pre-registered, ESTABLISHED. BFS suboptimal-tube beats Euclidean-cylinder baseline 6 of 7 evaluated systems, median ΔF1 = +0.07. Both gates cleared.</li>
+      <li>Spectral snap walk for per-residue displacement — pre-registered, REJECTED on the absolute-correlation gate (median ρ = +0.146 vs floor +0.35). Snap walk does beat the Euclidean baseline 6 of 10 systems on Δρ, but that was a sub-finding, not the formal gate.</li>
+      <li>The arbiter's diagnosis: snap walk is a rigid-body hinge detector, useful for domain partitioning, weak for motion magnitude.</li>
+      <li>Next two swings — Fiedler zero-crossings as allosteric-axis predictor, multi-source GPU BFS for embedding — go through the same pre-registration discipline.</li>
+    </ol>
+  </div>
+</div>
+
+<div class="footer">
+  <p><em>This is an amateur engineering project. We are not HPC professionals and make no competitive claims. Errors are likely.</em></p>
+  <p style="margin-top: 14px;">Built on M5 Max, Swift 6.0, Metal, Python 3.13. Validated against PDB structures via gemmi. Engine code GPLv3, drafted April 2026.</p>
+</div>
+
+<script>
+const sections = document.querySelectorAll('.section');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.15 });
+sections.forEach(s => observer.observe(s));
+
+const bar = document.getElementById('progressBar');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+  bar.style.width = pct + '%';
+});
+</script>
+</body>
+</html>
