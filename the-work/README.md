@@ -2,7 +2,7 @@
 
 Interactive chaptered presentation of the bio-digital-twin substrate — what the work IS, on the substrate that runs it.
 
-**Watch live:** [norayr-m.github.io/the-work](https://norayr-m.github.io/the-work/)
+**Watch live:** [norayr-m.github.io/norayr-m/the-work](https://norayr-m.github.io/norayr-m/the-work/)
 
 ---
 
