@@ -108,6 +108,21 @@ main.deck-main {
   padding: 0 60px;
   max-width: 1100px;
   scroll-behavior: smooth;
+  /* Winston discipline (Norayr 2026-05-02): section dividers snap into view as discrete pages.
+     Within-section content scrolls normally; only divider boundaries are sticky. */
+  scroll-snap-type: y proximity;
+}
+.section-symbol {
+  display: inline-block;
+  vertical-align: middle;
+  color: var(--gold-soft);
+  flex-shrink: 0;
+}
+.section-symbol--toc { width: 14px; height: 14px; margin-right: 8px; }
+.section-symbol--opener { width: 96px; height: 96px; margin-bottom: 28px; color: var(--gold); }
+nav.toc a.section-head {
+  display: flex;
+  align-items: center;
 }
 article.slide {
   padding: 60px 0 80px;
@@ -117,6 +132,7 @@ article.slide:last-child { border-bottom: none; padding-bottom: 120px; }
 article.slide.cover {
   padding: 100px 0;
   text-align: left;
+  scroll-snap-align: start;
 }
 article.slide.cover .kicker {
   font-family: var(--mono);
@@ -157,6 +173,9 @@ article.slide.divider {
   padding: 120px 0 100px;
   border-top: 1px solid var(--border);
   background: linear-gradient(to bottom, rgba(212,175,55,0.03), transparent);
+  /* Winston: each divider is a discrete-page anchor */
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 article.slide.divider .section-num {
   font-family: var(--mono);
@@ -404,17 +423,17 @@ article.slide.current-chapter.divider {
   </div>
   <div class="toc-group">
     <div class="toc-group-title">Tier 2 — The directions</div>
-    <a href="#sec-4" class="section-head">§4 · Savanna Engine</a>
+    <a href="#sec-4" class="section-head"><span class="section-symbol section-symbol--toc"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <polygon points="32,8 56,52 8,52" fill="none"/> <circle cx="32" cy="8" r="4" fill="currentColor"/> <circle cx="56" cy="52" r="4" fill="currentColor"/> <circle cx="8" cy="52" r="4" fill="currentColor"/> <text x="32" y="11" font-size="6" fill="white" text-anchor="middle" stroke="none" font-family="sans-serif" font-weight="bold">+</text> <text x="56" y="55" font-size="6" fill="white" text-anchor="middle" stroke="none" font-family="sans-serif" font-weight="bold">0</text> <text x="8" y="55" font-size="6" fill="white" text-anchor="middle" stroke="none" font-family="sans-serif" font-weight="bold">−</text></svg></span>§4 · Savanna Engine</a>
     <a href="#direction4_savanna">4.1  Direction slide</a>
-    <a href="#sec-5" class="section-head">§5 · DagDB Engine</a>
+    <a href="#sec-5" class="section-head"><span class="section-symbol section-symbol--toc"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <polygon points="32,8 54,20 54,44 32,56 10,44 10,20" fill="none"/> <circle cx="32" cy="8" r="3" fill="currentColor"/> <circle cx="54" cy="20" r="3" fill="currentColor"/> <circle cx="54" cy="44" r="3" fill="currentColor"/> <circle cx="32" cy="56" r="3" fill="currentColor"/> <circle cx="10" cy="44" r="3" fill="currentColor"/> <circle cx="10" cy="20" r="3" fill="currentColor"/> <circle cx="32" cy="32" r="4" fill="currentColor"/></svg></span>§5 · DagDB Engine</a>
     <a href="#direction5_dagdb">5.1  Direction slide</a>
-    <a href="#sec-6" class="section-head">§6 · Proteins</a>
+    <a href="#sec-6" class="section-head"><span class="section-symbol section-symbol--toc"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <circle cx="10" cy="14" r="3" fill="currentColor"/> <circle cx="22" cy="14" r="3" fill="currentColor"/> <circle cx="16" cy="26" r="3" fill="currentColor"/> <line x1="10" y1="14" x2="22" y2="14"/> <line x1="10" y1="14" x2="16" y2="26"/> <line x1="22" y1="14" x2="16" y2="26"/> <circle cx="42" cy="50" r="3" fill="currentColor"/> <circle cx="54" cy="50" r="3" fill="currentColor"/> <circle cx="48" cy="38" r="3" fill="currentColor"/> <line x1="42" y1="50" x2="54" y2="50"/> <line x1="42" y1="50" x2="48" y2="38"/> <line x1="54" y1="50" x2="48" y2="38"/> <line x1="26" y1="30" x2="38" y2="34" stroke-dasharray="2,2"/> <polygon points="38,34 34,30 36,33" fill="currentColor" stroke="none"/></svg></span>§6 · Proteins</a>
     <a href="#direction6_proteins">6.1  Direction slide</a>
-    <a href="#sec-7" class="section-head">§7 · Applied math</a>
+    <a href="#sec-7" class="section-head"><span class="section-symbol section-symbol--toc"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <rect x="10" y="10" width="20" height="20" fill="none" opacity="0.4"/> <rect x="34" y="10" width="20" height="20" fill="none" opacity="0.4"/> <rect x="10" y="34" width="20" height="20" fill="none" opacity="0.4"/> <rect x="34" y="34" width="20" height="20" fill="none" opacity="0.4"/> <polyline points="20,20 44,20 20,44 44,44" stroke-width="3.5"/> <circle cx="20" cy="20" r="3" fill="currentColor"/> <circle cx="44" cy="44" r="3" fill="currentColor"/></svg></span>§7 · Applied math</a>
     <a href="#direction7_applied_math">7.1  Direction slide</a>
-    <a href="#sec-8" class="section-head">§8 · Architecture</a>
+    <a href="#sec-8" class="section-head"><span class="section-symbol section-symbol--toc"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <rect x="8" y="32" width="36" height="20" fill="currentColor" opacity="0.2"/> <rect x="14" y="22" width="36" height="20" fill="currentColor" opacity="0.5"/> <rect x="20" y="12" width="36" height="20" fill="currentColor" opacity="0.85"/> <rect x="8" y="32" width="36" height="20"/> <rect x="14" y="22" width="36" height="20"/> <rect x="20" y="12" width="36" height="20"/></svg></span>§8 · Architecture</a>
     <a href="#direction8_architecture">8.1  Direction slide</a>
-    <a href="#sec-9" class="section-head">§9 · Theoretical math</a>
+    <a href="#sec-9" class="section-head"><span class="section-symbol section-symbol--toc"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="6" y1="50" x2="58" y2="50" opacity="0.3"/> <path d="M 6 40 Q 22 18 32 32 Q 42 46 58 24" stroke-width="3"/> <circle cx="32" cy="32" r="4" fill="currentColor"/></svg></span>§9 · Theoretical math</a>
     <a href="#direction9_theoretical_math">9.1  Direction slide</a>
   </div>
   <div class="toc-group">
@@ -1654,6 +1673,15 @@ footer addition</p>
 <p>bzz. — slvr.</p>
 </article>
 <article class="slide divider" id="sec-4">
+  <span class="section-symbol section-symbol--opener"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <polygon points="32,8 56,52 8,52" fill="none"/>
+  <circle cx="32" cy="8" r="4" fill="currentColor"/>
+  <circle cx="56" cy="52" r="4" fill="currentColor"/>
+  <circle cx="8" cy="52" r="4" fill="currentColor"/>
+  <text x="32" y="11" font-size="6" fill="white" text-anchor="middle" stroke="none" font-family="sans-serif" font-weight="bold">+</text>
+  <text x="56" y="55" font-size="6" fill="white" text-anchor="middle" stroke="none" font-family="sans-serif" font-weight="bold">0</text>
+  <text x="8" y="55" font-size="6" fill="white" text-anchor="middle" stroke="none" font-family="sans-serif" font-weight="bold">−</text>
+</svg></span>
   <span class="section-num">§4</span>
   <h1>Savanna Engine</h1>
   <p class="subtitle">The 100-billion-cell existence proof — and where the M5 thermal ceiling actually lives.</p>
@@ -1897,6 +1925,16 @@ port, not a feasibility claim.</p>
 assets.</em></p>
 </article>
 <article class="slide divider" id="sec-5">
+  <span class="section-symbol section-symbol--opener"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <polygon points="32,8 54,20 54,44 32,56 10,44 10,20" fill="none"/>
+  <circle cx="32" cy="8" r="3" fill="currentColor"/>
+  <circle cx="54" cy="20" r="3" fill="currentColor"/>
+  <circle cx="54" cy="44" r="3" fill="currentColor"/>
+  <circle cx="32" cy="56" r="3" fill="currentColor"/>
+  <circle cx="10" cy="44" r="3" fill="currentColor"/>
+  <circle cx="10" cy="20" r="3" fill="currentColor"/>
+  <circle cx="32" cy="32" r="4" fill="currentColor"/>
+</svg></span>
   <span class="section-num">§5</span>
   <h1>DagDB Engine</h1>
   <p class="subtitle">A graph where every node carries its own program — and the whole graph runs in parallel each GPU tick.</p>
@@ -2097,6 +2135,22 @@ href="https://github.com/norayr-m/dagdb-engine">github.com/norayr-m/dagdb-engine
 href="https://norayr-m.github.io/dagdb-engine/site/">demos</a></p>
 </article>
 <article class="slide divider" id="sec-6">
+  <span class="section-symbol section-symbol--opener"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <circle cx="10" cy="14" r="3" fill="currentColor"/>
+  <circle cx="22" cy="14" r="3" fill="currentColor"/>
+  <circle cx="16" cy="26" r="3" fill="currentColor"/>
+  <line x1="10" y1="14" x2="22" y2="14"/>
+  <line x1="10" y1="14" x2="16" y2="26"/>
+  <line x1="22" y1="14" x2="16" y2="26"/>
+  <circle cx="42" cy="50" r="3" fill="currentColor"/>
+  <circle cx="54" cy="50" r="3" fill="currentColor"/>
+  <circle cx="48" cy="38" r="3" fill="currentColor"/>
+  <line x1="42" y1="50" x2="54" y2="50"/>
+  <line x1="42" y1="50" x2="48" y2="38"/>
+  <line x1="54" y1="50" x2="48" y2="38"/>
+  <line x1="26" y1="30" x2="38" y2="34" stroke-dasharray="2,2"/>
+  <polygon points="38,34 34,30 36,33" fill="currentColor" stroke="none"/>
+</svg></span>
   <span class="section-num">§6</span>
   <h1>Proteins (Isomorphic Walk)</h1>
   <p class="subtitle">Asking the substrate where, inside a protein, distant binding sites can talk to each other.</p>
@@ -2390,6 +2444,15 @@ the honesty story, not operative claims.</p>
 Dag’s</em> <em>one_pager.md three-column discipline.</em></p>
 </article>
 <article class="slide divider" id="sec-7">
+  <span class="section-symbol section-symbol--opener"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <rect x="10" y="10" width="20" height="20" fill="none" opacity="0.4"/>
+  <rect x="34" y="10" width="20" height="20" fill="none" opacity="0.4"/>
+  <rect x="10" y="34" width="20" height="20" fill="none" opacity="0.4"/>
+  <rect x="34" y="34" width="20" height="20" fill="none" opacity="0.4"/>
+  <polyline points="20,20 44,20 20,44 44,44" stroke-width="3.5"/>
+  <circle cx="20" cy="20" r="3" fill="currentColor"/>
+  <circle cx="44" cy="44" r="3" fill="currentColor"/>
+</svg></span>
   <span class="section-num">§7</span>
   <h1>Applied math — citations + lineage</h1>
   <p class="subtitle">The lineage itemized — the prior work the substrate leans on, and from whom.</p>
@@ -2772,6 +2835,14 @@ context</li>
 Draft 1, populated 2026-05-01. GH-link footer added 2026-05-02.</em></p>
 </article>
 <article class="slide divider" id="sec-8">
+  <span class="section-symbol section-symbol--opener"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <rect x="8" y="32" width="36" height="20" fill="currentColor" opacity="0.2"/>
+  <rect x="14" y="22" width="36" height="20" fill="currentColor" opacity="0.5"/>
+  <rect x="20" y="12" width="36" height="20" fill="currentColor" opacity="0.85"/>
+  <rect x="8" y="32" width="36" height="20"/>
+  <rect x="14" y="22" width="36" height="20"/>
+  <rect x="20" y="12" width="36" height="20"/>
+</svg></span>
   <span class="section-num">§8</span>
   <h1>Architecture details</h1>
   <p class="subtitle">Inside the engine — UMA, Metal dispatch, and the lock-free wiring that holds it together.</p>
@@ -2978,6 +3049,11 @@ href="https://github.com/norayr-m/dagdb-engine/blob/main/docs/dev-test-prod-memo
 memo</a></p>
 </article>
 <article class="slide divider" id="sec-9">
+  <span class="section-symbol section-symbol--opener"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <line x1="6" y1="50" x2="58" y2="50" opacity="0.3"/>
+  <path d="M 6 40 Q 22 18 32 32 Q 42 46 58 24" stroke-width="3"/>
+  <circle cx="32" cy="32" r="4" fill="currentColor"/>
+</svg></span>
   <span class="section-num">§9</span>
   <h1>Theoretical math — open directions</h1>
   <p class="subtitle">Mathematical directions the substrate brings within reach — directions of interest, not finished work.</p>
