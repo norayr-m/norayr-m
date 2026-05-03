@@ -122,6 +122,83 @@ main.deck-main {
 .section-symbol--opener { width: 96px; height: 96px; margin-bottom: 28px; color: var(--gold); }
 .section-symbol--tier1-hero { width: 96px; height: 96px; margin-bottom: 28px; color: var(--gold); display: block; }
 .section-symbol--quicknav { width: 14px; height: 14px; margin-right: 4px; }
+/* Section 0 / iteration 2 — gallery + intro one-pager classes */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin: 48px auto;
+  max-width: 760px;
+}
+.gallery-cell {
+  text-align: center;
+  padding: 20px 12px;
+  border: 1px solid rgba(212,175,55,0.2);
+  border-radius: 8px;
+  background: rgba(212,175,55,0.03);
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.15s, border-color 0.15s, transform 0.15s;
+}
+.gallery-cell:hover {
+  background: rgba(212,175,55,0.07);
+  border-color: var(--gold);
+  transform: translateY(-2px);
+}
+.gallery-symbol {
+  display: block;
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 14px;
+  color: var(--gold);
+}
+.gallery-symbol svg { width: 100%; height: 100%; }
+.gallery-label {
+  font-size: 16px;
+  letter-spacing: 0.05em;
+  color: var(--gold);
+  font-weight: 500;
+}
+/* Intro one-pagers — large symbol inline with h1 */
+.intro-symbol {
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+  vertical-align: middle;
+  margin-right: 16px;
+  color: var(--gold);
+}
+.intro-symbol svg { width: 100%; height: 100%; }
+/* Compact thesis hero block — large GCUPS number + tag */
+.thesis-hero-compact {
+  margin: 32px auto;
+  padding: 24px 28px;
+  border-left: 3px solid var(--gold);
+  background: rgba(212,175,55,0.04);
+  max-width: 720px;
+}
+.thesis-number-large {
+  font-size: 64px;
+  font-weight: 300;
+  color: var(--gold);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.thesis-units {
+  font-family: var(--mono);
+  font-size: 18px;
+  color: var(--gold-soft);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-left: 8px;
+}
+.thesis-tag {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 12px;
+  letter-spacing: 0.04em;
+}
 .quicknav-strip {
   margin-left: auto;
   display: flex;
@@ -445,19 +522,17 @@ article.slide.current-chapter.divider {
     <a href="#cover">Cover</a>
   </div>
   <div class="toc-group">
-    <div class="toc-group-title">Tier 1 — Where we are</div>
-    <a href="#tier1_three_months_narrative">1.1  Three months narrative</a>
-    <a href="#hive_itself">1.2  The hive itself</a>
-    <a href="#bio_digital_twin_goal">1.3  Bio digital twin — the goal</a>
+    <div class="toc-group-title">§0 · Intro — the six pillars</div>
+    <a href="#sec0_1_gallery">0.1  Gallery</a>
+    <a href="#sec0_2_savanna">0.2  Savanna intro</a>
+    <a href="#sec0_3_dagdb">0.3  DagDB intro</a>
+    <a href="#sec0_4_proteins">0.4  Proteins intro</a>
+    <a href="#sec0_5_applied">0.5  Applied math intro</a>
+    <a href="#sec0_6_arch">0.6  Architecture intro</a>
+    <a href="#sec0_7_theory">0.7  Theoretical math intro</a>
   </div>
   <div class="toc-group">
-    <div class="toc-group-title">Substrate + biology framing</div>
-    <a href="#hepatocyte_pass_2_spec">S.1  Hepatocyte Pass 2</a>
-    <a href="#uma_performance">S.2  UMA performance</a>
-    <a href="#tokyo_ca_voronoi">S.3  Tokyo CA — Voronoi reading</a>
-  </div>
-  <div class="toc-group">
-    <div class="toc-group-title">Tier 2 — The directions</div>
+    <div class="toc-group-title">The six chapters</div>
     <a href="#sec-4" class="section-head"><span class="section-symbol section-symbol--toc"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <polygon points="32,8 56,52 8,52" fill="none"/> <circle cx="32" cy="8" r="4" fill="currentColor"/> <circle cx="56" cy="52" r="4" fill="currentColor"/> <circle cx="8" cy="52" r="4" fill="currentColor"/> <text x="32" y="11" font-size="6" fill="white" text-anchor="middle" stroke="none" font-family="sans-serif" font-weight="bold">+</text> <text x="56" y="55" font-size="6" fill="white" text-anchor="middle" stroke="none" font-family="sans-serif" font-weight="bold">0</text> <text x="8" y="55" font-size="6" fill="white" text-anchor="middle" stroke="none" font-family="sans-serif" font-weight="bold">−</text></svg></span>§4 · Savanna Engine</a>
     <a href="#direction4_savanna">4.1  Direction slide</a>
     <a href="#sec-5" class="section-head"><span class="section-symbol section-symbol--toc"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <polygon points="32,8 54,20 54,44 32,56 10,44 10,20" fill="none"/> <circle cx="32" cy="8" r="3" fill="currentColor"/> <circle cx="54" cy="20" r="3" fill="currentColor"/> <circle cx="54" cy="44" r="3" fill="currentColor"/> <circle cx="32" cy="56" r="3" fill="currentColor"/> <circle cx="10" cy="44" r="3" fill="currentColor"/> <circle cx="10" cy="20" r="3" fill="currentColor"/> <circle cx="32" cy="32" r="4" fill="currentColor"/></svg></span>§5 · DagDB Engine</a>
@@ -472,12 +547,16 @@ article.slide.current-chapter.divider {
     <a href="#direction9_theoretical_math">9.1  Direction slide</a>
   </div>
   <div class="toc-group">
-    <div class="toc-group-title">Layer 3 · Inventory</div>
-    <a href="#layer3_inventory">3.1  Full inventory walk</a>
-  </div>
-  <div class="toc-group">
-    <div class="toc-group-title">Q&amp;A</div>
-    <a href="#qa_section">Live · Direct questions to specialists</a>
+    <div class="toc-group-title">Appendix</div>
+    <a href="#appendix" class="section-head">Appendix opener</a>
+    <a href="#tier1_three_months_narrative">A.1  Three months narrative</a>
+    <a href="#hive_itself">A.2  The hive itself</a>
+    <a href="#bio_digital_twin_goal">A.3  Bio digital twin — the goal</a>
+    <a href="#hepatocyte_pass_2_spec">A.4  Hepatocyte Pass 2</a>
+    <a href="#uma_performance">A.5  UMA performance</a>
+    <a href="#tokyo_ca_voronoi">A.6  Tokyo CA — Voronoi</a>
+    <a href="#layer3_inventory">A.7  Full inventory walk</a>
+    <a href="#qa_section">A.8  Q&amp;A — direct questions to specialists</a>
   </div>
 </nav>
 
@@ -487,7 +566,7 @@ article.slide.current-chapter.divider {
     <div class="player-meta">
       <span class="player-kicker">Deck audio companion · three layers</span>
       <h2 class="player-title">The Work — narrated</h2>
-      <span class="player-subtitle">20 chapters · 45:46 total · L1 10:15 · L2 27:02 · L3 8:29 · Kokoro narration</span>
+      <span class="player-subtitle">27 chapters · 49:17 total · L1 4:06 · L2 20:31 · L3 24:40 · Kokoro narration</span>
     </div>
 
     <audio id="deckAudio" preload="metadata">
@@ -501,7 +580,7 @@ article.slide.current-chapter.divider {
       <div class="player-progress" id="progressWrap" onclick="deckSeek(event)">
         <div class="player-progress-bar" id="progressBar"></div>
       </div>
-      <span class="player-time"><span id="currentTime">0:00</span> <span class="sep">/</span> <span id="totalTime">45:46</span></span>
+      <span class="player-time"><span id="currentTime">0:00</span> <span class="sep">/</span> <span id="totalTime">49:17</span></span>
     </div>
 
     <div class="player-speed">
@@ -515,29 +594,36 @@ article.slide.current-chapter.divider {
     <details class="player-chapters" open>
       <summary>Chapters · click to jump</summary>
       <ol class="chapters-list">
-        <li class="layer-divider" data-layer="1" onclick="deckSeekTo(0, this)"><span class="layer-kicker">Layer 1 — Overview</span><span class="layer-total">10:15</span></li>
+        <li class="layer-divider" data-layer="1" onclick="deckSeekTo(0, this)"><span class="layer-kicker">Layer 1 — Intro</span><span class="layer-total">4:06</span></li>
         <li class="chapter" data-start="0" data-slide="cover" data-layer="1" onclick="deckSeekTo(0, this)"><span class="chap-num">1.1</span><span class="chap-label">Cover · The Work</span><span class="chap-time">0:00</span><span class="chap-dur">0:35</span></li>
-        <li class="chapter" data-start="35" data-slide="tier1_three_months_narrative" data-layer="1" onclick="deckSeekTo(35, this)"><span class="chap-num">1.2</span><span class="chap-label">Tier 1 · Three months on one laptop</span><span class="chap-time">0:35</span><span class="chap-dur">4:08</span></li>
-        <li class="chapter" data-start="283" data-slide="hive_itself" data-layer="1" onclick="deckSeekTo(283, this)"><span class="chap-num">1.3</span><span class="chap-label">The hive itself</span><span class="chap-time">4:43</span><span class="chap-dur">2:52</span></li>
-        <li class="chapter" data-start="455" data-slide="bio_digital_twin_goal" data-layer="1" onclick="deckSeekTo(455, this)"><span class="chap-num">1.4</span><span class="chap-label">Bio digital twin — the goal</span><span class="chap-time">7:35</span><span class="chap-dur">2:40</span></li>
-        <li class="layer-divider" data-layer="2" onclick="deckSeekTo(615, this)"><span class="layer-kicker">Layer 2 — Tier 2 directions</span><span class="layer-total">27:02</span></li>
-        <li class="chapter" data-start="615" data-slide="hepatocyte_pass_2_spec" data-layer="2" onclick="deckSeekTo(615, this)"><span class="chap-num">2.1</span><span class="chap-label">Hepatocyte Pass 2 — tissue-scale graph substrate</span><span class="chap-time">10:15</span><span class="chap-dur">2:22</span></li>
-        <li class="chapter" data-start="757" data-slide="uma_performance" data-layer="2" onclick="deckSeekTo(757, this)"><span class="chap-num">2.2</span><span class="chap-label">UMA performance — Apple unified memory</span><span class="chap-time">12:37</span><span class="chap-dur">1:59</span></li>
-        <li class="chapter" data-start="876" data-slide="tokyo_ca_voronoi" data-layer="2" onclick="deckSeekTo(876, this)"><span class="chap-num">2.3</span><span class="chap-label">Tokyo CA — wave-collision Voronoi</span><span class="chap-time">14:36</span><span class="chap-dur">2:10</span></li>
-        <li class="chapter" data-start="1006" data-slide="sec-4" data-layer="2" onclick="deckSeekTo(1006, this)"><span class="chap-num">2.4</span><span class="chap-label">§4 · Savanna Engine</span><span class="chap-time">16:46</span><span class="chap-dur">0:11</span></li>
-        <li class="chapter" data-start="1017" data-slide="direction4_savanna" data-layer="2" onclick="deckSeekTo(1017, this)"><span class="chap-num">2.5</span><span class="chap-label">Savanna direction — 100B-cell existence proof</span><span class="chap-time">16:57</span><span class="chap-dur">2:02</span></li>
-        <li class="chapter" data-start="1139" data-slide="sec-5" data-layer="2" onclick="deckSeekTo(1139, this)"><span class="chap-num">2.6</span><span class="chap-label">§5 · DagDB Engine</span><span class="chap-time">18:59</span><span class="chap-dur">0:12</span></li>
-        <li class="chapter" data-start="1151" data-slide="direction5_dagdb" data-layer="2" onclick="deckSeekTo(1151, this)"><span class="chap-num">2.7</span><span class="chap-label">DagDB direction — graph database with LUT6 nodes</span><span class="chap-time">19:11</span><span class="chap-dur">2:54</span></li>
-        <li class="chapter" data-start="1325" data-slide="sec-6" data-layer="2" onclick="deckSeekTo(1325, this)"><span class="chap-num">2.8</span><span class="chap-label">§6 · Proteins</span><span class="chap-time">22:05</span><span class="chap-dur">0:10</span></li>
-        <li class="chapter" data-start="1335" data-slide="direction6_proteins" data-layer="2" onclick="deckSeekTo(1335, this)"><span class="chap-num">2.9</span><span class="chap-label">Proteins direction — Isomorphic Walk</span><span class="chap-time">22:15</span><span class="chap-dur">2:18</span></li>
-        <li class="chapter" data-start="1473" data-slide="sec-7" data-layer="2" onclick="deckSeekTo(1473, this)"><span class="chap-num">2.10</span><span class="chap-label">§7 · Applied math</span><span class="chap-time">24:33</span><span class="chap-dur">0:09</span></li>
-        <li class="chapter" data-start="1482" data-slide="direction7_applied_math" data-layer="2" onclick="deckSeekTo(1482, this)"><span class="chap-num">2.11</span><span class="chap-label">Applied math — citations and lineage</span><span class="chap-time">24:42</span><span class="chap-dur">3:37</span></li>
-        <li class="chapter" data-start="1699" data-slide="sec-8" data-layer="2" onclick="deckSeekTo(1699, this)"><span class="chap-num">2.12</span><span class="chap-label">§8 · Architecture details</span><span class="chap-time">28:19</span><span class="chap-dur">0:11</span></li>
-        <li class="chapter" data-start="1710" data-slide="direction8_architecture" data-layer="2" onclick="deckSeekTo(1710, this)"><span class="chap-num">2.13</span><span class="chap-label">Architecture direction — engine internals</span><span class="chap-time">28:30</span><span class="chap-dur">4:20</span></li>
-        <li class="chapter" data-start="1970" data-slide="sec-9" data-layer="2" onclick="deckSeekTo(1970, this)"><span class="chap-num">2.14</span><span class="chap-label">§9 · Theoretical math</span><span class="chap-time">32:50</span><span class="chap-dur">0:11</span></li>
-        <li class="chapter" data-start="1981" data-slide="direction9_theoretical_math" data-layer="2" onclick="deckSeekTo(1981, this)"><span class="chap-num">2.15</span><span class="chap-label">Theoretical math — open directions</span><span class="chap-time">33:01</span><span class="chap-dur">4:16</span></li>
-        <li class="layer-divider" data-layer="3" onclick="deckSeekTo(2237, this)"><span class="layer-kicker">Layer 3 — Tier 3 inventory</span><span class="layer-total">8:29</span></li>
-        <li class="chapter" data-start="2237" data-slide="layer3_inventory" data-layer="3" onclick="deckSeekTo(2237, this)"><span class="chap-num">3.1</span><span class="chap-label">Layer 3 — Full inventory walk</span><span class="chap-time">37:17</span><span class="chap-dur">8:29</span></li>
+        <li class="chapter" data-start="35" data-slide="sec0_1_gallery" data-layer="1" onclick="deckSeekTo(35, this)"><span class="chap-num">1.2</span><span class="chap-label">§0.1 · The six pillars</span><span class="chap-time">0:35</span><span class="chap-dur">0:23</span></li>
+        <li class="chapter" data-start="58" data-slide="sec0_2_savanna" data-layer="1" onclick="deckSeekTo(58, this)"><span class="chap-num">1.3</span><span class="chap-label">§0.2 · Savanna intro</span><span class="chap-time">0:58</span><span class="chap-dur">0:32</span></li>
+        <li class="chapter" data-start="90" data-slide="sec0_3_dagdb" data-layer="1" onclick="deckSeekTo(90, this)"><span class="chap-num">1.4</span><span class="chap-label">§0.3 · DagDB intro</span><span class="chap-time">1:30</span><span class="chap-dur">0:36</span></li>
+        <li class="chapter" data-start="126" data-slide="sec0_4_proteins" data-layer="1" onclick="deckSeekTo(126, this)"><span class="chap-num">1.5</span><span class="chap-label">§0.4 · Proteins intro</span><span class="chap-time">2:06</span><span class="chap-dur">0:30</span></li>
+        <li class="chapter" data-start="156" data-slide="sec0_5_applied" data-layer="1" onclick="deckSeekTo(156, this)"><span class="chap-num">1.6</span><span class="chap-label">§0.5 · Applied math intro</span><span class="chap-time">2:36</span><span class="chap-dur">0:28</span></li>
+        <li class="chapter" data-start="184" data-slide="sec0_6_arch" data-layer="1" onclick="deckSeekTo(184, this)"><span class="chap-num">1.7</span><span class="chap-label">§0.6 · Architecture intro</span><span class="chap-time">3:04</span><span class="chap-dur">0:32</span></li>
+        <li class="chapter" data-start="216" data-slide="sec0_7_theory" data-layer="1" onclick="deckSeekTo(216, this)"><span class="chap-num">1.8</span><span class="chap-label">§0.7 · Theoretical math intro</span><span class="chap-time">3:36</span><span class="chap-dur">0:30</span></li>
+        <li class="layer-divider" data-layer="2" onclick="deckSeekTo(246, this)"><span class="layer-kicker">Layer 2 — Chapters</span><span class="layer-total">20:31</span></li>
+        <li class="chapter" data-start="246" data-slide="sec-4" data-layer="2" onclick="deckSeekTo(246, this)"><span class="chap-num">2.1</span><span class="chap-label">§4 · Savanna Engine</span><span class="chap-time">4:06</span><span class="chap-dur">0:11</span></li>
+        <li class="chapter" data-start="257" data-slide="direction4_savanna" data-layer="2" onclick="deckSeekTo(257, this)"><span class="chap-num">2.2</span><span class="chap-label">Savanna direction — 100B-cell existence proof</span><span class="chap-time">4:17</span><span class="chap-dur">2:02</span></li>
+        <li class="chapter" data-start="379" data-slide="sec-5" data-layer="2" onclick="deckSeekTo(379, this)"><span class="chap-num">2.3</span><span class="chap-label">§5 · DagDB Engine</span><span class="chap-time">6:19</span><span class="chap-dur">0:12</span></li>
+        <li class="chapter" data-start="391" data-slide="direction5_dagdb" data-layer="2" onclick="deckSeekTo(391, this)"><span class="chap-num">2.4</span><span class="chap-label">DagDB direction — graph database with LUT6 nodes</span><span class="chap-time">6:31</span><span class="chap-dur">2:54</span></li>
+        <li class="chapter" data-start="565" data-slide="sec-6" data-layer="2" onclick="deckSeekTo(565, this)"><span class="chap-num">2.5</span><span class="chap-label">§6 · Proteins</span><span class="chap-time">9:25</span><span class="chap-dur">0:10</span></li>
+        <li class="chapter" data-start="575" data-slide="direction6_proteins" data-layer="2" onclick="deckSeekTo(575, this)"><span class="chap-num">2.6</span><span class="chap-label">Proteins direction — Isomorphic Walk</span><span class="chap-time">9:35</span><span class="chap-dur">2:18</span></li>
+        <li class="chapter" data-start="713" data-slide="sec-7" data-layer="2" onclick="deckSeekTo(713, this)"><span class="chap-num">2.7</span><span class="chap-label">§7 · Applied math</span><span class="chap-time">11:53</span><span class="chap-dur">0:09</span></li>
+        <li class="chapter" data-start="722" data-slide="direction7_applied_math" data-layer="2" onclick="deckSeekTo(722, this)"><span class="chap-num">2.8</span><span class="chap-label">Applied math — citations and lineage</span><span class="chap-time">12:02</span><span class="chap-dur">3:37</span></li>
+        <li class="chapter" data-start="939" data-slide="sec-8" data-layer="2" onclick="deckSeekTo(939, this)"><span class="chap-num">2.9</span><span class="chap-label">§8 · Architecture details</span><span class="chap-time">15:39</span><span class="chap-dur">0:11</span></li>
+        <li class="chapter" data-start="950" data-slide="direction8_architecture" data-layer="2" onclick="deckSeekTo(950, this)"><span class="chap-num">2.10</span><span class="chap-label">Architecture direction — engine internals</span><span class="chap-time">15:50</span><span class="chap-dur">4:20</span></li>
+        <li class="chapter" data-start="1210" data-slide="sec-9" data-layer="2" onclick="deckSeekTo(1210, this)"><span class="chap-num">2.11</span><span class="chap-label">§9 · Theoretical math</span><span class="chap-time">20:10</span><span class="chap-dur">0:11</span></li>
+        <li class="chapter" data-start="1221" data-slide="direction9_theoretical_math" data-layer="2" onclick="deckSeekTo(1221, this)"><span class="chap-num">2.12</span><span class="chap-label">Theoretical math — open directions</span><span class="chap-time">20:21</span><span class="chap-dur">4:16</span></li>
+        <li class="layer-divider" data-layer="3" onclick="deckSeekTo(1477, this)"><span class="layer-kicker">Layer 3 — Appendix</span><span class="layer-total">24:40</span></li>
+        <li class="chapter" data-start="1477" data-slide="tier1_three_months_narrative" data-layer="3" onclick="deckSeekTo(1477, this)"><span class="chap-num">3.1</span><span class="chap-label">Appendix · Three months on one laptop</span><span class="chap-time">24:37</span><span class="chap-dur">4:08</span></li>
+        <li class="chapter" data-start="1725" data-slide="hive_itself" data-layer="3" onclick="deckSeekTo(1725, this)"><span class="chap-num">3.2</span><span class="chap-label">Appendix · The hive itself</span><span class="chap-time">28:45</span><span class="chap-dur">2:52</span></li>
+        <li class="chapter" data-start="1897" data-slide="bio_digital_twin_goal" data-layer="3" onclick="deckSeekTo(1897, this)"><span class="chap-num">3.3</span><span class="chap-label">Appendix · Bio digital twin — the goal</span><span class="chap-time">31:37</span><span class="chap-dur">2:40</span></li>
+        <li class="chapter" data-start="2057" data-slide="hepatocyte_pass_2_spec" data-layer="3" onclick="deckSeekTo(2057, this)"><span class="chap-num">3.4</span><span class="chap-label">Appendix · Hepatocyte Pass 2</span><span class="chap-time">34:17</span><span class="chap-dur">2:22</span></li>
+        <li class="chapter" data-start="2199" data-slide="uma_performance" data-layer="3" onclick="deckSeekTo(2199, this)"><span class="chap-num">3.5</span><span class="chap-label">Appendix · UMA performance</span><span class="chap-time">36:39</span><span class="chap-dur">1:59</span></li>
+        <li class="chapter" data-start="2318" data-slide="tokyo_ca_voronoi" data-layer="3" onclick="deckSeekTo(2318, this)"><span class="chap-num">3.6</span><span class="chap-label">Appendix · Tokyo CA — Voronoi</span><span class="chap-time">38:38</span><span class="chap-dur">2:10</span></li>
+        <li class="chapter" data-start="2448" data-slide="layer3_inventory" data-layer="3" onclick="deckSeekTo(2448, this)"><span class="chap-num">3.7</span><span class="chap-label">Appendix · Full inventory walk</span><span class="chap-time">40:48</span><span class="chap-dur">8:29</span></li>
       </ol>
     </details>
   </div>
@@ -551,1181 +637,163 @@ article.slide.current-chapter.divider {
   <p class="source-line"><em>Source: <a href="https://github.com/norayr-m">github.com/norayr-m</a></em></p>
 </article>
 
-<article class="slide" id="tier1_three_months_narrative">
-<h1 id="tier-1-the-last-three-months-on-one-laptop-narrative">Tier 1 —
-The last three months on one laptop (NARRATIVE)</h1>
-<blockquote>
-<p><em>Calibration: every line below maps to a label in the project’s
-calibration baseline (verified / spec / overclaim risk). Numbers from
-one M5 Max laptop. Amateur engineering project; no competitive claims;
-errors likely. Engine source is the source of truth; if anything below
-contradicts the code, the code wins.</em></p>
-</blockquote>
-<hr />
-<h2 id="the-story-in-five-beats">The story in five beats</h2>
-<svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg" style="max-width:600px;width:100%;display:block;margin:18px auto;">
-<rect x="20" y="40" width="170" height="120" fill="none" stroke="#d4af37" stroke-width="2" rx="4"/>
-<text x="105" y="70" text-anchor="middle" font-family="ui-monospace,monospace" font-size="14" fill="#d4af37">SAVANNA</text>
-<text x="105" y="100" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#a8863a">100B
-cells / 9h</text>
-<text x="105" y="120" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#a8863a">M5
-thermal ceiling</text>
-<text x="105" y="140" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#a8863a">existence
-proof</text>
-<rect x="215" y="40" width="170" height="120" fill="none" stroke="#d4af37" stroke-width="2" rx="4"/>
-<text x="300" y="70" text-anchor="middle" font-family="ui-monospace,monospace" font-size="14" fill="#d4af37">DagDB</text>
-<text x="300" y="100" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#a8863a">64-bit
-LUT6 per node</text>
-<text x="300" y="120" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#a8863a">BACK_EDGE
-/ AC-3</text>
-<text x="300" y="140" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#a8863a">snapshot
-v4 + WAL</text>
-<rect x="410" y="40" width="170" height="120" fill="none" stroke="#d4af37" stroke-width="2" rx="4"/>
-<text x="495" y="70" text-anchor="middle" font-family="ui-monospace,monospace" font-size="14" fill="#d4af37">Bio
-Digital Twin</text>
-<text x="495" y="100" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#a8863a">10⁷
-hepatocyte schema</text>
-<text x="495" y="120" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#a8863a">cell-resolution
-graph</text>
-<text x="495" y="140" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#a8863a">substrate
-verified · twins spec</text>
-<rect x="20" y="170" width="560" height="22" fill="#151311" stroke="#d4af37" stroke-width="1" rx="2"/>
-<text x="300" y="186" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#a8863a">one
-M5 Max laptop · three months · shared dispatch + Morton + 7-coloring
-substrate</text>
-</svg>
-<p><strong>One M5 Max laptop. Three months. Three things landed
-end-to-end.</strong></p>
-<ol type="1">
-<li><p><strong>Savanna Engine — ultra-scale spatial lattice on Apple
-Silicon.</strong> 100 billion cells over 9 hours on one M5 Max, 15.8
-GCUPS peak, 500 GB state file at the M5 thermal ceiling.
-<strong>VERIFIED</strong> as an existence proof for what consumer
-hardware can actually do under careful dispatch + Morton-Z-curve memory
-layout + 7-coloring parallel-safe scheduling.</p></li>
-<li><p><strong>DagDB engine — Boolean-circuit-as-database.</strong> A
-graph database where every node holds a 64-bit truth table (a LUT6 — the
-same primitive at the heart of an FPGA), wired into a ranked acyclic
-graph evaluated in parallel on the GPU each tick. <strong>BACK_EDGE
-primitive</strong> (synchronous-circuit register pattern) verified by
-AC-3 constraint-propagation round-trip against a Python reference:
-per-tick equality across 21 register nodes, converges in 2 synchronous
-ticks. Snapshot v4 with WAL replay, multi-version reads, atomic save
-discipline; bitwise LUT composition at runtime; honey-on-DagDB lossless
-round-trip probe. <strong>VERIFIED.</strong></p></li>
-<li><p><strong>Bio digital twin substrate.</strong> Graph-CA-on-topology
-framework that takes the Savanna throughput and the DagDB substrate and
-targets tissue-scale biological models. Hepatocyte 10⁷ Pass 2
-spatial-adjacency schema designed and cross-checked. Integration path
-with allosteric-pathway protein work in active development.
-<strong>MIXED</strong> — the substrate is verified at the throughput
-tier; specific tissue twins (liver, brain cortical column) are spec, not
-built.</p></li>
-</ol>
-<h2 id="calibration-discipline-as-the-fourth-beat">Calibration
-discipline as the fourth beat</h2>
-<p>Underneath the three engineering landings: a <strong>discipline of
-labelling claims</strong>. Every artefact in this presentation maps to
-one of three labels: <strong>verified</strong> (compiled, tested,
-measured), <strong>spec</strong> (designed, not built), or
-<strong>overclaim risk</strong> (something a casual reader might infer
-that isn’t actually true). The calibration anchor
-(<code>one_pager.md</code>) names the specific overclaim risks for this
-project — for example, “DagDB is a thinking engine” is overclaim (it’s a
-fast specialised substrate, not a general reasoner); “the Tokyo CA
-produces a slime-mold network” is overclaim (it produces a Voronoi
-tessellation; the substrate has no fluid dynamics).</p>
-<p>The honest split is the deliverable. The numbers are real; the limits
-are named.</p>
-<hr />
-<h2 id="what-this-tier-1-is-for">What this Tier 1 is for</h2>
-<p>Anyone who has not seen the work before should walk away from these
-five beats with: (a) what was built, (b) at what scale, (c) what’s real
-vs spec, and (d) the labelling discipline that carries through the rest
-of the deck.</p>
-<p>Tier 2 expands each direction; Tier 3 is the clickable inventory.
-Numbers above are the substantive ones; everything else is texture.</p>
-<h2 id="what-we-want-from-the-audience">What we want from the
-audience</h2>
-<p>Honest pushback on claim calibration. HPC specialists see more of
-this work than we do; if any label above is too generous in either
-direction, we want the redirect. Pointers to prior art are also welcome
-— the “novel combination, prior-art ingredients” framing only works if
-we have the ingredients named accurately.</p>
-<hr />
-<p><em>Slot owner: tut (explanatory framing).</em> <em>Co-owner: pub
-(calibration discipline policy).</em> <em>Calibration source:
-<code>one_pager.md</code>. If a claim above contradicts the engine
-source, the engine source wins.</em></p>
-<p><em>Source repos: <a
-href="https://github.com/norayr-m/savanna-engine">Savanna</a> · <a
-href="https://github.com/norayr-m/dagdb-engine">DagDB</a> · <a
-href="https://github.com/norayr-m/drt-generator">drt-generator</a> · <a
-href="https://github.com/norayr-m/drt-scanner">drt-scanner</a> · <a
-href="https://github.com/norayr-m/drt-cell-simulator">drt-cell-simulator</a>
-· <a
-href="https://github.com/norayr-m/isomorphic-walk">isomorphic-walk</a>.
-Profile: <a
-href="https://github.com/norayr-m">github.com/norayr-m</a>.</em></p>
-</article>
-<article class="slide" id="hive_itself">
-<span class="section-symbol section-symbol--tier1-hero"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-  <circle cx="32" cy="10" r="4" fill="currentColor"/>
-  <circle cx="10" cy="44" r="4" fill="currentColor"/>
-  <circle cx="54" cy="44" r="4" fill="currentColor"/>
-  <circle cx="32" cy="36" r="4" fill="currentColor"/>
-  <line x1="32" y1="10" x2="10" y2="44"/>
-  <line x1="32" y1="10" x2="54" y2="44"/>
-  <line x1="10" y1="44" x2="54" y2="44"/>
-  <line x1="32" y1="10" x2="32" y2="36"/>
-  <line x1="10" y1="44" x2="32" y2="36"/>
-  <line x1="54" y1="44" x2="32" y2="36"/>
-</svg></span>
-<h1
-id="the-development-model-behind-this-work-tier-2-the-hive-itself">The
-development model behind this work (Tier 2: the hive itself)</h1>
-<blockquote>
-<p><em>Calibration: this slide describes a development discipline, not a
-library or an engine. The substrate is one human operator using multiple
-AI agents in parallel under tight per-agent specialisation and explicit
-calibration policy. What’s claimed below is a way of working; what’s
-claimed about output is governed by the project’s calibration baseline
-(<code>one_pager.md</code>).</em></p>
-</blockquote>
-<hr />
-<h2 id="what">What</h2>
-<p>A multi-agent development discipline running on one M5 Max laptop.
-Different specialised agents own different lanes — engine, math,
-gatekeeping, infrastructure, life-admin — coordinated through file-based
-asynchronous messages and a small set of structural conventions. The
-substrate is plain code (Swift, Python, Metal) and plain protocols
-(markdown, JSON, git, launchctl, Metal compute). The discipline is what
-keeps the output honest.</p>
-<h2 id="five-structural-pieces">Five structural pieces</h2>
-<ol type="1">
-<li><p><strong>Per-agent git worktrees.</strong> Each specialised agent
-develops in a dedicated git worktree on a dedicated branch. No shared
-HEAD races; agents do not stomp each other’s edits. A real engineering
-problem (we hit a shared-HEAD race four times in two hours one evening
-before adopting this convention) with a structural fix.</p></li>
-<li><p><strong>Asynchronous file-based comms (drops).</strong>
-Coordination between agents flows through markdown drops in a shared
-directory. Each drop has a fixed naming convention
-(<code>YYYY-MM-DD_&lt;from&gt;-to-&lt;to&gt;_&lt;subject&gt;_&lt;AGENT&gt;_v1.md</code>)
-and a single-recipient or list-of-recipients header. Receipts close
-loops; cross-references stay grep-able indefinitely.</p></li>
-<li><p><strong>Calibration discipline.</strong> Every public-facing
-artefact maps each of its claims to one of three labels:
-<strong>verified</strong> (compiled, tested, measured),
-<strong>spec</strong> (designed, not built), or <strong>overclaim
-risk</strong> (something a casual reader might infer that isn’t actually
-true). The labels are explicit on the artefact itself, not buried in a
-separate honesty-disclaimer page. A gatekeeping-role agent screens every
-public artefact against this discipline before it leaves the
-laptop.</p></li>
-<li><p><strong>Retraction protocol.</strong> When a claim that
-previously shipped turns out to be wrong, the retraction is named on the
-relevant page — not silently rewritten. The canonical case is a
-norm-growth inequality from earlier work that was found to be
-tautological under closer inspection; that retraction is now the named
-precedent for how subsequent claims handle being shown to be wrong. The
-discipline is “retract loudly, in-place.”</p></li>
-<li><p><strong>Persistent-memory architecture per agent.</strong> Each
-agent maintains a local “honey” file of learned facts and a journal of
-session work. A common honey is shared across all agents. Memory is
-plain markdown; it survives session restarts and is grep-able by the
-operator. No magic.</p></li>
-</ol>
-<h2 id="why-this-matters-for-the-substance-below">Why this matters for
-the substance below</h2>
-<p>The throughput numbers in the rest of this deck (Savanna 100 billion
-cells, DagDB BACK_EDGE/AC-3 verified, etc.) come from work organised
-under this discipline. The discipline is not load-bearing for the
-<em>results</em> — the engines are real, the tests pass, the numbers are
-measurable on independent hardware. The discipline is load-bearing for
-the <em>honesty</em> of the labels around the results: distinguishing
-what was actually measured from what was designed but not built, and
-calling out what a casual reader might over-infer.</p>
-<p>Two specific consequences:</p>
-<ul>
-<li>The calibration anchor for this deck (<code>one_pager.md</code>)
-carries an explicit “what’s overclaim risk” section listing four claims
-a reasonable reader could infer that the work does not support. That
-section was not added defensively after the fact — it was written in the
-same draft as the verified-and-spec sections, by the same agent, under
-the same screen.</li>
-<li>The presentation you are looking at is structured in three tiers
-(very high level, medium, detailed-clickable) so that the level of
-scrutiny matches the level of detail. Tier 1 is honest at five-line
-density; Tier 2 expands; Tier 3 is the inventory where every artefact
-lives. The tier structure migrates to a live wiki on the operator’s
-GitHub Profile subsequently, maintained as new work lands.</li>
-</ul>
-<h2 id="what-this-is-not">What this is <em>not</em></h2>
-<ul>
-<li>Not a multi-agent AI framework or product. Not a published
-platform.</li>
-<li>Not an autonomous research system. The human operator drives every
-push and gates every public artefact.</li>
-<li>Not novel in its parts. Per-agent worktrees, file-based async comms,
-label-discipline pre-publication review, and named- retraction policies
-all exist independently in software engineering and in scientific
-publishing. The contribution, if there is one, is the
-<em>combination</em> applied to a single-operator multi-agent
-development setting on consumer hardware.</li>
-</ul>
-<h2 id="calibration">Calibration</h2>
-<p>This slide describes a way of working, not a measured artefact. If
-the audience wants to see the discipline applied: every label in this
-deck (verified / spec / overclaim) and the named-retraction references
-on relevant pages are the in-deck evidence. The machinery underneath
-(boot validators, screen checks, honey files, ring registry) lives in a
-forthcoming companion architecture document that walks the substrate in
-detail.</p>
-<hr />
-<p><em>Slot owner: tut (explanatory framing).</em> <em>Co-owner: pub
-(calibration discipline policy + screen).</em> <em>Coordinated with: vpt
-(architecture document forthcoming).</em> <em>Calibration source:
-<code>one_pager.md</code>. Substrate description: companion
-hive-architecture document, currently in v0.1 review.</em></p>
-</article>
-<article class="slide" id="bio_digital_twin_goal">
-<span class="section-symbol section-symbol--tier1-hero"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-  <rect x="8" y="14" width="48" height="10" rx="2" fill="currentColor" opacity="0.3"/>
-  <rect x="8" y="28" width="48" height="10" rx="2" fill="currentColor" opacity="0.55"/>
-  <rect x="8" y="42" width="48" height="10" rx="2" fill="currentColor" opacity="0.85"/>
-  <rect x="8" y="14" width="48" height="10" rx="2"/>
-  <rect x="8" y="28" width="48" height="10" rx="2"/>
-  <rect x="8" y="42" width="48" height="10" rx="2"/>
-</svg></span>
-<h1
-id="bio-digital-twin-on-consumer-hardware-tier-2-the-engineering-goal">Bio
-digital twin on consumer hardware (Tier 2: the engineering goal)</h1>
-<blockquote>
-<p><em>Calibration: substrate-level throughput is
-<strong>VERIFIED</strong> at the indicated scales. Specific tissue twins
-(liver lobule, full liver, brain cortical column) are
-<strong>SPEC</strong> — designed, schemas drafted, not built. The
-framing here is “what we are building toward,” with the verified-vs-spec
-split made explicit on every claim. Engine source remains source of
-truth.</em></p>
-</blockquote>
-<hr />
-<h2 id="what">What</h2>
-<svg viewBox="0 0 600 280" xmlns="http://www.w3.org/2000/svg" style="max-width:600px;width:100%;display:block;margin:18px auto;">
-<rect x="180" y="20" width="240" height="80" fill="none" stroke="#d4af37" stroke-width="2" rx="4"/>
-<text x="300" y="50" text-anchor="middle" font-family="ui-monospace,monospace" font-size="14" fill="#d4af37">organ</text>
-<text x="300" y="70" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#a8863a">full
-liver · 10⁷–10⁸ cells</text>
-<text x="300" y="88" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#a8863a">substrate
-verified · twin spec</text>
-<line x1="300" y1="100" x2="300" y2="120" stroke="#d4af37" stroke-width="1.5"/>
-<polygon points="294,118 306,118 300,128" fill="#d4af37"/>
-<rect x="180" y="120" width="240" height="80" fill="none" stroke="#d4af37" stroke-width="1.5" rx="4"/>
-<text x="300" y="150" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" fill="#d4af37">tissue</text>
-<text x="300" y="170" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#a8863a">liver
-lobule · 10⁶ hepatocytes</text>
-<text x="300" y="188" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#a8863a">brain
-column · 10⁵ neurons</text>
-<line x1="180" y1="160" x2="160" y2="220" stroke="#a8863a" stroke-width="1" stroke-dasharray="3,3"/>
-<g transform="translate(40,225)">
-<circle cx="0" cy="0" r="6" fill="#d4af37" opacity="0.7"/>
-<circle cx="22" cy="0" r="6" fill="#d4af37" opacity="0.7"/>
-<circle cx="44" cy="0" r="6" fill="#d4af37" opacity="0.7"/>
-<circle cx="66" cy="0" r="6" fill="#d4af37" opacity="0.7"/>
-<circle cx="88" cy="0" r="6" fill="#d4af37" opacity="0.7"/>
-<line x1="0" y1="0" x2="22" y2="0" stroke="#a8863a" stroke-width="1.5"/>
-<line x1="22" y1="0" x2="44" y2="0" stroke="#a8863a" stroke-width="1.5"/>
-<line x1="44" y1="0" x2="66" y2="0" stroke="#a8863a" stroke-width="1.5"/>
-<line x1="66" y1="0" x2="88" y2="0" stroke="#a8863a" stroke-width="1.5"/>
-</g>
-<text x="84" y="252" text-anchor="middle" font-family="ui-monospace,monospace" font-size="12" fill="#d4af37">cell-resolution
-graph</text>
-<text x="84" y="268" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="#a8863a">nodes
-· edges · ranks</text>
-<text x="510" y="252" text-anchor="middle" font-family="ui-monospace,monospace" font-size="12" fill="#d4af37">substrate</text>
-<text x="510" y="268" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="#a8863a">DagDB
-+ Savanna lineage</text>
-</svg>
-<p>A real-time digital twin of biological organs at single-cell or
-near-single-cell resolution, running on one consumer M5 Max laptop. The
-substrate is the graph-CA-on-topology framework underneath DagDB and
-Savanna: nodes are cells (or cell aggregates), edges are
-spatial-adjacency or signal-flow, ranks encode the directional gradient
-(blood-flow, signal-cascade, periportal-to-pericentral).</p>
-<p>The deliverable, when complete, is the ability to:</p>
-<ul>
-<li>Load a digital tissue with its biological connectivity intact.</li>
-<li>Run cell-resolution simulations of damage cascade, drug-interaction,
-signal propagation, regeneration dynamics.</li>
-<li>Query the running simulation via SQL (Postgres view layer over the
-graph, <strong>SPEC</strong>) and via the structured-knowledge MCP
-surface.</li>
-<li>Persist state durably (snapshot v4 + WAL replay,
-<strong>VERIFIED</strong> at the substrate level).</li>
-</ul>
-<h2 id="why">Why</h2>
-<p>Three classes of biological question that today’s tools handle poorly
-at tissue scale:</p>
-<ol type="1">
-<li><strong>Damage-cascade modelling.</strong> Acetaminophen and similar
-zone-3- selective hepatotoxins propagate damage downstream from
-initially exposed cells along the periportal-to-pericentral gradient.
-Predicting which cells die first, which recover, where regeneration
-originates, requires a graph representation of the tissue at cell
-resolution — not a continuum.</li>
-<li><strong>Drug-distribution modelling at lobule scale.</strong>
-Cell-resolution modelling of how a compound’s concentration profile
-across the lobule produces region-specific response over time.</li>
-<li><strong>Allosteric pathway integration.</strong> Coupling
-tissue-scale graph simulation with allosteric protein-pathway prediction
-(the isomorphic-walk lane), so that a cell’s surface signalling state
-can be linked to single-protein conformational dynamics within the same
-model.</li>
-</ol>
-<p>These are real biological questions with real clinical relevance.
-Whether the substrate proposed here actually answers them depends on
-validation work that is <strong>not</strong> part of this work’s claims;
-the substrate is one ingredient.</p>
-<h2 id="how-substrate-vs-deployment">How — substrate vs deployment</h2>
-<h3 id="substrate-verified">Substrate (verified)</h3>
-<ul>
-<li><strong>Throughput at scale.</strong> The Savanna lineage
-(predecessor engine, same hardware, same dispatch + Morton + 7-coloring
-machinery that DagDB inherits) ran 100 billion cells in 9 hours on one
-M5 Max, hitting the M5 thermal ceiling and producing a 500 GB state
-file. This is the <strong>existence proof</strong> for what this
-hardware can actually carry.</li>
-<li><strong>DagDB engine.</strong> Boolean-circuit-as-database with
-BACK_EDGE primitive (verified via AC-3 round-trip) gives the
-synchronous- circuit register pattern needed for any feedback-loop
-biology. Snapshot v4 + WAL + multi-version reads make it durable like a
-real database.</li>
-<li><strong>Apple Silicon UMA.</strong> Unified memory architecture
-removes the GPU/CPU copy that dominates traditional discrete-GPU bio
-simulation — load a tissue once, evaluate on GPU, query from CPU, no
-copy.</li>
-</ul>
-<h3 id="tissue-specific-deployments-spec">Tissue-specific deployments
-(spec)</h3>
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr>
-<th>Tissue</th>
-<th>Cell count</th>
-<th>Status</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Liver lobule (single functional unit)</td>
-<td>10⁶ hepatocytes</td>
-<td><strong>SPEC</strong> — schema designed (HepaticZonationPolicy, 16
-zonation ranks); not built</td>
-</tr>
-<tr>
-<td>Full liver</td>
-<td>10⁸ hepatocytes (~10⁷ for the Pass 2 schema)</td>
-<td><strong>SPEC</strong> — Pass 2 schema agreed with the
-protein-pathway lane; not built</td>
-</tr>
-<tr>
-<td>Brain cortical column</td>
-<td>10⁵ neurons</td>
-<td><strong>SPEC</strong> — concept stage</td>
-</tr>
-</tbody>
-</table>
-<p>The substrate-level throughput is verified at the relevant order of
-magnitude (the Savanna 10¹¹-cell result comfortably contains a 10⁷
-hepatocyte simulation in raw cell-count terms). What is <em>not</em> yet
-verified is that the substrate, configured with the specific
-HepaticZonationPolicy and the specific damage-cascade LUT logic, will
-reproduce biology faithfully. That is validation work, not substrate
-work, and it has not been done.</p>
-<p>The honest framing: <strong>substrate verified, biology validation
-pending</strong>.</p>
-<h2 id="whats-not-claimed">What’s not claimed</h2>
-<ul>
-<li>Not “we have a working liver digital twin.” We have a substrate
-capable of carrying a 10⁷-node tissue graph at high throughput, and a
-designed schema for one. Those are different things.</li>
-<li>Not “this replaces wet-lab biology.” Validation against measured
-biological outcomes is the gating step before any clinical or biomedical
-inference, and that step is not in scope here.</li>
-<li>Not “this is the only path.” Continuum PDE solvers, agent-based
-models in NetLogo or Repast, bespoke biology-specific frameworks all
-exist and have their own strengths. The graph-CA-on-topology approach is
-one path with specific advantages (cell-resolution at scale,
-queryability, durability) — it is not the only path.</li>
-</ul>
-<h2 id="what-we-want-from-the-audience">What we want from the
-audience</h2>
-<ul>
-<li><strong>Pointers to relevant biology validation literature.</strong>
-If the liver-zonation gradient has been quantified with cell-resolution
-experimental data (single-cell transcriptomics across the lobule, for
-instance), naming the dataset is useful for the validation step.</li>
-<li><strong>Pointers to similar substrate work.</strong> If a known
-graph-database or cellular-automaton platform has already been deployed
-at tissue scale, the prior-art map needs the addition.</li>
-<li><strong>Pull from real biological workloads.</strong> If a specific
-real-world workload (radiation damage modelling, environmental
-toxicology, metabolic network simulation at tissue scale) would benefit
-from the substrate’s specific shape, the pull signal is what tells us
-which deployment to build first.</li>
-</ul>
-<hr />
-<p><em>Slot owner: tut (explanatory framing).</em> <em>Technical
-co-owner: fold (hepatocyte schema, isomorphic-walk integration).</em>
-<em>Calibration source: <code>one_pager.md</code>. Engine source
-authoritative. Specific tick-rate numbers cited at substrate-level
-throughput gate against the Savanna result and the DagDB measured ticks
-at 1M nodes (~2 ms/tick at one million nodes, M5 Max,
-verified).</em></p>
-<p><em>Source repos: substrate engines — <a
-href="https://github.com/norayr-m/dagdb-engine">DagDB</a>, <a
-href="https://github.com/norayr-m/savanna-engine">Savanna</a>; bio
-digital twin prototype — <a
-href="https://github.com/norayr-m/drt-cell-simulator">drt-cell-simulator</a>;
-allosteric protein lane — <a
-href="https://github.com/norayr-m/isomorphic-walk">isomorphic-walk</a>.</em></p>
-</article>
-<article class="slide" id="hepatocyte_pass_2_spec">
-<h1 id="hepatocyte-pass-2-tissue-scale-graph-substrate-spec">Hepatocyte
-Pass 2 — tissue-scale graph substrate (SPEC)</h1>
-<blockquote>
-<p><em>Calibration: this slide reports a SPEC, not a built artefact. The
-underlying graph engine is verified at the 10⁹ node tier; the
-hepatocyte-specific deployment described below is queued, not yet built.
-The schema was cross-checked with the engine sibling on
-2026-04-29.</em></p>
-</blockquote>
-<figure style="margin:18px auto;text-align:center;">
-<svg viewBox="0 0 480 360" width="480" xmlns="http://www.w3.org/2000/svg">
-<!-- background gradient strip: portal (cool blue) → central (warm gold) -->
-<p><defs>
-<linearGradient id="zonegrad" x1="0%" y1="0%" x2="100%" y2="0%">
-<stop offset="0%"  stop-color="#4080c0" stop-opacity="0.18"/>
-<stop offset="50%" stop-color="#c4a35a" stop-opacity="0.10"/>
-<stop offset="100%" stop-color="#a04020" stop-opacity="0.18"/>
-</linearGradient> </defs>
-<rect x="40" y="60" width="400" height="200" fill="url(#zonegrad)" stroke="#8a7a5a" stroke-width="0.6" stroke-dasharray="3,3"/></p>
-<!-- portal triad (left) and central vein (right) labels -->
-<p><text x="60"  y="50" text-anchor="start" fill="#4080c0" font-size="11" font-family="monospace">portal
-triad</text>
-<text x="60"  y="278" text-anchor="start" fill="#4080c0" font-size="9" font-family="monospace">rank
-0</text>
-<text x="420" y="50" text-anchor="end" fill="#a04020" font-size="11" font-family="monospace">central
-vein</text>
-<text x="420" y="278" text-anchor="end" fill="#a04020" font-size="9" font-family="monospace">rank
-15</text></p>
-<!-- blood-flow arrow at top -->
-<p><line x1="80" y1="40" x2="400" y2="40" stroke="#8a7a5a" stroke-width="1.2"/>
-<polygon points="400,40 392,36 392,44" fill="#8a7a5a"/>
-<text x="240" y="32" text-anchor="middle" fill="#8a7a5a" font-size="11" font-family="monospace">blood
-flow = rank monotone (HepaticZonationPolicy)</text></p>
-<!-- zone columns: 3 zones, sample hepatocytes shown as small circles in plate-and-sinusoid arrangement -->
-<!-- column 1: Zone 1 (periportal), x ≈ 100, blue tint -->
-<p><g>
-<circle cx="90"  cy="100" r="7" fill="#4080c0" fill-opacity="0.6" stroke="#4080c0" stroke-width="1"/>
-<circle cx="120" cy="100" r="7" fill="#4080c0" fill-opacity="0.6" stroke="#4080c0" stroke-width="1"/>
-<circle cx="105" cy="130" r="7" fill="#4080c0" fill-opacity="0.6" stroke="#4080c0" stroke-width="1"/>
-<circle cx="90"  cy="160" r="7" fill="#4080c0" fill-opacity="0.6" stroke="#4080c0" stroke-width="1"/>
-<circle cx="120" cy="160" r="7" fill="#4080c0" fill-opacity="0.6" stroke="#4080c0" stroke-width="1"/>
-<circle cx="105" cy="190" r="7" fill="#4080c0" fill-opacity="0.6" stroke="#4080c0" stroke-width="1"/>
-<circle cx="90"  cy="220" r="7" fill="#4080c0" fill-opacity="0.6" stroke="#4080c0" stroke-width="1"/>
-<circle cx="120" cy="220" r="7" fill="#4080c0" fill-opacity="0.6" stroke="#4080c0" stroke-width="1"/>
-<!-- adjacency edges (4-6 per cell, plate arrangement) -->
-<g stroke="#4080c0" stroke-width="0.8" stroke-opacity="0.7">
-<line x1="90"  y1="100" x2="120" y2="100"/>
-<line x1="90"  y1="100" x2="105" y2="130"/>
-<line x1="120" y1="100" x2="105" y2="130"/>
-<line x1="105" y1="130" x2="90"  y2="160"/>
-<line x1="105" y1="130" x2="120" y2="160"/>
-<line x1="90"  y1="160" x2="120" y2="160"/>
-<line x1="90"  y1="160" x2="105" y2="190"/>
-<line x1="120" y1="160" x2="105" y2="190"/>
-<line x1="105" y1="190" x2="90"  y2="220"/>
-<line x1="105" y1="190" x2="120" y2="220"/>
-<line x1="90"  y1="220" x2="120" y2="220"/> </g>
-<text x="105" y="248" text-anchor="middle" fill="#4080c0" font-size="9" font-family="monospace">Zone
-1 (periportal)</text>
-<text x="105" y="261" text-anchor="middle" fill="#4080c0" font-size="8" font-family="monospace">gluconeogenesis</text>
-</g></p>
-<!-- column 2: Zone 2 (midzonal), x ≈ 240, gold tint -->
-<p><g>
-<circle cx="225" cy="100" r="7" fill="#c4a35a" fill-opacity="0.6" stroke="#c4a35a" stroke-width="1"/>
-<circle cx="255" cy="100" r="7" fill="#c4a35a" fill-opacity="0.6" stroke="#c4a35a" stroke-width="1"/>
-<circle cx="240" cy="130" r="7" fill="#c4a35a" fill-opacity="0.6" stroke="#c4a35a" stroke-width="1"/>
-<circle cx="225" cy="160" r="7" fill="#c4a35a" fill-opacity="0.6" stroke="#c4a35a" stroke-width="1"/>
-<circle cx="255" cy="160" r="7" fill="#c4a35a" fill-opacity="0.6" stroke="#c4a35a" stroke-width="1"/>
-<circle cx="240" cy="190" r="7" fill="#c4a35a" fill-opacity="0.6" stroke="#c4a35a" stroke-width="1"/>
-<circle cx="225" cy="220" r="7" fill="#c4a35a" fill-opacity="0.6" stroke="#c4a35a" stroke-width="1"/>
-<circle cx="255" cy="220" r="7" fill="#c4a35a" fill-opacity="0.6" stroke="#c4a35a" stroke-width="1"/>
-<g stroke="#c4a35a" stroke-width="0.8" stroke-opacity="0.7">
-<line x1="225" y1="100" x2="255" y2="100"/>
-<line x1="225" y1="100" x2="240" y2="130"/>
-<line x1="255" y1="100" x2="240" y2="130"/>
-<line x1="240" y1="130" x2="225" y2="160"/>
-<line x1="240" y1="130" x2="255" y2="160"/>
-<line x1="225" y1="160" x2="255" y2="160"/>
-<line x1="225" y1="160" x2="240" y2="190"/>
-<line x1="255" y1="160" x2="240" y2="190"/>
-<line x1="240" y1="190" x2="225" y2="220"/>
-<line x1="240" y1="190" x2="255" y2="220"/>
-<line x1="225" y1="220" x2="255" y2="220"/>
-<!-- inter-zone edges, dashed -->
-<line x1="120" y1="160" x2="225" y2="160" stroke-dasharray="3,3" stroke-opacity="0.3"/>
-</g>
-<text x="240" y="248" text-anchor="middle" fill="#a08040" font-size="9" font-family="monospace">Zone
-2 (midzonal)</text>
-<text x="240" y="261" text-anchor="middle" fill="#a08040" font-size="8" font-family="monospace">transition</text>
-</g></p>
-<!-- column 3: Zone 3 (pericentral), x ≈ 360, warm tint -->
-<p><g>
-<circle cx="360" cy="100" r="7" fill="#a04020" fill-opacity="0.6" stroke="#a04020" stroke-width="1"/>
-<circle cx="390" cy="100" r="7" fill="#a04020" fill-opacity="0.6" stroke="#a04020" stroke-width="1"/>
-<circle cx="375" cy="130" r="7" fill="#a04020" fill-opacity="0.6" stroke="#a04020" stroke-width="1"/>
-<circle cx="360" cy="160" r="7" fill="#a04020" fill-opacity="0.6" stroke="#a04020" stroke-width="1"/>
-<circle cx="390" cy="160" r="7" fill="#a04020" fill-opacity="0.6" stroke="#a04020" stroke-width="1"/>
-<circle cx="375" cy="190" r="7" fill="#a04020" fill-opacity="0.6" stroke="#a04020" stroke-width="1"/>
-<circle cx="360" cy="220" r="7" fill="#a04020" fill-opacity="0.6" stroke="#a04020" stroke-width="1"/>
-<circle cx="390" cy="220" r="7" fill="#a04020" fill-opacity="0.6" stroke="#a04020" stroke-width="1"/>
-<g stroke="#a04020" stroke-width="0.8" stroke-opacity="0.7">
-<line x1="360" y1="100" x2="390" y2="100"/>
-<line x1="360" y1="100" x2="375" y2="130"/>
-<line x1="390" y1="100" x2="375" y2="130"/>
-<line x1="375" y1="130" x2="360" y2="160"/>
-<line x1="375" y1="130" x2="390" y2="160"/>
-<line x1="360" y1="160" x2="390" y2="160"/>
-<line x1="360" y1="160" x2="375" y2="190"/>
-<line x1="390" y1="160" x2="375" y2="190"/>
-<line x1="375" y1="190" x2="360" y2="220"/>
-<line x1="375" y1="190" x2="390" y2="220"/>
-<line x1="360" y1="220" x2="390" y2="220"/>
-<line x1="255" y1="160" x2="360" y2="160" stroke-dasharray="3,3" stroke-opacity="0.3"/>
-</g>
-<text x="375" y="248" text-anchor="middle" fill="#a04020" font-size="9" font-family="monospace">Zone
-3 (pericentral)</text>
-<text x="375" y="261" text-anchor="middle" fill="#a04020" font-size="8" font-family="monospace">drug
-metabolism</text> </g></p>
-<!-- footer -->
-<text x="240" y="305" text-anchor="middle" fill="#8a7a5a" font-size="11" font-family="monospace">10⁷
-hepatocytes · 16 ranks · degree 4–6 native (no virtual splitting)</text>
-<text x="240" y="325" text-anchor="middle" fill="#8a7a5a" font-size="10" font-family="monospace">~420
-MB UMA · 0.3% of M5 budget · single-engine, no tile streaming</text>
-<text x="240" y="345" text-anchor="middle" fill="#8a7a5a" font-size="9" font-style="italic" font-family="monospace">SPEC
-— schema cross-checked with engine sibling; build queued behind
-tile-streaming</text>
-</svg>
-<figcaption style="font-size:11px;color:#8a7a5a;font-family:monospace;text-align:center;margin-top:6px;">
-Hepatic acinus as a 6-bound ranked DAG: zonation policy gives
-biologically real periportal-to-pericentral monotone rank.
-</figcaption>
-</figure>
-<hr />
-<h2 id="what">What</h2>
-<p>A graph substrate for representing a human liver at single-hepatocyte
-resolution. <strong>10⁷ hepatocyte nodes</strong> arranged as a
-spatial-adjacency graph: each cell connects to its 4–6 nearest
-neighbours in the plate- and-sinusoid morphology of the liver acinus.
-The connectivity pattern is natively bounded at 6 incoming edges per
-node, which fits the DagDB engine’s 6-bound DAG invariant without
-virtual node splitting.</p>
-<p>Rank policy: <strong>HepaticZonationPolicy</strong> —
-<code>rank(cell) = quantize(distance_from_portal_triad, n_levels=16)</code>.
-This converts the biologically real periportal → pericentral functional
-gradient (zone 1 → zone 3, characterised since the 1970s in the
-histology literature) into the engine’s monotone rank ordering. Edge
-direction becomes “blood-flow direction” (portal → central), which is
-also the direction along which hormones, nutrients, and damage signals
-propagate biologically.</p>
-<p>Ticks: quasi-static graph by default + opt-in LUT6 propagation for
-damage / signal cascade queries.</p>
-<hr />
-<h2 id="why">Why</h2>
-<p>Three classes of question that matter biologically and that today’s
-tools handle poorly at tissue scale:</p>
-<ol type="1">
-<li><strong>Damage-cascade modelling.</strong> Acetaminophen and similar
-zone-3- selective hepatotoxins propagate damage downstream from
-initially exposed cells. Predicting which hepatocytes die first, which
-recover, and where regeneration originates requires a graph
-representation of the tissue, not a continuum.</li>
-<li><strong>Lobule-scale drug-interaction simulation.</strong>
-Cell-resolution substrate for testing how drug clearance varies along
-the periportal-pericentral axis (zonation has direct functional
-consequences for first-pass metabolism).</li>
-<li><strong>Substrate for biological-twin construction.</strong>
-Existing computational liver models (Holzhütter’s hepatocyte network,
-Schliess–Hoehme spatiotemporal liver, Hattori et al.’s lobule
-simulators) operate at much smaller cell counts and richer per- cell
-state. A 10⁷-cell spatial-only substrate is <em>infrastructure</em>
-those richer models could later sit on top of, not a replacement for
-them.</li>
-</ol>
-<p>The 10⁷ scale is meaningful: a human liver lobule has roughly 10⁵
-hepatocytes; a complete liver has ~10¹¹. 10⁷ is a few hundred lobules —
-small enough to fit single-engine on an M5 Max laptop (≈420 MB at 42
-B/node, 0.3% of UMA), large enough to capture multi-lobule spatial
-gradients that single-lobule models miss.</p>
-<hr />
-<h2 id="how">How</h2>
-<h3 id="substrate-verified">Substrate (verified)</h3>
-<p>DagDB engine — 6-bounded ranked DAG with LUT6 gates, currently
-verified at the 10⁹ node tier (single engine, no tiling). 10⁷ hepatocyte
-target sits at the <em>single-engine, non-tiled</em> tier per the engine
-spec — does not depend on tile-streaming landing first. Schema
-cross-checked with the engine sibling on 2026-04-29: spatial-adjacency
-layer + HepaticZonationPolicy ranks + quasi-
-static-with-opt-in-propagation tick semantics.</p>
-<h3 id="schema-spec-not-yet-built">Schema (SPEC, not yet built)</h3>
-<pre><code>Nodes (10^7):
-  type:   hepatocyte
-  rank:   HepaticZonationPolicy (0 = portal, 15 = central)
-  attrs:
-    coords: (i, j, k) — grid position
-    zone:   1 / 2 / 3 (classical zonation)
-    truth:  0 healthy (default)
-            1 damaged
-            2 apoptotic
-            (used only during propagation ticks)
-
-Edges (~5 × 10^7):
-  type:    spatial-adjacency (hepatocyte ↔ hepatocyte plate contact)
-  policy:  source.rank &gt; dst.rank (blood-flow direction)
-  6-bound: holds natively (~0.1% loss at corner cells)
-
-Rank levels: 16 (3 zones × ~5 sub-zones each)
-Tick:        quasi-static; opt-in LUT6 propagation for damage cascade
-             each tick step ≈ hour-scale physical time
-
-Out of scope for Pass 2:
-  signaling-pathway edges (degree 10²–10³, needs virtual splitting)
-  sinusoid hub nodes (degree 10³–10⁴, different node type)
-  metabolic state simulation (needs activation channel + Pass 3 design)</code></pre>
-<h3 id="build-sequencing">Build sequencing</h3>
-<ul>
-<li>Pass 2 build queued behind the engine sibling’s TiledGraphRouter
-scaffold (currently mid-sprint).</li>
-<li>Preflight: 10⁵-cell subset, build the schema, run a portal → central
-BFS, confirm rank-monotonic edge direction and that the path length
-matches expected (~10–15 cell layers for a healthy lobule). One
-afternoon of work.</li>
-<li>Full 10⁷ build commits when preflight clears.</li>
-</ul>
-<h3
-id="biology-citations-so-the-audience-can-verify-the-premise">Biology
-citations (so the audience can verify the premise)</h3>
-<ul>
-<li>Periportal–pericentral zonation: Jungermann &amp; Kietzmann 1996,
-<em>Annu Rev Nutr</em> (functional zonation review)</li>
-<li>Hepatocyte plate morphology: Lemaigre 2009, <em>Genes Dev</em>
-(developmental and architectural review)</li>
-<li>Acinus / Rappaport zones: Rappaport 1958, <em>Anat Rec</em>
-(foundational)</li>
-<li>Acetaminophen zone-3 selectivity: McGill &amp; Jaeschke 2013,
-<em>Pharm Res</em> (toxicology mechanism)</li>
-</ul>
-<hr />
-<h2 id="honest-calibration-block">Honest calibration block</h2>
-<ul>
-<li><strong>Verified:</strong> the underlying DagDB engine at 10⁹ node
-single-engine tier; the contact-graph BFS substrate the Isomorphic Walk
-repo publishes (HIV-1 capsid 313,236 atoms / 6 ms); the schema design
-cross-check with the engine sibling.</li>
-<li><strong>Spec, not built:</strong> the 10⁷-hepatocyte deployment
-described above. The schema is biologically grounded and
-engineering-clean, but no actual liver substrate has been built or
-validated against empirical liver data yet. The preflight 10⁵-cell
-sanity check is the next concrete commitment.</li>
-<li><strong>Not claimed:</strong> a “validated bio digital twin.” The
-substrate is infrastructure for biology models, not a biology model
-itself. Tissue-twin validation against published liver data (zonation
-enzyme expression patterns, damage cascade replays from toxicology
-literature) is forthcoming work, not present work.</li>
-</ul>
-<hr />
-<h2 id="source-material">Source material</h2>
-<ul>
-<li>Isomorphic Walk repo (proteins lane, where the hepatocyte schema
-spec lives alongside the contact-graph substrate): <a
-href="https://github.com/norayr-m/isomorphic-walk"
-class="uri">https://github.com/norayr-m/isomorphic-walk</a></li>
-<li>DagDB engine repo (the 6-bound ranked DAG substrate this builds on):
-<a href="https://github.com/norayr-m/dagdb-engine"
-class="uri">https://github.com/norayr-m/dagdb-engine</a></li>
-<li>Calibration row in <code>../one_pager.md</code>: “Hepatocyte 10⁷
-Pass 2 schema: spatial-adjacency layer with HepaticZonationPolicy ranks
-(16 levels, periportal → pericentral). Schema agreed with Fold; not
-built.” — SPEC tier</li>
-<li>Companion slide: <code>slides/direction6_proteins.md</code> (the
-protein-pathway prediction lane that motivates the tissue-scale
-substrate question)</li>
-<li>Biology citations (audit-grade): Jungermann &amp; Kietzmann 1996
-<em>Annu Rev Nutr</em> (zonation review); Lemaigre 2009 <em>Genes
-Dev</em> (architectural review); Rappaport 1958 <em>Anat Rec</em>
-(acinus foundational); McGill &amp; Jaeschke 2013 <em>Pharm Res</em>
-(zone-3 hepatotoxin selectivity)</li>
-</ul>
-<hr />
-<p><em>This slide is part of the the work deck. Calibration discipline
-locked: verified vs spec vs overclaim-risk three-column split. This
-artefact is in the <strong>spec</strong> column.</em></p>
-</article>
-<article class="slide" id="uma_performance">
-<h1 id="uma-performance-dagdb-on-apple-unified-memory-verified">UMA
-performance — DagDB on Apple unified memory (VERIFIED)</h1>
-<blockquote>
-<p><em>Calibration: numbers in this slide come from the verified tier of
-<code>one_pager.md</code> — measured on M5 Max (128 GB unified memory),
-10-run validated, &lt;1 % standard deviation. Any number outside that
-anchor is flagged. Existence proof for the scale path inherited from the
-Savanna predecessor (100 B cells over 9 hours, same hardware).</em></p>
-</blockquote>
-<hr />
-<h2 id="what-unified-memory-buys">What unified memory buys</h2>
-<div style="display:flex;justify-content:center;margin:18px 0;">
-<svg width="600" height="200" viewBox="0 0 600 200">
-<!-- NVIDIA path -->
-<rect x="20" y="20" width="250" height="80" rx="6" fill="rgba(192,64,48,0.06)" stroke="#c04030" stroke-width="1"/>
-<text x="145" y="45" fill="#c04030" text-anchor="middle" font-size="12" font-weight="bold">NVIDIA
-(PG-Strom)</text>
-<text x="145" y="65" fill="#8a7a5a" text-anchor="middle" font-size="10">CPU
-RAM –PCIe–&gt; GPU VRAM</text>
-<text x="145" y="80" fill="#8a7a5a" text-anchor="middle" font-size="10">GPU
-VRAM –PCIe–&gt; CPU RAM</text>
-<text x="145" y="95" fill="#c04030" text-anchor="middle" font-size="10">2
-copies per query</text> <!-- Apple path -->
-<rect x="320" y="20" width="260" height="80" rx="6" fill="rgba(106,154,58,0.06)" stroke="#6a9a3a" stroke-width="1"/>
-<text x="450" y="45" fill="#6a9a3a" text-anchor="middle" font-size="12" font-weight="bold">Apple
-Silicon (DagDB)</text>
-<text x="450" y="65" fill="#8a7a5a" text-anchor="middle" font-size="10">CPU
-+ GPU = same physical RAM</text>
-<text x="450" y="80" fill="#8a7a5a" text-anchor="middle" font-size="10">mmap
-= pointer to GPU output</text>
-<text x="450" y="95" fill="#6a9a3a" text-anchor="middle" font-size="10">0
-copies per query</text> <!-- Bottom -->
-<rect x="20" y="130" width="560" height="50" rx="6" fill="rgba(196,163,90,0.06)" stroke="#c4a35a" stroke-width="1"/>
-<text x="300" y="155" fill="#c4a35a" text-anchor="middle" font-size="13">Shared
-memory on UMA = the Postgres backend reads the</text>
-<text x="300" y="172" fill="#c4a35a" text-anchor="middle" font-size="13">exact
-physical bytes the GPU just wrote. Zero overhead.</text>
-</svg>
+<article class="slide" id="sec0_1_gallery">
+<h1>The six pillars</h1>
+<div class="gallery-grid">
+  <a href="#sec-4" class="gallery-cell"><span class="gallery-symbol"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <polygon points="32,8 56,52 8,52" fill="none"/>
+  <circle cx="32" cy="8" r="4" fill="currentColor"/>
+  <circle cx="56" cy="52" r="4" fill="currentColor"/>
+  <circle cx="8" cy="52" r="4" fill="currentColor"/>
+  <text x="32" y="11" font-size="6" fill="white" text-anchor="middle" stroke="none" font-family="sans-serif" font-weight="bold">+</text>
+  <text x="56" y="55" font-size="6" fill="white" text-anchor="middle" stroke="none" font-family="sans-serif" font-weight="bold">0</text>
+  <text x="8" y="55" font-size="6" fill="white" text-anchor="middle" stroke="none" font-family="sans-serif" font-weight="bold">−</text>
+</svg></span><div class="gallery-label">Savanna</div></a>
+  <a href="#sec-5" class="gallery-cell"><span class="gallery-symbol"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <polygon points="32,8 54,20 54,44 32,56 10,44 10,20" fill="none"/>
+  <circle cx="32" cy="8" r="3" fill="currentColor"/>
+  <circle cx="54" cy="20" r="3" fill="currentColor"/>
+  <circle cx="54" cy="44" r="3" fill="currentColor"/>
+  <circle cx="32" cy="56" r="3" fill="currentColor"/>
+  <circle cx="10" cy="44" r="3" fill="currentColor"/>
+  <circle cx="10" cy="20" r="3" fill="currentColor"/>
+  <circle cx="32" cy="32" r="4" fill="currentColor"/>
+</svg></span><div class="gallery-label">DagDB</div></a>
+  <a href="#sec-6" class="gallery-cell"><span class="gallery-symbol"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <circle cx="10" cy="14" r="3" fill="currentColor"/>
+  <circle cx="22" cy="14" r="3" fill="currentColor"/>
+  <circle cx="16" cy="26" r="3" fill="currentColor"/>
+  <line x1="10" y1="14" x2="22" y2="14"/>
+  <line x1="10" y1="14" x2="16" y2="26"/>
+  <line x1="22" y1="14" x2="16" y2="26"/>
+  <circle cx="42" cy="50" r="3" fill="currentColor"/>
+  <circle cx="54" cy="50" r="3" fill="currentColor"/>
+  <circle cx="48" cy="38" r="3" fill="currentColor"/>
+  <line x1="42" y1="50" x2="54" y2="50"/>
+  <line x1="42" y1="50" x2="48" y2="38"/>
+  <line x1="54" y1="50" x2="48" y2="38"/>
+  <line x1="26" y1="30" x2="38" y2="34" stroke-dasharray="2,2"/>
+  <polygon points="38,34 34,30 36,33" fill="currentColor" stroke="none"/>
+</svg></span><div class="gallery-label">Proteins</div></a>
+  <a href="#sec-7" class="gallery-cell"><span class="gallery-symbol"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <rect x="10" y="10" width="20" height="20" fill="none" opacity="0.4"/>
+  <rect x="34" y="10" width="20" height="20" fill="none" opacity="0.4"/>
+  <rect x="10" y="34" width="20" height="20" fill="none" opacity="0.4"/>
+  <rect x="34" y="34" width="20" height="20" fill="none" opacity="0.4"/>
+  <polyline points="20,20 44,20 20,44 44,44" stroke-width="3.5"/>
+  <circle cx="20" cy="20" r="3" fill="currentColor"/>
+  <circle cx="44" cy="44" r="3" fill="currentColor"/>
+</svg></span><div class="gallery-label">Applied Math</div></a>
+  <a href="#sec-8" class="gallery-cell"><span class="gallery-symbol"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <rect x="8" y="32" width="36" height="20" fill="currentColor" opacity="0.2"/>
+  <rect x="14" y="22" width="36" height="20" fill="currentColor" opacity="0.5"/>
+  <rect x="20" y="12" width="36" height="20" fill="currentColor" opacity="0.85"/>
+  <rect x="8" y="32" width="36" height="20"/>
+  <rect x="14" y="22" width="36" height="20"/>
+  <rect x="20" y="12" width="36" height="20"/>
+</svg></span><div class="gallery-label">Architecture</div></a>
+  <a href="#sec-9" class="gallery-cell"><span class="gallery-symbol"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <line x1="6" y1="50" x2="58" y2="50" opacity="0.3"/>
+  <path d="M 6 40 Q 22 18 32 32 Q 42 46 58 24" stroke-width="3"/>
+  <circle cx="32" cy="32" r="4" fill="currentColor"/>
+</svg></span><div class="gallery-label">Theoretical Math</div></a>
 </div>
-<p>DagDB runs on Apple Metal GPU compute with the entire graph state
-<strong>resident in unified memory</strong> — a single physical RAM
-addressed by both CPU and GPU with <strong>zero copy across the
-boundary</strong>. Three direct consequences:</p>
-<ol type="1">
-<li><strong>State reads from kernels and CPU code are the same memory
-access.</strong> No <code>cudaMemcpy</code>, no DMA-in / DMA-out, no
-double- buffering. The 23 MB of per-cell state at 1 M nodes lives in one
-place.</li>
-<li><strong>Dispatch overhead is the bottleneck, not bandwidth.</strong>
-At 1 M nodes the per-tick wall is ~2 ms with 13 kernel dispatches.
-Reducing dispatch count (fusing kernels) is more impactful than
-optimizing memory access patterns.</li>
-<li><strong>CPU-side latch can read/write GPU buffers directly.</strong>
-The <code>BACK_EDGE</code> two-phase snapshot/commit runs on the CPU at
-sub-ms per pass for 1 M back-edges (untested at scale, plausible but not
-yet measured). Deferred GPU-side latch kernel is on the shelf.</li>
-</ol>
-<p>Caveat: M5 Max specifically. Smaller M-series chips have less unified
-memory and thermal headroom; the scaling table below is for M5 Max
-only.</p>
-<hr />
-<h2 id="numbers-verified-at-1-m-nodes-on-m5-max">Numbers (verified at 1
-M nodes on M5 Max)</h2>
-<table>
-<colgroup>
-<col style="width: 30%" />
-<col style="width: 40%" />
-<col style="width: 30%" />
-</colgroup>
-<thead>
-<tr>
-<th>Quantity</th>
-<th style="text-align: right;">Value</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Grid</td>
-<td style="text-align: right;">1 048 576 nodes (1024 × 1024 hex)</td>
-<td></td>
-</tr>
-<tr>
-<td>State per node</td>
-<td style="text-align: right;">23 MB total / 1 M cells = ~23 B/node</td>
-<td>5 channels + 4 scent fields</td>
-</tr>
-<tr>
-<td>Per-tick compute</td>
-<td style="text-align: right;"><strong>~2 ms</strong></td>
-<td>13 kernel dispatches</td>
-</tr>
-<tr>
-<td>Throughput</td>
-<td style="text-align: right;"><strong>~500 k ticks/s</strong> GPU
-only</td>
-<td>excludes display, recorder</td>
-</tr>
-<tr>
-<td>Dispatch overhead</td>
-<td style="text-align: right;">5 % GPU utilization</td>
-<td>rest waiting on vsync / CPU</td>
-</tr>
-<tr>
-<td>Memory bandwidth</td>
-<td style="text-align: right;">29 GB/s</td>
-<td>observed during tick</td>
-</tr>
-<tr>
-<td>10-run σ</td>
-<td style="text-align: right;">&lt; 1 %</td>
-<td>reproducible</td>
-</tr>
-</tbody>
-</table>
-<p>For the Tokyo CA workload at 200×200 (smaller scale, more nodes per
-cell): <strong>~few ms per tick</strong> — same envelope as the 1 M-cell
-result above with different per-cell state shape.</p>
-<hr />
-<h2 id="scaling-path-existence-proof-inherited-from-savanna">Scaling
-path (existence proof inherited from Savanna)</h2>
-<p>DagDB shares dispatch + Morton + 7-coloring + halo file format with
-the predecessor Savanna engine. Savanna ran:</p>
-<table>
-<thead>
-<tr>
-<th>Grid</th>
-<th>Wall time</th>
-<th>Throughput</th>
-<th>State</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1 M cells</td>
-<td>sub-second</td>
-<td>1 600 tps</td>
-<td>23 MB</td>
-</tr>
-<tr>
-<td>16 M cells</td>
-<td>~13 sec</td>
-<td>77 tps</td>
-<td>367 MB</td>
-</tr>
-<tr>
-<td>100 B cells</td>
-<td>9 hours</td>
-<td>~3 tps*</td>
-<td>500 GB</td>
-</tr>
-</tbody>
-</table>
-<p>*100 B run hit M5 thermal ceiling; 9-hour wall reflects sustained
-throttled state, not headroom. Same dispatch machinery, different
-per-cell state.</p>
-<p>This is <strong>existence-proof for the substrate’s scale
-path</strong>. DagDB ran the same machinery; the per-cell state happens
-to be Boolean LUT6 + ranked DAG metadata instead of Savanna’s fluid +
-scent + entity tables. The throughput envelope is determined by the
-engine machinery, not the workload semantics.</p>
-<hr />
-<h2 id="whats-spec-not-built">What’s spec, not built</h2>
-<ul>
-<li><strong>Tile streaming</strong> for 10¹¹ nodes on one M5 Max: page
-tiles to/from NVMe, two tiles resident at once, 24-bit-tile + 40-bit-
-local global IDs. 632-line spec at <code>docs/tiled-streaming.md</code>.
-Steps 1-2 + 4 shipped (TileHalo, GlobalNodeID, TiledGraphRouter
-scaffold). Steps 5-7 (live tile load, NVMe streaming, cross-tile BFS)
-pending.</li>
-<li><strong>Engineering goal: 10¹² nodes</strong> on one M5 Max via tile
-streaming. Not yet built; the predecessor’s 100 B existence proof is the
-benchmark we’d need to push to 10× via streaming + thermal recovery
-cycles.</li>
-<li><strong>Deferred GPU latch kernel</strong> for
-<code>BACK_EDGE</code>: the CPU-side two-phase latch is fine at 1 M
-back-edges; for 10¹² this becomes the bottleneck and a GPU-side
-equivalent is shelved as a known next-step optimization.</li>
-</ul>
-<hr />
-<h2 id="whats-overclaim-risk">What’s overclaim risk</h2>
-<p>The numbers above are real, on real hardware, with real load. Three
-things to flag before the audience pulls them:</p>
-<ol type="1">
-<li><strong>Apple-specific.</strong> UMA is not a generic GPU property —
-Nvidia and AMD discrete GPUs have device memory and PCIe transfer costs.
-The 5 % GPU utilization figure depends on UMA, not on smart
-engineering.</li>
-<li><strong>One machine, one model.</strong> Numbers come from one M5
-Max laptop. Not a controlled benchmark, not peer-reviewed, no
-head-to-head against an Nvidia rack.</li>
-<li><strong>Throughput vs. workload.</strong> Per-tick compute is
-workload- dependent. 2 ms is for 1 M Boolean LUT6 with light state. A
-workload with heavier per-cell math (e.g., real-valued fluid dynamics —
-which DagDB explicitly does NOT do) would have a different
-envelope.</li>
-</ol>
-<hr />
-<h2 id="source-material">Source material</h2>
-<ul>
-<li>DagDB engine repo: <a
-href="https://github.com/norayr-m/dagdb-engine"
-class="uri">https://github.com/norayr-m/dagdb-engine</a></li>
-<li>Savanna engine repo (existence proof for the scale path): <a
-href="https://github.com/norayr-m/savanna-engine"
-class="uri">https://github.com/norayr-m/savanna-engine</a></li>
-<li>Tile-streaming spec:
-<code>dagdb-engine/docs/tiled-streaming.md</code></li>
-<li>Calibration row in <code>../one_pager.md</code>: “~2 ms per tick at
-1 M nodes on M5 Max” — VERIFIED tier</li>
-<li>Companion slide: <code>slides/direction4_savanna.md</code> (the 100
-B / 9 h Savanna run that anchors the scaling table)</li>
-</ul>
-<hr />
-<h2 id="status">Status</h2>
-<p><code>UMA performance slide</code>: <strong>IN PROGRESS</strong>
-(status board at <code>README.md</code>). - [x] This slide drafted - [x]
-Why-UMA SVG inlined (pandoc indent fix landed 18:51) - [x] GH-link
-footer added - [ ] Verify <code>~2 ms</code> and <code>~500 k tps</code>
-on current main (re-run benchmark) - [ ] Pub-screen pass</p>
-<p>bzz. — slvr.</p>
+<p>These six are what the work is. The next six pages introduce each pillar in one breath. Then we go in.</p>
 </article>
-<article class="slide" id="tokyo_ca_voronoi">
-<h1 id="tokyo-ca-on-dagdb-wave-collision-voronoi-verified">Tokyo CA on
-DagDB — wave-collision Voronoi (VERIFIED)</h1>
-<blockquote>
-<p><em>Calibration: this slide reports a VERIFIED build. The 200×200
-Tokyo Greenberg-Hastings cellular automaton runs end-to-end on the DagDB
-substrate; convergence + dashboard + per-tick recording all measurable
-on current main. Honest framing guard: this is NOT a slime-mold network
-— that’s an explicit overclaim flagged in <code>one_pager.md</code>. The
-result is a Voronoi tessellation between food sources, produced by
-wave-front collision. See <code>demos/tokyo_ca.md</code> (consolidated
-demo run plan + technical encoding).</em></p>
-</blockquote>
-<hr />
-<h2 id="what">What</h2>
-<div style="text-align:center;margin:18px 0;">
-<p><img src="assets/tokyo_ca_voronoi_t160.png" alt="Tokyo CA at tick 160 — Voronoi tessellation visible as bright yellow ridges crossing the field" style="max-width:600px;width:100%;border:1px solid #3a3225;border-radius:4px;"/></p>
-</div>
-<p>A 200×200 hex-grid cellular automaton, <strong>encoded as a ranked
-DagDB DAG</strong> with the Greenberg-Hastings 3-state excitable
-rule:</p>
-<ul>
-<li><strong>Resting → Excited</strong> when any neighbour is
-excited</li>
-<li><strong>Excited → Refractory</strong> after one tick</li>
-<li><strong>Refractory → Resting</strong> after one tick</li>
-</ul>
-<p>Food cells (36 Tokyo-region city positions) re-trigger excitation
-periodically, producing radial wave fronts. Wave-front
-<em>collisions</em> between adjacent food cells trace out the Voronoi
-tessellation boundary — the locus of cells equidistant (in hop count)
-from two food sources.</p>
-<p>Per cell on the substrate: - 11 logical nodes per cell × 40 000 cells
-≈ <strong>440 000 DagDB nodes</strong> total - 3 phase-bit register
-nodes per cell, latched by <code>BACK_EDGE</code> - 8 combinational LUT6
-nodes per cell for neighbour excitation, in-range detection, next-state
-logic - All evaluations rank-stratified for parallel-safe dispatch</p>
-<p>Convergence to the steady-state Voronoi pattern at <strong>~tick
-160</strong>.</p>
-<hr />
-<h2 id="why-this-is-on-the-deck">Why this is on the deck</h2>
-<p>Three substrate properties this demo proves visibly:</p>
-<ol type="1">
-<li><strong><code>BACK_EDGE</code> works at scale.</strong> 440 K nodes
-with 3 register nodes per cell, all latching cleanly tick after tick.
-The synchronous-circuit register pattern is the load-bearing primitive
-that makes recurrent dynamics on a 6-bounded DAG possible.</li>
-<li><strong>Morton + 7-coloring keeps it parallel-safe.</strong> Every
-cell updates in lock-step with no race; the 7-coloring guarantees
-distance-2 independence on the hex lattice (Molloy &amp; Salavatipour
-2005).</li>
-<li><strong>The substrate runs a recurrent computation as a database
-operation.</strong> Snapshot, replay, MVCC query against any tick — all
-with the existing engine API. Not a special-purpose simulator bolted on
-the side.</li>
-</ol>
-<hr />
-<h2 id="why-this-is-not-slime-mold">Why this is NOT slime mold</h2>
-<p>This is the load-bearing framing for the audience. Three things to
-say up front in the live demo:</p>
-<ol type="1">
-<li><strong>Not a Tero/Physarum slime-mold network.</strong> Slime mold
-uses continuous fluid dynamics — cytoplasmic streaming, real-valued
-pressure fields, conductance reinforcement via flux. DagDB is Boolean
-LUT6 by design, no fluid dynamics. What you see is wave- front collision
-producing Voronoi, not biological transport network optimisation.</li>
-<li><strong>Not Tero 2010.</strong> Tero’s algorithm uses Kirchhoff
-pressure solves on a graph with adaptive conductance. It’s a separate
-algorithm that we have a Metal-side sister demo for (mold_walk, see the
-side slide), running on a different substrate.</li>
-<li><strong>Not new computer science.</strong> Greenberg-Hastings
-excitable CA is from 1978. The engineering contribution is having it run
-as a ranked LUT6 DAG with <code>BACK_EDGE</code> register latching, on a
-GPU substrate with WAL + multi-version reads — same ingredients as a
-real-time database, applied to a CA workload.</li>
-</ol>
-<hr />
-<h2 id="numbers-verified-on-current-main-2026-05-01">Numbers (verified
-on current main, 2026-05-01)</h2>
-<table>
-<colgroup>
-<col style="width: 30%" />
-<col style="width: 40%" />
-<col style="width: 30%" />
-</colgroup>
-<thead>
-<tr>
-<th>Quantity</th>
-<th style="text-align: right;">Value</th>
-<th>Source</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Grid</td>
-<td style="text-align: right;">200 × 200 hex cells</td>
-<td>terrain spec</td>
-</tr>
-<tr>
-<td>Land cells</td>
-<td style="text-align: right;">28 038</td>
-<td>inert mask filtered</td>
-</tr>
-<tr>
-<td>Inert cells</td>
-<td style="text-align: right;">11 962</td>
-<td>water + Pacific + mountains</td>
-</tr>
-<tr>
-<td>DagDB nodes</td>
-<td style="text-align: right;">~440 000</td>
-<td>11 nodes/cell × 40 000 cells</td>
-</tr>
-<tr>
-<td><code>BACK_EDGE</code>s</td>
-<td style="text-align: right;">~120 000</td>
-<td>3 register nodes × 40 000 cells</td>
-</tr>
-<tr>
-<td>Per-tick wall</td>
-<td style="text-align: right;"><strong>~24 ms</strong> on M5 Max</td>
-<td>with full per-tick dashboard recording; pure compute is faster</td>
-</tr>
-<tr>
-<td>Convergence</td>
-<td style="text-align: right;"><strong>160 ticks</strong> ✓</td>
-<td><code>swift test TokyoCATests/testTokyoSolve200x200</code> re-run
-2026-05-01</td>
-</tr>
-<tr>
-<td>Total wall</td>
-<td style="text-align: right;">4.6 s for 190 ticks</td>
-<td>live demo runs in real time</td>
-</tr>
-<tr>
-<td>7-color groups</td>
-<td style="text-align: right;">7</td>
-<td>hex lattice distance-2 chromatic number (Molloy &amp; Salavatipour
-2005)</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="visual-asset">Visual asset</h2>
-<p><strong>Primary</strong>:
-<code>assets/tokyo_ca_voronoi_t160.png</code> (200 × 200 → 600 × 600
-upscaled, NEAREST). Yellow-orange checkerboard texture is the
-oscillating excitable medium; bright yellow ridges across the field are
-wave-front collision lines = Voronoi edges between food cells. Central
-diamond pattern = waves converging from the Tokyo cluster. Dark-blue
-regions are inert mask (Pacific, Tokyo Bay, mountains).</p>
-<p><strong>Time series</strong> (also in <code>assets/</code>):
-<code>tokyo_ca_t030.png</code>, <code>tokyo_ca_t060.png</code>,
-<code>tokyo_ca_t100.png</code> — show convergence progression for the
-slide’s mid-presentation animation.</p>
-<h2 id="references-per-tut-foundation-lane">References (per Tut,
-foundation lane)</h2>
-<pre class="text"><code>Greenberg, J.M. and Hastings, S.P. (1978). &quot;Spatial patterns for
-discrete models of diffusion in excitable media.&quot; SIAM J. Appl.
-Math. 34(3), 515-523.
-— origin of the 3-state excitable CA rule we run.
-
-Tolmachev, D. and Adamatzky, A. (1996). &quot;Chemical processor for
-computation of Voronoi diagram.&quot; Adv. Mater. Optics Electron. 6(4),
-191-196.
-— wave-front collision on excitable media computes Voronoi as a
-by-product. Direct precedent for what Tokyo demo shows.
-
-Adamatzky, A. (2010). Game of Life Cellular Automata. Springer.
-— Ch. 17 covers maze-solving / Voronoi-computing CA class. Our
-Tokyo CA is in this lineage, NOT Tero 2010.
-
-Murray, J.D. (2003). Mathematical Biology II. Springer, 3rd ed.
-Chs. 1, 8-10. — accessible textbook treatment of excitable media
-for the architect-grade audience.
-
-Molloy, M. and Salavatipour, M.R. (2005). &quot;A bound on the chromatic
-number of the square of a planar graph.&quot; J. Combin. Theory B 94(2),
-189-213. — distance-2 chromatic number 7 of the squared hex lattice;
-underwrites the 7-coloring parallel dispatch.</code></pre>
-<h2 id="whats-overclaim-risk">What’s overclaim risk</h2>
-<p>(Pulled from <code>one_pager.md</code> for completeness.)</p>
-<blockquote>
-<p><em>“Tokyo CA runs slime mold on the substrate”</em> — wrong.
-Substrate has no fluid dynamics; engine source explicitly says “No scent
-diffusion. No fluid dynamics.” Engine docstring is the source of truth.
-What the Tokyo demo actually shows is a Greenberg-Hastings excitable
-cellular automaton producing a Voronoi tessellation between food
-sources, NOT a slime-mold network. Real CA, real convergence, real
-visualization — but not what Tero 2010 produced biologically.</p>
-</blockquote>
-<p>The <strong>mold_walk side demo</strong> sits next to this slide on
-the deck and shows what <em>actually</em> trying for slime mold looks
-like — on a different substrate, explicitly labelled as Metal-side (see
-<code>slides/mold_walk_side_demo.md</code>).</p>
-<hr />
-<h2 id="source-material">Source material</h2>
-<ul>
-<li>DagDB engine repo: <a
-href="https://github.com/norayr-m/dagdb-engine"
-class="uri">https://github.com/norayr-m/dagdb-engine</a></li>
-<li>Tokyo CA test source:
-<code>dagdb/Tests/DagDBTests/TokyoCATests.swift</code>
-(<code>testTokyoSolve200x200</code> — convergence at tick 160, 4.6 s
-wall)</li>
-<li>Dashboard build scripts:
-<code>dagdb/examples/tokyo_ca/build_dashboard_data.py</code> +
-<code>build_dashboard_html.py</code></li>
-<li>Mold_walk sister substrate (Metal-side, separate repo):
-<code>~/000_AI_Work/0_Projects/0_Active_MoldWalk/</code> (referenced by
-side demo, not the DagDB run)</li>
-</ul>
-<hr />
-<h2 id="status">Status</h2>
-<p><code>Tokyo CA live demo</code>: <strong>IN PROGRESS</strong> (status
-board at <code>README.md</code>). - [x] Demo run plan + technical
-encoding consolidated (<code>demos/tokyo_ca.md</code>) - [x] This slide
-drafted - [x] UMA performance slide drafted
-(<code>uma_performance.md</code>) - [x] Visual asset inlined
-(<code>tokyo_ca_voronoi_t160.png</code>) - [x] GH-link footer added - [
-] Side mold_walk slide (tomorrow afternoon) - [ ] Convergence GIF
-capture under <code>assets/</code> - [ ] Pub-screen pass on the GH
-footer addition</p>
-<p>bzz. — slvr.</p>
+<article class="slide" id="sec0_2_savanna">
+  <h1><span class="intro-symbol"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <polygon points="32,8 56,52 8,52" fill="none"/>
+  <circle cx="32" cy="8" r="4" fill="currentColor"/>
+  <circle cx="56" cy="52" r="4" fill="currentColor"/>
+  <circle cx="8" cy="52" r="4" fill="currentColor"/>
+  <text x="32" y="11" font-size="6" fill="white" text-anchor="middle" stroke="none" font-family="sans-serif" font-weight="bold">+</text>
+  <text x="56" y="55" font-size="6" fill="white" text-anchor="middle" stroke="none" font-family="sans-serif" font-weight="bold">0</text>
+  <text x="8" y="55" font-size="6" fill="white" text-anchor="middle" stroke="none" font-family="sans-serif" font-weight="bold">−</text>
+</svg></span> Savanna</h1>
+  
+  <p>A ternary lattice running on Apple Silicon GPU, scheduling cells in seven phases via distance-2 chromatic separation on a hexagonal grid. The substrate that hits the central GCUPS number on a laptop.</p>
+  <div class="thesis-hero-compact">
+    <span class="thesis-number-large">14.4</span> <span class="thesis-units">GCUPS</span>
+    <p class="thesis-tag">at 1 billion hex cells · 522 ms/tick · M5 Max · 10-run published, 95% CI</p>
+  </div>
+  <p><strong>Read more:</strong> <a href="https://github.com/norayr-m/savanna-engine">Savanna Engine repo</a> · <a href="https://norayr-m.github.io/savanna-engine/whitepaper.html">Savanna white paper</a> · <a href="https://norayr-m.github.io/savanna-engine/7color_explained.html">7-coloring explained — interactive</a></p>
+</article>
+<article class="slide" id="sec0_3_dagdb">
+  <h1><span class="intro-symbol"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <polygon points="32,8 54,20 54,44 32,56 10,44 10,20" fill="none"/>
+  <circle cx="32" cy="8" r="3" fill="currentColor"/>
+  <circle cx="54" cy="20" r="3" fill="currentColor"/>
+  <circle cx="54" cy="44" r="3" fill="currentColor"/>
+  <circle cx="32" cy="56" r="3" fill="currentColor"/>
+  <circle cx="10" cy="44" r="3" fill="currentColor"/>
+  <circle cx="10" cy="20" r="3" fill="currentColor"/>
+  <circle cx="32" cy="32" r="4" fill="currentColor"/>
+</svg></span> DagDB</h1>
+  
+  <p>Every node holds a 64-bit truth table — six inputs, one output, the same primitive that lives at the heart of an FPGA. Nodes wired into a ranked acyclic graph; the engine evaluates the whole graph in parallel on the GPU each tick. Snapshots, write-ahead log, multi-version reads — durable like a real database.</p>
+  <p>The <code>BACK_EDGE</code> primitive lets state latch across tick boundaries — unlocks AC-3 constraint propagation, Hopfield-style recurrent networks, Boolean networks with feedback.</p>
+  <p><strong>Read more:</strong> <a href="https://github.com/norayr-m/dagdb-engine">DagDB repo</a> · <a href="https://norayr-m.github.io/dagdb-engine/whitepaper.html">DagDB white paper</a> · <a href="https://norayr-m.github.io/dagdb-engine/site/index.html">Engine site</a> · <a href="https://norayr-m.github.io/dagdb-engine/site/sql-architecture.html">SQL architecture</a></p>
+</article>
+<article class="slide" id="sec0_4_proteins">
+  <h1><span class="intro-symbol"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <circle cx="10" cy="14" r="3" fill="currentColor"/>
+  <circle cx="22" cy="14" r="3" fill="currentColor"/>
+  <circle cx="16" cy="26" r="3" fill="currentColor"/>
+  <line x1="10" y1="14" x2="22" y2="14"/>
+  <line x1="10" y1="14" x2="16" y2="26"/>
+  <line x1="22" y1="14" x2="16" y2="26"/>
+  <circle cx="42" cy="50" r="3" fill="currentColor"/>
+  <circle cx="54" cy="50" r="3" fill="currentColor"/>
+  <circle cx="48" cy="38" r="3" fill="currentColor"/>
+  <line x1="42" y1="50" x2="54" y2="50"/>
+  <line x1="42" y1="50" x2="48" y2="38"/>
+  <line x1="54" y1="50" x2="48" y2="38"/>
+  <line x1="26" y1="30" x2="38" y2="34" stroke-dasharray="2,2"/>
+  <polygon points="38,34 34,30 36,33" fill="currentColor" stroke="none"/>
+</svg></span> Proteins</h1>
+  
+  <p>Geometric reasoning over protein conformations. Substrate, not folding prediction. AlphaFold gives you the structure; we operate on it.</p>
+  <p>The hepatocyte 10⁷ Pass 2 schema lays in a spatial-adjacency layer with hepatic-zonation policy ranks (sixteen levels, periportal to pericentral). The graph encodes what is adjacent in space; the engine reasons over the topology.</p>
+  <p><strong>Read more:</strong> <a href="https://github.com/norayr-m/isomorphic-walk">Isomorphic Walk repo</a></p>
+</article>
+<article class="slide" id="sec0_5_applied">
+  <h1><span class="intro-symbol"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <rect x="10" y="10" width="20" height="20" fill="none" opacity="0.4"/>
+  <rect x="34" y="10" width="20" height="20" fill="none" opacity="0.4"/>
+  <rect x="10" y="34" width="20" height="20" fill="none" opacity="0.4"/>
+  <rect x="34" y="34" width="20" height="20" fill="none" opacity="0.4"/>
+  <polyline points="20,20 44,20 20,44 44,44" stroke-width="3.5"/>
+  <circle cx="20" cy="20" r="3" fill="currentColor"/>
+  <circle cx="44" cy="44" r="3" fill="currentColor"/>
+</svg></span> Applied Math</h1>
+  
+  <p>Memory layout via Morton Z-curve — cache-friendly traversal that delivers a 2.11× speedup over row-major at one billion cells. Distance-2 chromatic separation on the hexagonal grid uses exactly seven colours (Molloy–Salavatipour 2005), with the engine using <code>(col + row + 4·(col &amp; 1)) mod 7</code> as the colour-class formula. The combination is what makes the substrate parallelizable on commodity GPU hardware.</p>
+  <p><strong>Read more:</strong> <a href="https://norayr-m.github.io/savanna-engine/morton_charts.html">Savanna Morton charts</a> · <a href="https://norayr-m.github.io/savanna-engine/7color_explained.html">7-coloring explained</a></p>
+</article>
+<article class="slide" id="sec0_6_arch">
+  <h1><span class="intro-symbol"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <rect x="8" y="32" width="36" height="20" fill="currentColor" opacity="0.2"/>
+  <rect x="14" y="22" width="36" height="20" fill="currentColor" opacity="0.5"/>
+  <rect x="20" y="12" width="36" height="20" fill="currentColor" opacity="0.85"/>
+  <rect x="8" y="32" width="36" height="20"/>
+  <rect x="14" y="22" width="36" height="20"/>
+  <rect x="20" y="12" width="36" height="20"/>
+</svg></span> Architecture</h1>
+  
+  <p>Apple unified memory used as zero-copy substrate — no CPU/GPU buffer boundary. Tile-streaming scaffold for 10¹¹ nodes on one M5 Max: page tiles to and from NVMe, two tiles resident at a time, cross-tile addressing via 24-bit-tile + 40-bit-local u64 global ID.</p>
+  <p>Three-environment separation — dev / test / prod under guarded paths. Triple-write to markdown, DagDB, and Postgres with markdown as the leader.</p>
+  <p><strong>Read more:</strong> <a href="https://github.com/norayr-m/dagdb-engine">DagDB engine repo</a> · <a href="https://norayr-m.github.io/dagdb-engine/whitepaper.html">DagDB white paper</a></p>
+</article>
+<article class="slide" id="sec0_7_theory">
+  <h1><span class="intro-symbol"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <line x1="6" y1="50" x2="58" y2="50" opacity="0.3"/>
+  <path d="M 6 40 Q 22 18 32 32 Q 42 46 58 24" stroke-width="3"/>
+  <circle cx="32" cy="32" r="4" fill="currentColor"/>
+</svg></span> Theoretical Math</h1>
+  
+  <p>The substrate the simulation engines run on assumes regularity properties of the underlying space. CVPDE-class results — Almgren-monotonicity-style — are foundation lemmas that have to hold for the substrate to behave the way the engineering claims.</p>
+  <p>Open directions: extension to non-uniform grids, generalization beyond hexagonal lattices, sharper bounds on the chromatic number under non-uniform-distance constraints.</p>
+  <p><strong>Read more:</strong> <a href="https://github.com/norayr-m/dagdb-engine">DagDB engine repo</a></p>
 </article>
 <article class="slide divider" id="sec-4">
   <span class="section-symbol section-symbol--opener"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -3410,6 +2478,1187 @@ Proc. Mag. 2013)</li>
 <hr />
 <p><em>Stubbed by Pub on 2026-05-01 as PM coordinator. Drafter: ref.
 Draft 1, populated 2026-05-01. GH-link footer added 2026-05-02.</em></p>
+</article>
+<article class="slide divider" id="appendix">
+  <span class="section-num">Appendix</span>
+  <h1>Context, substrate measurements, inventory, Q&amp;A</h1>
+  <p class="subtitle">Tier 1 narrative, side material, full inventory walk, and the live-Q&amp;A handoff. Here for those who want depth or want to review.</p>
+</article>
+<article class="slide" id="tier1_three_months_narrative">
+<h1 id="tier-1-the-last-three-months-on-one-laptop-narrative">Tier 1 —
+The last three months on one laptop (NARRATIVE)</h1>
+<blockquote>
+<p><em>Calibration: every line below maps to a label in the project’s
+calibration baseline (verified / spec / overclaim risk). Numbers from
+one M5 Max laptop. Amateur engineering project; no competitive claims;
+errors likely. Engine source is the source of truth; if anything below
+contradicts the code, the code wins.</em></p>
+</blockquote>
+<hr />
+<h2 id="the-story-in-five-beats">The story in five beats</h2>
+<svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg" style="max-width:600px;width:100%;display:block;margin:18px auto;">
+<rect x="20" y="40" width="170" height="120" fill="none" stroke="#d4af37" stroke-width="2" rx="4"/>
+<text x="105" y="70" text-anchor="middle" font-family="ui-monospace,monospace" font-size="14" fill="#d4af37">SAVANNA</text>
+<text x="105" y="100" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#a8863a">100B
+cells / 9h</text>
+<text x="105" y="120" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#a8863a">M5
+thermal ceiling</text>
+<text x="105" y="140" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#a8863a">existence
+proof</text>
+<rect x="215" y="40" width="170" height="120" fill="none" stroke="#d4af37" stroke-width="2" rx="4"/>
+<text x="300" y="70" text-anchor="middle" font-family="ui-monospace,monospace" font-size="14" fill="#d4af37">DagDB</text>
+<text x="300" y="100" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#a8863a">64-bit
+LUT6 per node</text>
+<text x="300" y="120" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#a8863a">BACK_EDGE
+/ AC-3</text>
+<text x="300" y="140" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#a8863a">snapshot
+v4 + WAL</text>
+<rect x="410" y="40" width="170" height="120" fill="none" stroke="#d4af37" stroke-width="2" rx="4"/>
+<text x="495" y="70" text-anchor="middle" font-family="ui-monospace,monospace" font-size="14" fill="#d4af37">Bio
+Digital Twin</text>
+<text x="495" y="100" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#a8863a">10⁷
+hepatocyte schema</text>
+<text x="495" y="120" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#a8863a">cell-resolution
+graph</text>
+<text x="495" y="140" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#a8863a">substrate
+verified · twins spec</text>
+<rect x="20" y="170" width="560" height="22" fill="#151311" stroke="#d4af37" stroke-width="1" rx="2"/>
+<text x="300" y="186" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#a8863a">one
+M5 Max laptop · three months · shared dispatch + Morton + 7-coloring
+substrate</text>
+</svg>
+<p><strong>One M5 Max laptop. Three months. Three things landed
+end-to-end.</strong></p>
+<ol type="1">
+<li><p><strong>Savanna Engine — ultra-scale spatial lattice on Apple
+Silicon.</strong> 100 billion cells over 9 hours on one M5 Max, 15.8
+GCUPS peak, 500 GB state file at the M5 thermal ceiling.
+<strong>VERIFIED</strong> as an existence proof for what consumer
+hardware can actually do under careful dispatch + Morton-Z-curve memory
+layout + 7-coloring parallel-safe scheduling.</p></li>
+<li><p><strong>DagDB engine — Boolean-circuit-as-database.</strong> A
+graph database where every node holds a 64-bit truth table (a LUT6 — the
+same primitive at the heart of an FPGA), wired into a ranked acyclic
+graph evaluated in parallel on the GPU each tick. <strong>BACK_EDGE
+primitive</strong> (synchronous-circuit register pattern) verified by
+AC-3 constraint-propagation round-trip against a Python reference:
+per-tick equality across 21 register nodes, converges in 2 synchronous
+ticks. Snapshot v4 with WAL replay, multi-version reads, atomic save
+discipline; bitwise LUT composition at runtime; honey-on-DagDB lossless
+round-trip probe. <strong>VERIFIED.</strong></p></li>
+<li><p><strong>Bio digital twin substrate.</strong> Graph-CA-on-topology
+framework that takes the Savanna throughput and the DagDB substrate and
+targets tissue-scale biological models. Hepatocyte 10⁷ Pass 2
+spatial-adjacency schema designed and cross-checked. Integration path
+with allosteric-pathway protein work in active development.
+<strong>MIXED</strong> — the substrate is verified at the throughput
+tier; specific tissue twins (liver, brain cortical column) are spec, not
+built.</p></li>
+</ol>
+<h2 id="calibration-discipline-as-the-fourth-beat">Calibration
+discipline as the fourth beat</h2>
+<p>Underneath the three engineering landings: a <strong>discipline of
+labelling claims</strong>. Every artefact in this presentation maps to
+one of three labels: <strong>verified</strong> (compiled, tested,
+measured), <strong>spec</strong> (designed, not built), or
+<strong>overclaim risk</strong> (something a casual reader might infer
+that isn’t actually true). The calibration anchor
+(<code>one_pager.md</code>) names the specific overclaim risks for this
+project — for example, “DagDB is a thinking engine” is overclaim (it’s a
+fast specialised substrate, not a general reasoner); “the Tokyo CA
+produces a slime-mold network” is overclaim (it produces a Voronoi
+tessellation; the substrate has no fluid dynamics).</p>
+<p>The honest split is the deliverable. The numbers are real; the limits
+are named.</p>
+<hr />
+<h2 id="what-this-tier-1-is-for">What this Tier 1 is for</h2>
+<p>Anyone who has not seen the work before should walk away from these
+five beats with: (a) what was built, (b) at what scale, (c) what’s real
+vs spec, and (d) the labelling discipline that carries through the rest
+of the deck.</p>
+<p>Tier 2 expands each direction; Tier 3 is the clickable inventory.
+Numbers above are the substantive ones; everything else is texture.</p>
+<h2 id="what-we-want-from-the-audience">What we want from the
+audience</h2>
+<p>Honest pushback on claim calibration. HPC specialists see more of
+this work than we do; if any label above is too generous in either
+direction, we want the redirect. Pointers to prior art are also welcome
+— the “novel combination, prior-art ingredients” framing only works if
+we have the ingredients named accurately.</p>
+<hr />
+<p><em>Slot owner: tut (explanatory framing).</em> <em>Co-owner: pub
+(calibration discipline policy).</em> <em>Calibration source:
+<code>one_pager.md</code>. If a claim above contradicts the engine
+source, the engine source wins.</em></p>
+<p><em>Source repos: <a
+href="https://github.com/norayr-m/savanna-engine">Savanna</a> · <a
+href="https://github.com/norayr-m/dagdb-engine">DagDB</a> · <a
+href="https://github.com/norayr-m/drt-generator">drt-generator</a> · <a
+href="https://github.com/norayr-m/drt-scanner">drt-scanner</a> · <a
+href="https://github.com/norayr-m/drt-cell-simulator">drt-cell-simulator</a>
+· <a
+href="https://github.com/norayr-m/isomorphic-walk">isomorphic-walk</a>.
+Profile: <a
+href="https://github.com/norayr-m">github.com/norayr-m</a>.</em></p>
+</article>
+<article class="slide" id="hive_itself">
+<span class="section-symbol section-symbol--tier1-hero"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <circle cx="32" cy="10" r="4" fill="currentColor"/>
+  <circle cx="10" cy="44" r="4" fill="currentColor"/>
+  <circle cx="54" cy="44" r="4" fill="currentColor"/>
+  <circle cx="32" cy="36" r="4" fill="currentColor"/>
+  <line x1="32" y1="10" x2="10" y2="44"/>
+  <line x1="32" y1="10" x2="54" y2="44"/>
+  <line x1="10" y1="44" x2="54" y2="44"/>
+  <line x1="32" y1="10" x2="32" y2="36"/>
+  <line x1="10" y1="44" x2="32" y2="36"/>
+  <line x1="54" y1="44" x2="32" y2="36"/>
+</svg></span>
+<h1
+id="the-development-model-behind-this-work-tier-2-the-hive-itself">The
+development model behind this work (Tier 2: the hive itself)</h1>
+<blockquote>
+<p><em>Calibration: this slide describes a development discipline, not a
+library or an engine. The substrate is one human operator using multiple
+AI agents in parallel under tight per-agent specialisation and explicit
+calibration policy. What’s claimed below is a way of working; what’s
+claimed about output is governed by the project’s calibration baseline
+(<code>one_pager.md</code>).</em></p>
+</blockquote>
+<hr />
+<h2 id="what">What</h2>
+<p>A multi-agent development discipline running on one M5 Max laptop.
+Different specialised agents own different lanes — engine, math,
+gatekeeping, infrastructure, life-admin — coordinated through file-based
+asynchronous messages and a small set of structural conventions. The
+substrate is plain code (Swift, Python, Metal) and plain protocols
+(markdown, JSON, git, launchctl, Metal compute). The discipline is what
+keeps the output honest.</p>
+<h2 id="five-structural-pieces">Five structural pieces</h2>
+<ol type="1">
+<li><p><strong>Per-agent git worktrees.</strong> Each specialised agent
+develops in a dedicated git worktree on a dedicated branch. No shared
+HEAD races; agents do not stomp each other’s edits. A real engineering
+problem (we hit a shared-HEAD race four times in two hours one evening
+before adopting this convention) with a structural fix.</p></li>
+<li><p><strong>Asynchronous file-based comms (drops).</strong>
+Coordination between agents flows through markdown drops in a shared
+directory. Each drop has a fixed naming convention
+(<code>YYYY-MM-DD_&lt;from&gt;-to-&lt;to&gt;_&lt;subject&gt;_&lt;AGENT&gt;_v1.md</code>)
+and a single-recipient or list-of-recipients header. Receipts close
+loops; cross-references stay grep-able indefinitely.</p></li>
+<li><p><strong>Calibration discipline.</strong> Every public-facing
+artefact maps each of its claims to one of three labels:
+<strong>verified</strong> (compiled, tested, measured),
+<strong>spec</strong> (designed, not built), or <strong>overclaim
+risk</strong> (something a casual reader might infer that isn’t actually
+true). The labels are explicit on the artefact itself, not buried in a
+separate honesty-disclaimer page. A gatekeeping-role agent screens every
+public artefact against this discipline before it leaves the
+laptop.</p></li>
+<li><p><strong>Retraction protocol.</strong> When a claim that
+previously shipped turns out to be wrong, the retraction is named on the
+relevant page — not silently rewritten. The canonical case is a
+norm-growth inequality from earlier work that was found to be
+tautological under closer inspection; that retraction is now the named
+precedent for how subsequent claims handle being shown to be wrong. The
+discipline is “retract loudly, in-place.”</p></li>
+<li><p><strong>Persistent-memory architecture per agent.</strong> Each
+agent maintains a local “honey” file of learned facts and a journal of
+session work. A common honey is shared across all agents. Memory is
+plain markdown; it survives session restarts and is grep-able by the
+operator. No magic.</p></li>
+</ol>
+<h2 id="why-this-matters-for-the-substance-below">Why this matters for
+the substance below</h2>
+<p>The throughput numbers in the rest of this deck (Savanna 100 billion
+cells, DagDB BACK_EDGE/AC-3 verified, etc.) come from work organised
+under this discipline. The discipline is not load-bearing for the
+<em>results</em> — the engines are real, the tests pass, the numbers are
+measurable on independent hardware. The discipline is load-bearing for
+the <em>honesty</em> of the labels around the results: distinguishing
+what was actually measured from what was designed but not built, and
+calling out what a casual reader might over-infer.</p>
+<p>Two specific consequences:</p>
+<ul>
+<li>The calibration anchor for this deck (<code>one_pager.md</code>)
+carries an explicit “what’s overclaim risk” section listing four claims
+a reasonable reader could infer that the work does not support. That
+section was not added defensively after the fact — it was written in the
+same draft as the verified-and-spec sections, by the same agent, under
+the same screen.</li>
+<li>The presentation you are looking at is structured in three tiers
+(very high level, medium, detailed-clickable) so that the level of
+scrutiny matches the level of detail. Tier 1 is honest at five-line
+density; Tier 2 expands; Tier 3 is the inventory where every artefact
+lives. The tier structure migrates to a live wiki on the operator’s
+GitHub Profile subsequently, maintained as new work lands.</li>
+</ul>
+<h2 id="what-this-is-not">What this is <em>not</em></h2>
+<ul>
+<li>Not a multi-agent AI framework or product. Not a published
+platform.</li>
+<li>Not an autonomous research system. The human operator drives every
+push and gates every public artefact.</li>
+<li>Not novel in its parts. Per-agent worktrees, file-based async comms,
+label-discipline pre-publication review, and named- retraction policies
+all exist independently in software engineering and in scientific
+publishing. The contribution, if there is one, is the
+<em>combination</em> applied to a single-operator multi-agent
+development setting on consumer hardware.</li>
+</ul>
+<h2 id="calibration">Calibration</h2>
+<p>This slide describes a way of working, not a measured artefact. If
+the audience wants to see the discipline applied: every label in this
+deck (verified / spec / overclaim) and the named-retraction references
+on relevant pages are the in-deck evidence. The machinery underneath
+(boot validators, screen checks, honey files, ring registry) lives in a
+forthcoming companion architecture document that walks the substrate in
+detail.</p>
+<hr />
+<p><em>Slot owner: tut (explanatory framing).</em> <em>Co-owner: pub
+(calibration discipline policy + screen).</em> <em>Coordinated with: vpt
+(architecture document forthcoming).</em> <em>Calibration source:
+<code>one_pager.md</code>. Substrate description: companion
+hive-architecture document, currently in v0.1 review.</em></p>
+</article>
+<article class="slide" id="bio_digital_twin_goal">
+<span class="section-symbol section-symbol--tier1-hero"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <rect x="8" y="14" width="48" height="10" rx="2" fill="currentColor" opacity="0.3"/>
+  <rect x="8" y="28" width="48" height="10" rx="2" fill="currentColor" opacity="0.55"/>
+  <rect x="8" y="42" width="48" height="10" rx="2" fill="currentColor" opacity="0.85"/>
+  <rect x="8" y="14" width="48" height="10" rx="2"/>
+  <rect x="8" y="28" width="48" height="10" rx="2"/>
+  <rect x="8" y="42" width="48" height="10" rx="2"/>
+</svg></span>
+<h1
+id="bio-digital-twin-on-consumer-hardware-tier-2-the-engineering-goal">Bio
+digital twin on consumer hardware (Tier 2: the engineering goal)</h1>
+<blockquote>
+<p><em>Calibration: substrate-level throughput is
+<strong>VERIFIED</strong> at the indicated scales. Specific tissue twins
+(liver lobule, full liver, brain cortical column) are
+<strong>SPEC</strong> — designed, schemas drafted, not built. The
+framing here is “what we are building toward,” with the verified-vs-spec
+split made explicit on every claim. Engine source remains source of
+truth.</em></p>
+</blockquote>
+<hr />
+<h2 id="what">What</h2>
+<svg viewBox="0 0 600 280" xmlns="http://www.w3.org/2000/svg" style="max-width:600px;width:100%;display:block;margin:18px auto;">
+<rect x="180" y="20" width="240" height="80" fill="none" stroke="#d4af37" stroke-width="2" rx="4"/>
+<text x="300" y="50" text-anchor="middle" font-family="ui-monospace,monospace" font-size="14" fill="#d4af37">organ</text>
+<text x="300" y="70" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#a8863a">full
+liver · 10⁷–10⁸ cells</text>
+<text x="300" y="88" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#a8863a">substrate
+verified · twin spec</text>
+<line x1="300" y1="100" x2="300" y2="120" stroke="#d4af37" stroke-width="1.5"/>
+<polygon points="294,118 306,118 300,128" fill="#d4af37"/>
+<rect x="180" y="120" width="240" height="80" fill="none" stroke="#d4af37" stroke-width="1.5" rx="4"/>
+<text x="300" y="150" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" fill="#d4af37">tissue</text>
+<text x="300" y="170" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#a8863a">liver
+lobule · 10⁶ hepatocytes</text>
+<text x="300" y="188" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#a8863a">brain
+column · 10⁵ neurons</text>
+<line x1="180" y1="160" x2="160" y2="220" stroke="#a8863a" stroke-width="1" stroke-dasharray="3,3"/>
+<g transform="translate(40,225)">
+<circle cx="0" cy="0" r="6" fill="#d4af37" opacity="0.7"/>
+<circle cx="22" cy="0" r="6" fill="#d4af37" opacity="0.7"/>
+<circle cx="44" cy="0" r="6" fill="#d4af37" opacity="0.7"/>
+<circle cx="66" cy="0" r="6" fill="#d4af37" opacity="0.7"/>
+<circle cx="88" cy="0" r="6" fill="#d4af37" opacity="0.7"/>
+<line x1="0" y1="0" x2="22" y2="0" stroke="#a8863a" stroke-width="1.5"/>
+<line x1="22" y1="0" x2="44" y2="0" stroke="#a8863a" stroke-width="1.5"/>
+<line x1="44" y1="0" x2="66" y2="0" stroke="#a8863a" stroke-width="1.5"/>
+<line x1="66" y1="0" x2="88" y2="0" stroke="#a8863a" stroke-width="1.5"/>
+</g>
+<text x="84" y="252" text-anchor="middle" font-family="ui-monospace,monospace" font-size="12" fill="#d4af37">cell-resolution
+graph</text>
+<text x="84" y="268" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="#a8863a">nodes
+· edges · ranks</text>
+<text x="510" y="252" text-anchor="middle" font-family="ui-monospace,monospace" font-size="12" fill="#d4af37">substrate</text>
+<text x="510" y="268" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="#a8863a">DagDB
++ Savanna lineage</text>
+</svg>
+<p>A real-time digital twin of biological organs at single-cell or
+near-single-cell resolution, running on one consumer M5 Max laptop. The
+substrate is the graph-CA-on-topology framework underneath DagDB and
+Savanna: nodes are cells (or cell aggregates), edges are
+spatial-adjacency or signal-flow, ranks encode the directional gradient
+(blood-flow, signal-cascade, periportal-to-pericentral).</p>
+<p>The deliverable, when complete, is the ability to:</p>
+<ul>
+<li>Load a digital tissue with its biological connectivity intact.</li>
+<li>Run cell-resolution simulations of damage cascade, drug-interaction,
+signal propagation, regeneration dynamics.</li>
+<li>Query the running simulation via SQL (Postgres view layer over the
+graph, <strong>SPEC</strong>) and via the structured-knowledge MCP
+surface.</li>
+<li>Persist state durably (snapshot v4 + WAL replay,
+<strong>VERIFIED</strong> at the substrate level).</li>
+</ul>
+<h2 id="why">Why</h2>
+<p>Three classes of biological question that today’s tools handle poorly
+at tissue scale:</p>
+<ol type="1">
+<li><strong>Damage-cascade modelling.</strong> Acetaminophen and similar
+zone-3- selective hepatotoxins propagate damage downstream from
+initially exposed cells along the periportal-to-pericentral gradient.
+Predicting which cells die first, which recover, where regeneration
+originates, requires a graph representation of the tissue at cell
+resolution — not a continuum.</li>
+<li><strong>Drug-distribution modelling at lobule scale.</strong>
+Cell-resolution modelling of how a compound’s concentration profile
+across the lobule produces region-specific response over time.</li>
+<li><strong>Allosteric pathway integration.</strong> Coupling
+tissue-scale graph simulation with allosteric protein-pathway prediction
+(the isomorphic-walk lane), so that a cell’s surface signalling state
+can be linked to single-protein conformational dynamics within the same
+model.</li>
+</ol>
+<p>These are real biological questions with real clinical relevance.
+Whether the substrate proposed here actually answers them depends on
+validation work that is <strong>not</strong> part of this work’s claims;
+the substrate is one ingredient.</p>
+<h2 id="how-substrate-vs-deployment">How — substrate vs deployment</h2>
+<h3 id="substrate-verified">Substrate (verified)</h3>
+<ul>
+<li><strong>Throughput at scale.</strong> The Savanna lineage
+(predecessor engine, same hardware, same dispatch + Morton + 7-coloring
+machinery that DagDB inherits) ran 100 billion cells in 9 hours on one
+M5 Max, hitting the M5 thermal ceiling and producing a 500 GB state
+file. This is the <strong>existence proof</strong> for what this
+hardware can actually carry.</li>
+<li><strong>DagDB engine.</strong> Boolean-circuit-as-database with
+BACK_EDGE primitive (verified via AC-3 round-trip) gives the
+synchronous- circuit register pattern needed for any feedback-loop
+biology. Snapshot v4 + WAL + multi-version reads make it durable like a
+real database.</li>
+<li><strong>Apple Silicon UMA.</strong> Unified memory architecture
+removes the GPU/CPU copy that dominates traditional discrete-GPU bio
+simulation — load a tissue once, evaluate on GPU, query from CPU, no
+copy.</li>
+</ul>
+<h3 id="tissue-specific-deployments-spec">Tissue-specific deployments
+(spec)</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Tissue</th>
+<th>Cell count</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Liver lobule (single functional unit)</td>
+<td>10⁶ hepatocytes</td>
+<td><strong>SPEC</strong> — schema designed (HepaticZonationPolicy, 16
+zonation ranks); not built</td>
+</tr>
+<tr>
+<td>Full liver</td>
+<td>10⁸ hepatocytes (~10⁷ for the Pass 2 schema)</td>
+<td><strong>SPEC</strong> — Pass 2 schema agreed with the
+protein-pathway lane; not built</td>
+</tr>
+<tr>
+<td>Brain cortical column</td>
+<td>10⁵ neurons</td>
+<td><strong>SPEC</strong> — concept stage</td>
+</tr>
+</tbody>
+</table>
+<p>The substrate-level throughput is verified at the relevant order of
+magnitude (the Savanna 10¹¹-cell result comfortably contains a 10⁷
+hepatocyte simulation in raw cell-count terms). What is <em>not</em> yet
+verified is that the substrate, configured with the specific
+HepaticZonationPolicy and the specific damage-cascade LUT logic, will
+reproduce biology faithfully. That is validation work, not substrate
+work, and it has not been done.</p>
+<p>The honest framing: <strong>substrate verified, biology validation
+pending</strong>.</p>
+<h2 id="whats-not-claimed">What’s not claimed</h2>
+<ul>
+<li>Not “we have a working liver digital twin.” We have a substrate
+capable of carrying a 10⁷-node tissue graph at high throughput, and a
+designed schema for one. Those are different things.</li>
+<li>Not “this replaces wet-lab biology.” Validation against measured
+biological outcomes is the gating step before any clinical or biomedical
+inference, and that step is not in scope here.</li>
+<li>Not “this is the only path.” Continuum PDE solvers, agent-based
+models in NetLogo or Repast, bespoke biology-specific frameworks all
+exist and have their own strengths. The graph-CA-on-topology approach is
+one path with specific advantages (cell-resolution at scale,
+queryability, durability) — it is not the only path.</li>
+</ul>
+<h2 id="what-we-want-from-the-audience">What we want from the
+audience</h2>
+<ul>
+<li><strong>Pointers to relevant biology validation literature.</strong>
+If the liver-zonation gradient has been quantified with cell-resolution
+experimental data (single-cell transcriptomics across the lobule, for
+instance), naming the dataset is useful for the validation step.</li>
+<li><strong>Pointers to similar substrate work.</strong> If a known
+graph-database or cellular-automaton platform has already been deployed
+at tissue scale, the prior-art map needs the addition.</li>
+<li><strong>Pull from real biological workloads.</strong> If a specific
+real-world workload (radiation damage modelling, environmental
+toxicology, metabolic network simulation at tissue scale) would benefit
+from the substrate’s specific shape, the pull signal is what tells us
+which deployment to build first.</li>
+</ul>
+<hr />
+<p><em>Slot owner: tut (explanatory framing).</em> <em>Technical
+co-owner: fold (hepatocyte schema, isomorphic-walk integration).</em>
+<em>Calibration source: <code>one_pager.md</code>. Engine source
+authoritative. Specific tick-rate numbers cited at substrate-level
+throughput gate against the Savanna result and the DagDB measured ticks
+at 1M nodes (~2 ms/tick at one million nodes, M5 Max,
+verified).</em></p>
+<p><em>Source repos: substrate engines — <a
+href="https://github.com/norayr-m/dagdb-engine">DagDB</a>, <a
+href="https://github.com/norayr-m/savanna-engine">Savanna</a>; bio
+digital twin prototype — <a
+href="https://github.com/norayr-m/drt-cell-simulator">drt-cell-simulator</a>;
+allosteric protein lane — <a
+href="https://github.com/norayr-m/isomorphic-walk">isomorphic-walk</a>.</em></p>
+</article>
+<article class="slide" id="hepatocyte_pass_2_spec">
+<h1 id="hepatocyte-pass-2-tissue-scale-graph-substrate-spec">Hepatocyte
+Pass 2 — tissue-scale graph substrate (SPEC)</h1>
+<blockquote>
+<p><em>Calibration: this slide reports a SPEC, not a built artefact. The
+underlying graph engine is verified at the 10⁹ node tier; the
+hepatocyte-specific deployment described below is queued, not yet built.
+The schema was cross-checked with the engine sibling on
+2026-04-29.</em></p>
+</blockquote>
+<figure style="margin:18px auto;text-align:center;">
+<svg viewBox="0 0 480 360" width="480" xmlns="http://www.w3.org/2000/svg">
+<!-- background gradient strip: portal (cool blue) → central (warm gold) -->
+<p><defs>
+<linearGradient id="zonegrad" x1="0%" y1="0%" x2="100%" y2="0%">
+<stop offset="0%"  stop-color="#4080c0" stop-opacity="0.18"/>
+<stop offset="50%" stop-color="#c4a35a" stop-opacity="0.10"/>
+<stop offset="100%" stop-color="#a04020" stop-opacity="0.18"/>
+</linearGradient> </defs>
+<rect x="40" y="60" width="400" height="200" fill="url(#zonegrad)" stroke="#8a7a5a" stroke-width="0.6" stroke-dasharray="3,3"/></p>
+<!-- portal triad (left) and central vein (right) labels -->
+<p><text x="60"  y="50" text-anchor="start" fill="#4080c0" font-size="11" font-family="monospace">portal
+triad</text>
+<text x="60"  y="278" text-anchor="start" fill="#4080c0" font-size="9" font-family="monospace">rank
+0</text>
+<text x="420" y="50" text-anchor="end" fill="#a04020" font-size="11" font-family="monospace">central
+vein</text>
+<text x="420" y="278" text-anchor="end" fill="#a04020" font-size="9" font-family="monospace">rank
+15</text></p>
+<!-- blood-flow arrow at top -->
+<p><line x1="80" y1="40" x2="400" y2="40" stroke="#8a7a5a" stroke-width="1.2"/>
+<polygon points="400,40 392,36 392,44" fill="#8a7a5a"/>
+<text x="240" y="32" text-anchor="middle" fill="#8a7a5a" font-size="11" font-family="monospace">blood
+flow = rank monotone (HepaticZonationPolicy)</text></p>
+<!-- zone columns: 3 zones, sample hepatocytes shown as small circles in plate-and-sinusoid arrangement -->
+<!-- column 1: Zone 1 (periportal), x ≈ 100, blue tint -->
+<p><g>
+<circle cx="90"  cy="100" r="7" fill="#4080c0" fill-opacity="0.6" stroke="#4080c0" stroke-width="1"/>
+<circle cx="120" cy="100" r="7" fill="#4080c0" fill-opacity="0.6" stroke="#4080c0" stroke-width="1"/>
+<circle cx="105" cy="130" r="7" fill="#4080c0" fill-opacity="0.6" stroke="#4080c0" stroke-width="1"/>
+<circle cx="90"  cy="160" r="7" fill="#4080c0" fill-opacity="0.6" stroke="#4080c0" stroke-width="1"/>
+<circle cx="120" cy="160" r="7" fill="#4080c0" fill-opacity="0.6" stroke="#4080c0" stroke-width="1"/>
+<circle cx="105" cy="190" r="7" fill="#4080c0" fill-opacity="0.6" stroke="#4080c0" stroke-width="1"/>
+<circle cx="90"  cy="220" r="7" fill="#4080c0" fill-opacity="0.6" stroke="#4080c0" stroke-width="1"/>
+<circle cx="120" cy="220" r="7" fill="#4080c0" fill-opacity="0.6" stroke="#4080c0" stroke-width="1"/>
+<!-- adjacency edges (4-6 per cell, plate arrangement) -->
+<g stroke="#4080c0" stroke-width="0.8" stroke-opacity="0.7">
+<line x1="90"  y1="100" x2="120" y2="100"/>
+<line x1="90"  y1="100" x2="105" y2="130"/>
+<line x1="120" y1="100" x2="105" y2="130"/>
+<line x1="105" y1="130" x2="90"  y2="160"/>
+<line x1="105" y1="130" x2="120" y2="160"/>
+<line x1="90"  y1="160" x2="120" y2="160"/>
+<line x1="90"  y1="160" x2="105" y2="190"/>
+<line x1="120" y1="160" x2="105" y2="190"/>
+<line x1="105" y1="190" x2="90"  y2="220"/>
+<line x1="105" y1="190" x2="120" y2="220"/>
+<line x1="90"  y1="220" x2="120" y2="220"/> </g>
+<text x="105" y="248" text-anchor="middle" fill="#4080c0" font-size="9" font-family="monospace">Zone
+1 (periportal)</text>
+<text x="105" y="261" text-anchor="middle" fill="#4080c0" font-size="8" font-family="monospace">gluconeogenesis</text>
+</g></p>
+<!-- column 2: Zone 2 (midzonal), x ≈ 240, gold tint -->
+<p><g>
+<circle cx="225" cy="100" r="7" fill="#c4a35a" fill-opacity="0.6" stroke="#c4a35a" stroke-width="1"/>
+<circle cx="255" cy="100" r="7" fill="#c4a35a" fill-opacity="0.6" stroke="#c4a35a" stroke-width="1"/>
+<circle cx="240" cy="130" r="7" fill="#c4a35a" fill-opacity="0.6" stroke="#c4a35a" stroke-width="1"/>
+<circle cx="225" cy="160" r="7" fill="#c4a35a" fill-opacity="0.6" stroke="#c4a35a" stroke-width="1"/>
+<circle cx="255" cy="160" r="7" fill="#c4a35a" fill-opacity="0.6" stroke="#c4a35a" stroke-width="1"/>
+<circle cx="240" cy="190" r="7" fill="#c4a35a" fill-opacity="0.6" stroke="#c4a35a" stroke-width="1"/>
+<circle cx="225" cy="220" r="7" fill="#c4a35a" fill-opacity="0.6" stroke="#c4a35a" stroke-width="1"/>
+<circle cx="255" cy="220" r="7" fill="#c4a35a" fill-opacity="0.6" stroke="#c4a35a" stroke-width="1"/>
+<g stroke="#c4a35a" stroke-width="0.8" stroke-opacity="0.7">
+<line x1="225" y1="100" x2="255" y2="100"/>
+<line x1="225" y1="100" x2="240" y2="130"/>
+<line x1="255" y1="100" x2="240" y2="130"/>
+<line x1="240" y1="130" x2="225" y2="160"/>
+<line x1="240" y1="130" x2="255" y2="160"/>
+<line x1="225" y1="160" x2="255" y2="160"/>
+<line x1="225" y1="160" x2="240" y2="190"/>
+<line x1="255" y1="160" x2="240" y2="190"/>
+<line x1="240" y1="190" x2="225" y2="220"/>
+<line x1="240" y1="190" x2="255" y2="220"/>
+<line x1="225" y1="220" x2="255" y2="220"/>
+<!-- inter-zone edges, dashed -->
+<line x1="120" y1="160" x2="225" y2="160" stroke-dasharray="3,3" stroke-opacity="0.3"/>
+</g>
+<text x="240" y="248" text-anchor="middle" fill="#a08040" font-size="9" font-family="monospace">Zone
+2 (midzonal)</text>
+<text x="240" y="261" text-anchor="middle" fill="#a08040" font-size="8" font-family="monospace">transition</text>
+</g></p>
+<!-- column 3: Zone 3 (pericentral), x ≈ 360, warm tint -->
+<p><g>
+<circle cx="360" cy="100" r="7" fill="#a04020" fill-opacity="0.6" stroke="#a04020" stroke-width="1"/>
+<circle cx="390" cy="100" r="7" fill="#a04020" fill-opacity="0.6" stroke="#a04020" stroke-width="1"/>
+<circle cx="375" cy="130" r="7" fill="#a04020" fill-opacity="0.6" stroke="#a04020" stroke-width="1"/>
+<circle cx="360" cy="160" r="7" fill="#a04020" fill-opacity="0.6" stroke="#a04020" stroke-width="1"/>
+<circle cx="390" cy="160" r="7" fill="#a04020" fill-opacity="0.6" stroke="#a04020" stroke-width="1"/>
+<circle cx="375" cy="190" r="7" fill="#a04020" fill-opacity="0.6" stroke="#a04020" stroke-width="1"/>
+<circle cx="360" cy="220" r="7" fill="#a04020" fill-opacity="0.6" stroke="#a04020" stroke-width="1"/>
+<circle cx="390" cy="220" r="7" fill="#a04020" fill-opacity="0.6" stroke="#a04020" stroke-width="1"/>
+<g stroke="#a04020" stroke-width="0.8" stroke-opacity="0.7">
+<line x1="360" y1="100" x2="390" y2="100"/>
+<line x1="360" y1="100" x2="375" y2="130"/>
+<line x1="390" y1="100" x2="375" y2="130"/>
+<line x1="375" y1="130" x2="360" y2="160"/>
+<line x1="375" y1="130" x2="390" y2="160"/>
+<line x1="360" y1="160" x2="390" y2="160"/>
+<line x1="360" y1="160" x2="375" y2="190"/>
+<line x1="390" y1="160" x2="375" y2="190"/>
+<line x1="375" y1="190" x2="360" y2="220"/>
+<line x1="375" y1="190" x2="390" y2="220"/>
+<line x1="360" y1="220" x2="390" y2="220"/>
+<line x1="255" y1="160" x2="360" y2="160" stroke-dasharray="3,3" stroke-opacity="0.3"/>
+</g>
+<text x="375" y="248" text-anchor="middle" fill="#a04020" font-size="9" font-family="monospace">Zone
+3 (pericentral)</text>
+<text x="375" y="261" text-anchor="middle" fill="#a04020" font-size="8" font-family="monospace">drug
+metabolism</text> </g></p>
+<!-- footer -->
+<text x="240" y="305" text-anchor="middle" fill="#8a7a5a" font-size="11" font-family="monospace">10⁷
+hepatocytes · 16 ranks · degree 4–6 native (no virtual splitting)</text>
+<text x="240" y="325" text-anchor="middle" fill="#8a7a5a" font-size="10" font-family="monospace">~420
+MB UMA · 0.3% of M5 budget · single-engine, no tile streaming</text>
+<text x="240" y="345" text-anchor="middle" fill="#8a7a5a" font-size="9" font-style="italic" font-family="monospace">SPEC
+— schema cross-checked with engine sibling; build queued behind
+tile-streaming</text>
+</svg>
+<figcaption style="font-size:11px;color:#8a7a5a;font-family:monospace;text-align:center;margin-top:6px;">
+Hepatic acinus as a 6-bound ranked DAG: zonation policy gives
+biologically real periportal-to-pericentral monotone rank.
+</figcaption>
+</figure>
+<hr />
+<h2 id="what">What</h2>
+<p>A graph substrate for representing a human liver at single-hepatocyte
+resolution. <strong>10⁷ hepatocyte nodes</strong> arranged as a
+spatial-adjacency graph: each cell connects to its 4–6 nearest
+neighbours in the plate- and-sinusoid morphology of the liver acinus.
+The connectivity pattern is natively bounded at 6 incoming edges per
+node, which fits the DagDB engine’s 6-bound DAG invariant without
+virtual node splitting.</p>
+<p>Rank policy: <strong>HepaticZonationPolicy</strong> —
+<code>rank(cell) = quantize(distance_from_portal_triad, n_levels=16)</code>.
+This converts the biologically real periportal → pericentral functional
+gradient (zone 1 → zone 3, characterised since the 1970s in the
+histology literature) into the engine’s monotone rank ordering. Edge
+direction becomes “blood-flow direction” (portal → central), which is
+also the direction along which hormones, nutrients, and damage signals
+propagate biologically.</p>
+<p>Ticks: quasi-static graph by default + opt-in LUT6 propagation for
+damage / signal cascade queries.</p>
+<hr />
+<h2 id="why">Why</h2>
+<p>Three classes of question that matter biologically and that today’s
+tools handle poorly at tissue scale:</p>
+<ol type="1">
+<li><strong>Damage-cascade modelling.</strong> Acetaminophen and similar
+zone-3- selective hepatotoxins propagate damage downstream from
+initially exposed cells. Predicting which hepatocytes die first, which
+recover, and where regeneration originates requires a graph
+representation of the tissue, not a continuum.</li>
+<li><strong>Lobule-scale drug-interaction simulation.</strong>
+Cell-resolution substrate for testing how drug clearance varies along
+the periportal-pericentral axis (zonation has direct functional
+consequences for first-pass metabolism).</li>
+<li><strong>Substrate for biological-twin construction.</strong>
+Existing computational liver models (Holzhütter’s hepatocyte network,
+Schliess–Hoehme spatiotemporal liver, Hattori et al.’s lobule
+simulators) operate at much smaller cell counts and richer per- cell
+state. A 10⁷-cell spatial-only substrate is <em>infrastructure</em>
+those richer models could later sit on top of, not a replacement for
+them.</li>
+</ol>
+<p>The 10⁷ scale is meaningful: a human liver lobule has roughly 10⁵
+hepatocytes; a complete liver has ~10¹¹. 10⁷ is a few hundred lobules —
+small enough to fit single-engine on an M5 Max laptop (≈420 MB at 42
+B/node, 0.3% of UMA), large enough to capture multi-lobule spatial
+gradients that single-lobule models miss.</p>
+<hr />
+<h2 id="how">How</h2>
+<h3 id="substrate-verified">Substrate (verified)</h3>
+<p>DagDB engine — 6-bounded ranked DAG with LUT6 gates, currently
+verified at the 10⁹ node tier (single engine, no tiling). 10⁷ hepatocyte
+target sits at the <em>single-engine, non-tiled</em> tier per the engine
+spec — does not depend on tile-streaming landing first. Schema
+cross-checked with the engine sibling on 2026-04-29: spatial-adjacency
+layer + HepaticZonationPolicy ranks + quasi-
+static-with-opt-in-propagation tick semantics.</p>
+<h3 id="schema-spec-not-yet-built">Schema (SPEC, not yet built)</h3>
+<pre><code>Nodes (10^7):
+  type:   hepatocyte
+  rank:   HepaticZonationPolicy (0 = portal, 15 = central)
+  attrs:
+    coords: (i, j, k) — grid position
+    zone:   1 / 2 / 3 (classical zonation)
+    truth:  0 healthy (default)
+            1 damaged
+            2 apoptotic
+            (used only during propagation ticks)
+
+Edges (~5 × 10^7):
+  type:    spatial-adjacency (hepatocyte ↔ hepatocyte plate contact)
+  policy:  source.rank &gt; dst.rank (blood-flow direction)
+  6-bound: holds natively (~0.1% loss at corner cells)
+
+Rank levels: 16 (3 zones × ~5 sub-zones each)
+Tick:        quasi-static; opt-in LUT6 propagation for damage cascade
+             each tick step ≈ hour-scale physical time
+
+Out of scope for Pass 2:
+  signaling-pathway edges (degree 10²–10³, needs virtual splitting)
+  sinusoid hub nodes (degree 10³–10⁴, different node type)
+  metabolic state simulation (needs activation channel + Pass 3 design)</code></pre>
+<h3 id="build-sequencing">Build sequencing</h3>
+<ul>
+<li>Pass 2 build queued behind the engine sibling’s TiledGraphRouter
+scaffold (currently mid-sprint).</li>
+<li>Preflight: 10⁵-cell subset, build the schema, run a portal → central
+BFS, confirm rank-monotonic edge direction and that the path length
+matches expected (~10–15 cell layers for a healthy lobule). One
+afternoon of work.</li>
+<li>Full 10⁷ build commits when preflight clears.</li>
+</ul>
+<h3
+id="biology-citations-so-the-audience-can-verify-the-premise">Biology
+citations (so the audience can verify the premise)</h3>
+<ul>
+<li>Periportal–pericentral zonation: Jungermann &amp; Kietzmann 1996,
+<em>Annu Rev Nutr</em> (functional zonation review)</li>
+<li>Hepatocyte plate morphology: Lemaigre 2009, <em>Genes Dev</em>
+(developmental and architectural review)</li>
+<li>Acinus / Rappaport zones: Rappaport 1958, <em>Anat Rec</em>
+(foundational)</li>
+<li>Acetaminophen zone-3 selectivity: McGill &amp; Jaeschke 2013,
+<em>Pharm Res</em> (toxicology mechanism)</li>
+</ul>
+<hr />
+<h2 id="honest-calibration-block">Honest calibration block</h2>
+<ul>
+<li><strong>Verified:</strong> the underlying DagDB engine at 10⁹ node
+single-engine tier; the contact-graph BFS substrate the Isomorphic Walk
+repo publishes (HIV-1 capsid 313,236 atoms / 6 ms); the schema design
+cross-check with the engine sibling.</li>
+<li><strong>Spec, not built:</strong> the 10⁷-hepatocyte deployment
+described above. The schema is biologically grounded and
+engineering-clean, but no actual liver substrate has been built or
+validated against empirical liver data yet. The preflight 10⁵-cell
+sanity check is the next concrete commitment.</li>
+<li><strong>Not claimed:</strong> a “validated bio digital twin.” The
+substrate is infrastructure for biology models, not a biology model
+itself. Tissue-twin validation against published liver data (zonation
+enzyme expression patterns, damage cascade replays from toxicology
+literature) is forthcoming work, not present work.</li>
+</ul>
+<hr />
+<h2 id="source-material">Source material</h2>
+<ul>
+<li>Isomorphic Walk repo (proteins lane, where the hepatocyte schema
+spec lives alongside the contact-graph substrate): <a
+href="https://github.com/norayr-m/isomorphic-walk"
+class="uri">https://github.com/norayr-m/isomorphic-walk</a></li>
+<li>DagDB engine repo (the 6-bound ranked DAG substrate this builds on):
+<a href="https://github.com/norayr-m/dagdb-engine"
+class="uri">https://github.com/norayr-m/dagdb-engine</a></li>
+<li>Calibration row in <code>../one_pager.md</code>: “Hepatocyte 10⁷
+Pass 2 schema: spatial-adjacency layer with HepaticZonationPolicy ranks
+(16 levels, periportal → pericentral). Schema agreed with Fold; not
+built.” — SPEC tier</li>
+<li>Companion slide: <code>slides/direction6_proteins.md</code> (the
+protein-pathway prediction lane that motivates the tissue-scale
+substrate question)</li>
+<li>Biology citations (audit-grade): Jungermann &amp; Kietzmann 1996
+<em>Annu Rev Nutr</em> (zonation review); Lemaigre 2009 <em>Genes
+Dev</em> (architectural review); Rappaport 1958 <em>Anat Rec</em>
+(acinus foundational); McGill &amp; Jaeschke 2013 <em>Pharm Res</em>
+(zone-3 hepatotoxin selectivity)</li>
+</ul>
+<hr />
+<p><em>This slide is part of the the work deck. Calibration discipline
+locked: verified vs spec vs overclaim-risk three-column split. This
+artefact is in the <strong>spec</strong> column.</em></p>
+</article>
+<article class="slide" id="uma_performance">
+<h1 id="uma-performance-dagdb-on-apple-unified-memory-verified">UMA
+performance — DagDB on Apple unified memory (VERIFIED)</h1>
+<blockquote>
+<p><em>Calibration: numbers in this slide come from the verified tier of
+<code>one_pager.md</code> — measured on M5 Max (128 GB unified memory),
+10-run validated, &lt;1 % standard deviation. Any number outside that
+anchor is flagged. Existence proof for the scale path inherited from the
+Savanna predecessor (100 B cells over 9 hours, same hardware).</em></p>
+</blockquote>
+<hr />
+<h2 id="what-unified-memory-buys">What unified memory buys</h2>
+<div style="display:flex;justify-content:center;margin:18px 0;">
+<svg width="600" height="200" viewBox="0 0 600 200">
+<!-- NVIDIA path -->
+<rect x="20" y="20" width="250" height="80" rx="6" fill="rgba(192,64,48,0.06)" stroke="#c04030" stroke-width="1"/>
+<text x="145" y="45" fill="#c04030" text-anchor="middle" font-size="12" font-weight="bold">NVIDIA
+(PG-Strom)</text>
+<text x="145" y="65" fill="#8a7a5a" text-anchor="middle" font-size="10">CPU
+RAM –PCIe–&gt; GPU VRAM</text>
+<text x="145" y="80" fill="#8a7a5a" text-anchor="middle" font-size="10">GPU
+VRAM –PCIe–&gt; CPU RAM</text>
+<text x="145" y="95" fill="#c04030" text-anchor="middle" font-size="10">2
+copies per query</text> <!-- Apple path -->
+<rect x="320" y="20" width="260" height="80" rx="6" fill="rgba(106,154,58,0.06)" stroke="#6a9a3a" stroke-width="1"/>
+<text x="450" y="45" fill="#6a9a3a" text-anchor="middle" font-size="12" font-weight="bold">Apple
+Silicon (DagDB)</text>
+<text x="450" y="65" fill="#8a7a5a" text-anchor="middle" font-size="10">CPU
++ GPU = same physical RAM</text>
+<text x="450" y="80" fill="#8a7a5a" text-anchor="middle" font-size="10">mmap
+= pointer to GPU output</text>
+<text x="450" y="95" fill="#6a9a3a" text-anchor="middle" font-size="10">0
+copies per query</text> <!-- Bottom -->
+<rect x="20" y="130" width="560" height="50" rx="6" fill="rgba(196,163,90,0.06)" stroke="#c4a35a" stroke-width="1"/>
+<text x="300" y="155" fill="#c4a35a" text-anchor="middle" font-size="13">Shared
+memory on UMA = the Postgres backend reads the</text>
+<text x="300" y="172" fill="#c4a35a" text-anchor="middle" font-size="13">exact
+physical bytes the GPU just wrote. Zero overhead.</text>
+</svg>
+</div>
+<p>DagDB runs on Apple Metal GPU compute with the entire graph state
+<strong>resident in unified memory</strong> — a single physical RAM
+addressed by both CPU and GPU with <strong>zero copy across the
+boundary</strong>. Three direct consequences:</p>
+<ol type="1">
+<li><strong>State reads from kernels and CPU code are the same memory
+access.</strong> No <code>cudaMemcpy</code>, no DMA-in / DMA-out, no
+double- buffering. The 23 MB of per-cell state at 1 M nodes lives in one
+place.</li>
+<li><strong>Dispatch overhead is the bottleneck, not bandwidth.</strong>
+At 1 M nodes the per-tick wall is ~2 ms with 13 kernel dispatches.
+Reducing dispatch count (fusing kernels) is more impactful than
+optimizing memory access patterns.</li>
+<li><strong>CPU-side latch can read/write GPU buffers directly.</strong>
+The <code>BACK_EDGE</code> two-phase snapshot/commit runs on the CPU at
+sub-ms per pass for 1 M back-edges (untested at scale, plausible but not
+yet measured). Deferred GPU-side latch kernel is on the shelf.</li>
+</ol>
+<p>Caveat: M5 Max specifically. Smaller M-series chips have less unified
+memory and thermal headroom; the scaling table below is for M5 Max
+only.</p>
+<hr />
+<h2 id="numbers-verified-at-1-m-nodes-on-m5-max">Numbers (verified at 1
+M nodes on M5 Max)</h2>
+<table>
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 40%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr>
+<th>Quantity</th>
+<th style="text-align: right;">Value</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Grid</td>
+<td style="text-align: right;">1 048 576 nodes (1024 × 1024 hex)</td>
+<td></td>
+</tr>
+<tr>
+<td>State per node</td>
+<td style="text-align: right;">23 MB total / 1 M cells = ~23 B/node</td>
+<td>5 channels + 4 scent fields</td>
+</tr>
+<tr>
+<td>Per-tick compute</td>
+<td style="text-align: right;"><strong>~2 ms</strong></td>
+<td>13 kernel dispatches</td>
+</tr>
+<tr>
+<td>Throughput</td>
+<td style="text-align: right;"><strong>~500 k ticks/s</strong> GPU
+only</td>
+<td>excludes display, recorder</td>
+</tr>
+<tr>
+<td>Dispatch overhead</td>
+<td style="text-align: right;">5 % GPU utilization</td>
+<td>rest waiting on vsync / CPU</td>
+</tr>
+<tr>
+<td>Memory bandwidth</td>
+<td style="text-align: right;">29 GB/s</td>
+<td>observed during tick</td>
+</tr>
+<tr>
+<td>10-run σ</td>
+<td style="text-align: right;">&lt; 1 %</td>
+<td>reproducible</td>
+</tr>
+</tbody>
+</table>
+<p>For the Tokyo CA workload at 200×200 (smaller scale, more nodes per
+cell): <strong>~few ms per tick</strong> — same envelope as the 1 M-cell
+result above with different per-cell state shape.</p>
+<hr />
+<h2 id="scaling-path-existence-proof-inherited-from-savanna">Scaling
+path (existence proof inherited from Savanna)</h2>
+<p>DagDB shares dispatch + Morton + 7-coloring + halo file format with
+the predecessor Savanna engine. Savanna ran:</p>
+<table>
+<thead>
+<tr>
+<th>Grid</th>
+<th>Wall time</th>
+<th>Throughput</th>
+<th>State</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 M cells</td>
+<td>sub-second</td>
+<td>1 600 tps</td>
+<td>23 MB</td>
+</tr>
+<tr>
+<td>16 M cells</td>
+<td>~13 sec</td>
+<td>77 tps</td>
+<td>367 MB</td>
+</tr>
+<tr>
+<td>100 B cells</td>
+<td>9 hours</td>
+<td>~3 tps*</td>
+<td>500 GB</td>
+</tr>
+</tbody>
+</table>
+<p>*100 B run hit M5 thermal ceiling; 9-hour wall reflects sustained
+throttled state, not headroom. Same dispatch machinery, different
+per-cell state.</p>
+<p>This is <strong>existence-proof for the substrate’s scale
+path</strong>. DagDB ran the same machinery; the per-cell state happens
+to be Boolean LUT6 + ranked DAG metadata instead of Savanna’s fluid +
+scent + entity tables. The throughput envelope is determined by the
+engine machinery, not the workload semantics.</p>
+<hr />
+<h2 id="whats-spec-not-built">What’s spec, not built</h2>
+<ul>
+<li><strong>Tile streaming</strong> for 10¹¹ nodes on one M5 Max: page
+tiles to/from NVMe, two tiles resident at once, 24-bit-tile + 40-bit-
+local global IDs. 632-line spec at <code>docs/tiled-streaming.md</code>.
+Steps 1-2 + 4 shipped (TileHalo, GlobalNodeID, TiledGraphRouter
+scaffold). Steps 5-7 (live tile load, NVMe streaming, cross-tile BFS)
+pending.</li>
+<li><strong>Engineering goal: 10¹² nodes</strong> on one M5 Max via tile
+streaming. Not yet built; the predecessor’s 100 B existence proof is the
+benchmark we’d need to push to 10× via streaming + thermal recovery
+cycles.</li>
+<li><strong>Deferred GPU latch kernel</strong> for
+<code>BACK_EDGE</code>: the CPU-side two-phase latch is fine at 1 M
+back-edges; for 10¹² this becomes the bottleneck and a GPU-side
+equivalent is shelved as a known next-step optimization.</li>
+</ul>
+<hr />
+<h2 id="whats-overclaim-risk">What’s overclaim risk</h2>
+<p>The numbers above are real, on real hardware, with real load. Three
+things to flag before the audience pulls them:</p>
+<ol type="1">
+<li><strong>Apple-specific.</strong> UMA is not a generic GPU property —
+Nvidia and AMD discrete GPUs have device memory and PCIe transfer costs.
+The 5 % GPU utilization figure depends on UMA, not on smart
+engineering.</li>
+<li><strong>One machine, one model.</strong> Numbers come from one M5
+Max laptop. Not a controlled benchmark, not peer-reviewed, no
+head-to-head against an Nvidia rack.</li>
+<li><strong>Throughput vs. workload.</strong> Per-tick compute is
+workload- dependent. 2 ms is for 1 M Boolean LUT6 with light state. A
+workload with heavier per-cell math (e.g., real-valued fluid dynamics —
+which DagDB explicitly does NOT do) would have a different
+envelope.</li>
+</ol>
+<hr />
+<h2 id="source-material">Source material</h2>
+<ul>
+<li>DagDB engine repo: <a
+href="https://github.com/norayr-m/dagdb-engine"
+class="uri">https://github.com/norayr-m/dagdb-engine</a></li>
+<li>Savanna engine repo (existence proof for the scale path): <a
+href="https://github.com/norayr-m/savanna-engine"
+class="uri">https://github.com/norayr-m/savanna-engine</a></li>
+<li>Tile-streaming spec:
+<code>dagdb-engine/docs/tiled-streaming.md</code></li>
+<li>Calibration row in <code>../one_pager.md</code>: “~2 ms per tick at
+1 M nodes on M5 Max” — VERIFIED tier</li>
+<li>Companion slide: <code>slides/direction4_savanna.md</code> (the 100
+B / 9 h Savanna run that anchors the scaling table)</li>
+</ul>
+<hr />
+<h2 id="status">Status</h2>
+<p><code>UMA performance slide</code>: <strong>IN PROGRESS</strong>
+(status board at <code>README.md</code>). - [x] This slide drafted - [x]
+Why-UMA SVG inlined (pandoc indent fix landed 18:51) - [x] GH-link
+footer added - [ ] Verify <code>~2 ms</code> and <code>~500 k tps</code>
+on current main (re-run benchmark) - [ ] Pub-screen pass</p>
+<p>bzz. — slvr.</p>
+</article>
+<article class="slide" id="tokyo_ca_voronoi">
+<h1 id="tokyo-ca-on-dagdb-wave-collision-voronoi-verified">Tokyo CA on
+DagDB — wave-collision Voronoi (VERIFIED)</h1>
+<blockquote>
+<p><em>Calibration: this slide reports a VERIFIED build. The 200×200
+Tokyo Greenberg-Hastings cellular automaton runs end-to-end on the DagDB
+substrate; convergence + dashboard + per-tick recording all measurable
+on current main. Honest framing guard: this is NOT a slime-mold network
+— that’s an explicit overclaim flagged in <code>one_pager.md</code>. The
+result is a Voronoi tessellation between food sources, produced by
+wave-front collision. See <code>demos/tokyo_ca.md</code> (consolidated
+demo run plan + technical encoding).</em></p>
+</blockquote>
+<hr />
+<h2 id="what">What</h2>
+<div style="text-align:center;margin:18px 0;">
+<p><img src="assets/tokyo_ca_voronoi_t160.png" alt="Tokyo CA at tick 160 — Voronoi tessellation visible as bright yellow ridges crossing the field" style="max-width:600px;width:100%;border:1px solid #3a3225;border-radius:4px;"/></p>
+</div>
+<p>A 200×200 hex-grid cellular automaton, <strong>encoded as a ranked
+DagDB DAG</strong> with the Greenberg-Hastings 3-state excitable
+rule:</p>
+<ul>
+<li><strong>Resting → Excited</strong> when any neighbour is
+excited</li>
+<li><strong>Excited → Refractory</strong> after one tick</li>
+<li><strong>Refractory → Resting</strong> after one tick</li>
+</ul>
+<p>Food cells (36 Tokyo-region city positions) re-trigger excitation
+periodically, producing radial wave fronts. Wave-front
+<em>collisions</em> between adjacent food cells trace out the Voronoi
+tessellation boundary — the locus of cells equidistant (in hop count)
+from two food sources.</p>
+<p>Per cell on the substrate: - 11 logical nodes per cell × 40 000 cells
+≈ <strong>440 000 DagDB nodes</strong> total - 3 phase-bit register
+nodes per cell, latched by <code>BACK_EDGE</code> - 8 combinational LUT6
+nodes per cell for neighbour excitation, in-range detection, next-state
+logic - All evaluations rank-stratified for parallel-safe dispatch</p>
+<p>Convergence to the steady-state Voronoi pattern at <strong>~tick
+160</strong>.</p>
+<hr />
+<h2 id="why-this-is-on-the-deck">Why this is on the deck</h2>
+<p>Three substrate properties this demo proves visibly:</p>
+<ol type="1">
+<li><strong><code>BACK_EDGE</code> works at scale.</strong> 440 K nodes
+with 3 register nodes per cell, all latching cleanly tick after tick.
+The synchronous-circuit register pattern is the load-bearing primitive
+that makes recurrent dynamics on a 6-bounded DAG possible.</li>
+<li><strong>Morton + 7-coloring keeps it parallel-safe.</strong> Every
+cell updates in lock-step with no race; the 7-coloring guarantees
+distance-2 independence on the hex lattice (Molloy &amp; Salavatipour
+2005).</li>
+<li><strong>The substrate runs a recurrent computation as a database
+operation.</strong> Snapshot, replay, MVCC query against any tick — all
+with the existing engine API. Not a special-purpose simulator bolted on
+the side.</li>
+</ol>
+<hr />
+<h2 id="why-this-is-not-slime-mold">Why this is NOT slime mold</h2>
+<p>This is the load-bearing framing for the audience. Three things to
+say up front in the live demo:</p>
+<ol type="1">
+<li><strong>Not a Tero/Physarum slime-mold network.</strong> Slime mold
+uses continuous fluid dynamics — cytoplasmic streaming, real-valued
+pressure fields, conductance reinforcement via flux. DagDB is Boolean
+LUT6 by design, no fluid dynamics. What you see is wave- front collision
+producing Voronoi, not biological transport network optimisation.</li>
+<li><strong>Not Tero 2010.</strong> Tero’s algorithm uses Kirchhoff
+pressure solves on a graph with adaptive conductance. It’s a separate
+algorithm that we have a Metal-side sister demo for (mold_walk, see the
+side slide), running on a different substrate.</li>
+<li><strong>Not new computer science.</strong> Greenberg-Hastings
+excitable CA is from 1978. The engineering contribution is having it run
+as a ranked LUT6 DAG with <code>BACK_EDGE</code> register latching, on a
+GPU substrate with WAL + multi-version reads — same ingredients as a
+real-time database, applied to a CA workload.</li>
+</ol>
+<hr />
+<h2 id="numbers-verified-on-current-main-2026-05-01">Numbers (verified
+on current main, 2026-05-01)</h2>
+<table>
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 40%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr>
+<th>Quantity</th>
+<th style="text-align: right;">Value</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Grid</td>
+<td style="text-align: right;">200 × 200 hex cells</td>
+<td>terrain spec</td>
+</tr>
+<tr>
+<td>Land cells</td>
+<td style="text-align: right;">28 038</td>
+<td>inert mask filtered</td>
+</tr>
+<tr>
+<td>Inert cells</td>
+<td style="text-align: right;">11 962</td>
+<td>water + Pacific + mountains</td>
+</tr>
+<tr>
+<td>DagDB nodes</td>
+<td style="text-align: right;">~440 000</td>
+<td>11 nodes/cell × 40 000 cells</td>
+</tr>
+<tr>
+<td><code>BACK_EDGE</code>s</td>
+<td style="text-align: right;">~120 000</td>
+<td>3 register nodes × 40 000 cells</td>
+</tr>
+<tr>
+<td>Per-tick wall</td>
+<td style="text-align: right;"><strong>~24 ms</strong> on M5 Max</td>
+<td>with full per-tick dashboard recording; pure compute is faster</td>
+</tr>
+<tr>
+<td>Convergence</td>
+<td style="text-align: right;"><strong>160 ticks</strong> ✓</td>
+<td><code>swift test TokyoCATests/testTokyoSolve200x200</code> re-run
+2026-05-01</td>
+</tr>
+<tr>
+<td>Total wall</td>
+<td style="text-align: right;">4.6 s for 190 ticks</td>
+<td>live demo runs in real time</td>
+</tr>
+<tr>
+<td>7-color groups</td>
+<td style="text-align: right;">7</td>
+<td>hex lattice distance-2 chromatic number (Molloy &amp; Salavatipour
+2005)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="visual-asset">Visual asset</h2>
+<p><strong>Primary</strong>:
+<code>assets/tokyo_ca_voronoi_t160.png</code> (200 × 200 → 600 × 600
+upscaled, NEAREST). Yellow-orange checkerboard texture is the
+oscillating excitable medium; bright yellow ridges across the field are
+wave-front collision lines = Voronoi edges between food cells. Central
+diamond pattern = waves converging from the Tokyo cluster. Dark-blue
+regions are inert mask (Pacific, Tokyo Bay, mountains).</p>
+<p><strong>Time series</strong> (also in <code>assets/</code>):
+<code>tokyo_ca_t030.png</code>, <code>tokyo_ca_t060.png</code>,
+<code>tokyo_ca_t100.png</code> — show convergence progression for the
+slide’s mid-presentation animation.</p>
+<h2 id="references-per-tut-foundation-lane">References (per Tut,
+foundation lane)</h2>
+<pre class="text"><code>Greenberg, J.M. and Hastings, S.P. (1978). &quot;Spatial patterns for
+discrete models of diffusion in excitable media.&quot; SIAM J. Appl.
+Math. 34(3), 515-523.
+— origin of the 3-state excitable CA rule we run.
+
+Tolmachev, D. and Adamatzky, A. (1996). &quot;Chemical processor for
+computation of Voronoi diagram.&quot; Adv. Mater. Optics Electron. 6(4),
+191-196.
+— wave-front collision on excitable media computes Voronoi as a
+by-product. Direct precedent for what Tokyo demo shows.
+
+Adamatzky, A. (2010). Game of Life Cellular Automata. Springer.
+— Ch. 17 covers maze-solving / Voronoi-computing CA class. Our
+Tokyo CA is in this lineage, NOT Tero 2010.
+
+Murray, J.D. (2003). Mathematical Biology II. Springer, 3rd ed.
+Chs. 1, 8-10. — accessible textbook treatment of excitable media
+for the architect-grade audience.
+
+Molloy, M. and Salavatipour, M.R. (2005). &quot;A bound on the chromatic
+number of the square of a planar graph.&quot; J. Combin. Theory B 94(2),
+189-213. — distance-2 chromatic number 7 of the squared hex lattice;
+underwrites the 7-coloring parallel dispatch.</code></pre>
+<h2 id="whats-overclaim-risk">What’s overclaim risk</h2>
+<p>(Pulled from <code>one_pager.md</code> for completeness.)</p>
+<blockquote>
+<p><em>“Tokyo CA runs slime mold on the substrate”</em> — wrong.
+Substrate has no fluid dynamics; engine source explicitly says “No scent
+diffusion. No fluid dynamics.” Engine docstring is the source of truth.
+What the Tokyo demo actually shows is a Greenberg-Hastings excitable
+cellular automaton producing a Voronoi tessellation between food
+sources, NOT a slime-mold network. Real CA, real convergence, real
+visualization — but not what Tero 2010 produced biologically.</p>
+</blockquote>
+<p>The <strong>mold_walk side demo</strong> sits next to this slide on
+the deck and shows what <em>actually</em> trying for slime mold looks
+like — on a different substrate, explicitly labelled as Metal-side (see
+<code>slides/mold_walk_side_demo.md</code>).</p>
+<hr />
+<h2 id="source-material">Source material</h2>
+<ul>
+<li>DagDB engine repo: <a
+href="https://github.com/norayr-m/dagdb-engine"
+class="uri">https://github.com/norayr-m/dagdb-engine</a></li>
+<li>Tokyo CA test source:
+<code>dagdb/Tests/DagDBTests/TokyoCATests.swift</code>
+(<code>testTokyoSolve200x200</code> — convergence at tick 160, 4.6 s
+wall)</li>
+<li>Dashboard build scripts:
+<code>dagdb/examples/tokyo_ca/build_dashboard_data.py</code> +
+<code>build_dashboard_html.py</code></li>
+<li>Mold_walk sister substrate (Metal-side, separate repo):
+<code>~/000_AI_Work/0_Projects/0_Active_MoldWalk/</code> (referenced by
+side demo, not the DagDB run)</li>
+</ul>
+<hr />
+<h2 id="status">Status</h2>
+<p><code>Tokyo CA live demo</code>: <strong>IN PROGRESS</strong> (status
+board at <code>README.md</code>). - [x] Demo run plan + technical
+encoding consolidated (<code>demos/tokyo_ca.md</code>) - [x] This slide
+drafted - [x] UMA performance slide drafted
+(<code>uma_performance.md</code>) - [x] Visual asset inlined
+(<code>tokyo_ca_voronoi_t160.png</code>) - [x] GH-link footer added - [
+] Side mold_walk slide (tomorrow afternoon) - [ ] Convergence GIF
+capture under <code>assets/</code> - [ ] Pub-screen pass on the GH
+footer addition</p>
+<p>bzz. — slvr.</p>
 </article>
 <article class="slide" id="layer3_inventory">
 <h1 id="layer-3-full-inventory-walk">Layer 3 — Full inventory walk</h1>
