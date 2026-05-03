@@ -121,6 +121,40 @@ main.deck-main {
 .section-symbol--toc { width: 14px; height: 14px; margin-right: 8px; }
 .section-symbol--opener { width: 96px; height: 96px; margin-bottom: 28px; color: var(--gold); }
 .section-symbol--tier1-hero { width: 96px; height: 96px; margin-bottom: 28px; color: var(--gold); display: block; }
+.section-symbol--quicknav { width: 14px; height: 14px; margin-right: 4px; }
+.quicknav-strip {
+  margin-left: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  align-items: center;
+  max-width: 60%;
+  justify-content: flex-end;
+}
+.quicknav-pair {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--gold-soft);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 6px;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  transition: color 0.12s, border-color 0.12s, background 0.12s;
+}
+.quicknav-pair:hover {
+  color: var(--gold);
+  border-color: rgba(212,175,55,0.25);
+  background: rgba(212,175,55,0.04);
+}
+.quicknav-pair.active {
+  color: var(--gold);
+  border-color: var(--gold);
+  background: rgba(212,175,55,0.06);
+}
 nav.toc a.section-head {
   display: flex;
   align-items: center;
@@ -403,7 +437,7 @@ article.slide.current-chapter.divider {
   <span class="kicker">A peculiar piece of software · and the substrate underneath it</span>
   <span class="sep">·</span>
   <span class="doc-title"><strong>The Work</strong> — assembled deck</span>
-</header>
+<div class="quicknav-strip"><a href="#hive_itself" class="quicknav-pair"><span class="section-symbol section-symbol--quicknav"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <circle cx="32" cy="10" r="4" fill="currentColor"/> <circle cx="10" cy="44" r="4" fill="currentColor"/> <circle cx="54" cy="44" r="4" fill="currentColor"/> <circle cx="32" cy="36" r="4" fill="currentColor"/> <line x1="32" y1="10" x2="10" y2="44"/> <line x1="32" y1="10" x2="54" y2="44"/> <line x1="10" y1="44" x2="54" y2="44"/> <line x1="32" y1="10" x2="32" y2="36"/> <line x1="10" y1="44" x2="32" y2="36"/> <line x1="54" y1="44" x2="32" y2="36"/> </svg></span><span class="quicknav-label">Hive</span></a><a href="#bio_digital_twin_goal" class="quicknav-pair"><span class="section-symbol section-symbol--quicknav"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <rect x="8" y="14" width="48" height="10" rx="2" fill="currentColor" opacity="0.3"/> <rect x="8" y="28" width="48" height="10" rx="2" fill="currentColor" opacity="0.55"/> <rect x="8" y="42" width="48" height="10" rx="2" fill="currentColor" opacity="0.85"/> <rect x="8" y="14" width="48" height="10" rx="2"/> <rect x="8" y="28" width="48" height="10" rx="2"/> <rect x="8" y="42" width="48" height="10" rx="2"/> </svg></span><span class="quicknav-label">Twin</span></a><a href="#sec-4" class="quicknav-pair"><span class="section-symbol section-symbol--quicknav"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <polygon points="32,8 56,52 8,52" fill="none"/> <circle cx="32" cy="8" r="4" fill="currentColor"/> <circle cx="56" cy="52" r="4" fill="currentColor"/> <circle cx="8" cy="52" r="4" fill="currentColor"/> <text x="32" y="11" font-size="6" fill="white" text-anchor="middle" stroke="none" font-family="sans-serif" font-weight="bold">+</text> <text x="56" y="55" font-size="6" fill="white" text-anchor="middle" stroke="none" font-family="sans-serif" font-weight="bold">0</text> <text x="8" y="55" font-size="6" fill="white" text-anchor="middle" stroke="none" font-family="sans-serif" font-weight="bold">−</text> </svg></span><span class="quicknav-label">Savanna</span></a><a href="#sec-5" class="quicknav-pair"><span class="section-symbol section-symbol--quicknav"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <polygon points="32,8 54,20 54,44 32,56 10,44 10,20" fill="none"/> <circle cx="32" cy="8" r="3" fill="currentColor"/> <circle cx="54" cy="20" r="3" fill="currentColor"/> <circle cx="54" cy="44" r="3" fill="currentColor"/> <circle cx="32" cy="56" r="3" fill="currentColor"/> <circle cx="10" cy="44" r="3" fill="currentColor"/> <circle cx="10" cy="20" r="3" fill="currentColor"/> <circle cx="32" cy="32" r="4" fill="currentColor"/> </svg></span><span class="quicknav-label">DagDB</span></a><a href="#sec-6" class="quicknav-pair"><span class="section-symbol section-symbol--quicknav"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <circle cx="10" cy="14" r="3" fill="currentColor"/> <circle cx="22" cy="14" r="3" fill="currentColor"/> <circle cx="16" cy="26" r="3" fill="currentColor"/> <line x1="10" y1="14" x2="22" y2="14"/> <line x1="10" y1="14" x2="16" y2="26"/> <line x1="22" y1="14" x2="16" y2="26"/> <circle cx="42" cy="50" r="3" fill="currentColor"/> <circle cx="54" cy="50" r="3" fill="currentColor"/> <circle cx="48" cy="38" r="3" fill="currentColor"/> <line x1="42" y1="50" x2="54" y2="50"/> <line x1="42" y1="50" x2="48" y2="38"/> <line x1="54" y1="50" x2="48" y2="38"/> <line x1="26" y1="30" x2="38" y2="34" stroke-dasharray="2,2"/> <polygon points="38,34 34,30 36,33" fill="currentColor" stroke="none"/> </svg></span><span class="quicknav-label">Proteins</span></a><a href="#sec-7" class="quicknav-pair"><span class="section-symbol section-symbol--quicknav"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <rect x="10" y="10" width="20" height="20" fill="none" opacity="0.4"/> <rect x="34" y="10" width="20" height="20" fill="none" opacity="0.4"/> <rect x="10" y="34" width="20" height="20" fill="none" opacity="0.4"/> <rect x="34" y="34" width="20" height="20" fill="none" opacity="0.4"/> <polyline points="20,20 44,20 20,44 44,44" stroke-width="3.5"/> <circle cx="20" cy="20" r="3" fill="currentColor"/> <circle cx="44" cy="44" r="3" fill="currentColor"/> </svg></span><span class="quicknav-label">Applied</span></a><a href="#sec-8" class="quicknav-pair"><span class="section-symbol section-symbol--quicknav"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <rect x="8" y="32" width="36" height="20" fill="currentColor" opacity="0.2"/> <rect x="14" y="22" width="36" height="20" fill="currentColor" opacity="0.5"/> <rect x="20" y="12" width="36" height="20" fill="currentColor" opacity="0.85"/> <rect x="8" y="32" width="36" height="20"/> <rect x="14" y="22" width="36" height="20"/> <rect x="20" y="12" width="36" height="20"/> </svg></span><span class="quicknav-label">Arch</span></a><a href="#sec-9" class="quicknav-pair"><span class="section-symbol section-symbol--quicknav"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="6" y1="50" x2="58" y2="50" opacity="0.3"/> <path d="M 6 40 Q 22 18 32 32 Q 42 46 58 24" stroke-width="3"/> <circle cx="32" cy="32" r="4" fill="currentColor"/> </svg></span><span class="quicknav-label">Theory</span></a></div></header>
 
 <nav class="toc" id="toc">
   <div class="toc-group">
@@ -3669,7 +3703,7 @@ href="https://github.com/norayr-m">github.com/norayr-m</a>.</em></p>
 
 <script>
 (function() {
-  const links = Array.from(document.querySelectorAll('nav.toc a'));
+  const links = Array.from(document.querySelectorAll('nav.toc a, .quicknav-strip a.quicknav-pair'));
   const sections = links
     .map(a => a.getAttribute('href'))
     .filter(h => h && h.startsWith('#'))
