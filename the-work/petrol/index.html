@@ -39,6 +39,42 @@
   --muted: #b5ad9e;
   --border: rgba(212,175,55,0.15);
 }
+/* Palette switcher in masthead — Norayr 2026-05-03 iteration 2.8 single-page selector */
+.palette-switcher {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.palette-switcher .palette-label { margin-right: 6px; }
+.palette-switcher button {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--gold-soft);
+  padding: 4px 8px;
+  border-radius: 3px;
+  font-family: inherit;
+  font-size: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  cursor: pointer;
+  transition: color 0.12s, border-color 0.12s, background 0.12s;
+}
+.palette-switcher button:hover {
+  color: var(--gold);
+  border-color: rgba(212,175,55,0.35);
+  background: rgba(212,175,55,0.04);
+}
+.palette-switcher button.active {
+  color: var(--gold);
+  border-color: var(--gold);
+  background: rgba(212,175,55,0.10);
+}
 body {
   margin: 0; padding: 0; max-width: none;
   display: grid;
@@ -233,7 +269,7 @@ main.deck-main li { line-height: 1.6; }
   letter-spacing: 0.04em;
 }
 .quicknav-strip {
-  margin-left: auto;
+  margin-left: 16px;
   display: flex;
   flex-wrap: wrap;
   gap: 4px 10px;
@@ -570,6 +606,13 @@ article.slide.current-chapter.divider {
   <span class="kicker">A peculiar piece of software · and the substrate underneath it</span>
   <span class="sep">·</span>
   <span class="doc-title"><strong>The Work</strong> — assembled deck</span>
+  <div class="palette-switcher" role="group" aria-label="Colour scheme">
+    <span class="palette-label">Theme</span>
+    <button type="button" data-set-theme="dark">Dark</button>
+    <button type="button" data-set-theme="cream">Cream</button>
+    <button type="button" data-set-theme="petrol">Petrol</button>
+    <button type="button" data-set-theme="warm-dark">Warm</button>
+  </div>
 <div class="quicknav-strip"><a href="#sec-4" class="quicknav-pair"><span class="section-symbol section-symbol--quicknav"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <polygon points="32,8 56,52 8,52" fill="none"/> <circle cx="32" cy="8" r="4" fill="currentColor"/> <circle cx="56" cy="52" r="4" fill="currentColor"/> <circle cx="8" cy="52" r="4" fill="currentColor"/> <text x="32" y="11" font-size="6" fill="white" text-anchor="middle" stroke="none" font-family="sans-serif" font-weight="bold">+</text> <text x="56" y="55" font-size="6" fill="white" text-anchor="middle" stroke="none" font-family="sans-serif" font-weight="bold">0</text> <text x="8" y="55" font-size="6" fill="white" text-anchor="middle" stroke="none" font-family="sans-serif" font-weight="bold">−</text> </svg></span><span class="quicknav-label">Savanna</span></a><a href="#sec-5" class="quicknav-pair"><span class="section-symbol section-symbol--quicknav"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <polygon points="32,8 54,20 54,44 32,56 10,44 10,20" fill="none"/> <circle cx="32" cy="8" r="3" fill="currentColor"/> <circle cx="54" cy="20" r="3" fill="currentColor"/> <circle cx="54" cy="44" r="3" fill="currentColor"/> <circle cx="32" cy="56" r="3" fill="currentColor"/> <circle cx="10" cy="44" r="3" fill="currentColor"/> <circle cx="10" cy="20" r="3" fill="currentColor"/> <circle cx="32" cy="32" r="4" fill="currentColor"/> </svg></span><span class="quicknav-label">DagDB</span></a><a href="#sec-6" class="quicknav-pair"><span class="section-symbol section-symbol--quicknav"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <circle cx="10" cy="14" r="3" fill="currentColor"/> <circle cx="22" cy="14" r="3" fill="currentColor"/> <circle cx="16" cy="26" r="3" fill="currentColor"/> <line x1="10" y1="14" x2="22" y2="14"/> <line x1="10" y1="14" x2="16" y2="26"/> <line x1="22" y1="14" x2="16" y2="26"/> <circle cx="42" cy="50" r="3" fill="currentColor"/> <circle cx="54" cy="50" r="3" fill="currentColor"/> <circle cx="48" cy="38" r="3" fill="currentColor"/> <line x1="42" y1="50" x2="54" y2="50"/> <line x1="42" y1="50" x2="48" y2="38"/> <line x1="54" y1="50" x2="48" y2="38"/> <line x1="26" y1="30" x2="38" y2="34" stroke-dasharray="2,2"/> <polygon points="38,34 34,30 36,33" fill="currentColor" stroke="none"/> </svg></span><span class="quicknav-label">Proteins</span></a><a href="#sec-7" class="quicknav-pair"><span class="section-symbol section-symbol--quicknav"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <rect x="10" y="10" width="20" height="20" fill="none" opacity="0.4"/> <rect x="34" y="10" width="20" height="20" fill="none" opacity="0.4"/> <rect x="10" y="34" width="20" height="20" fill="none" opacity="0.4"/> <rect x="34" y="34" width="20" height="20" fill="none" opacity="0.4"/> <polyline points="20,20 44,20 20,44 44,44" stroke-width="3.5"/> <circle cx="20" cy="20" r="3" fill="currentColor"/> <circle cx="44" cy="44" r="3" fill="currentColor"/> </svg></span><span class="quicknav-label">Applied</span></a><a href="#sec-8" class="quicknav-pair"><span class="section-symbol section-symbol--quicknav"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <rect x="8" y="32" width="36" height="20" fill="currentColor" opacity="0.2"/> <rect x="14" y="22" width="36" height="20" fill="currentColor" opacity="0.5"/> <rect x="20" y="12" width="36" height="20" fill="currentColor" opacity="0.85"/> <rect x="8" y="32" width="36" height="20"/> <rect x="14" y="22" width="36" height="20"/> <rect x="20" y="12" width="36" height="20"/> </svg></span><span class="quicknav-label">Arch</span></a><a href="#sec-9" class="quicknav-pair"><span class="section-symbol section-symbol--quicknav"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="6" y1="50" x2="58" y2="50" opacity="0.3"/> <path d="M 6 40 Q 22 18 32 32 Q 42 46 58 24" stroke-width="3"/> <circle cx="32" cy="32" r="4" fill="currentColor"/> </svg></span><span class="quicknav-label">Theory</span></a></div></header>
 
 <nav class="toc" id="toc">
@@ -4070,6 +4113,35 @@ href="https://github.com/norayr-m">github.com/norayr-m</a>.</em></p>
       }
     });
   });
+})();
+
+// Palette switcher — Norayr 2026-05-03 iteration 2.8 single-page selector with localStorage persistence
+(function() {
+  const buttons = document.querySelectorAll('.palette-switcher button[data-set-theme]');
+  if (!buttons.length) return;
+  function currentTheme() { return document.body.dataset.theme || 'dark'; }
+  function applyTheme(theme) {
+    if (theme === 'dark') {
+      delete document.body.dataset.theme;
+    } else {
+      document.body.dataset.theme = theme;
+    }
+    buttons.forEach(b => b.classList.toggle('active', b.dataset.setTheme === theme));
+    try { localStorage.setItem('deck-theme', theme); } catch (e) {}
+  }
+  // On load: URL-baked theme (variant subpath) wins. Otherwise apply saved preference.
+  if (!document.body.dataset.theme) {
+    let saved = null;
+    try { saved = localStorage.getItem('deck-theme'); } catch (e) {}
+    if (saved && saved !== 'dark') {
+      document.body.dataset.theme = saved;
+    }
+  } else {
+    // URL-baked theme — sync localStorage so refresh on main URL stays consistent
+    try { localStorage.setItem('deck-theme', document.body.dataset.theme); } catch (e) {}
+  }
+  buttons.forEach(b => b.classList.toggle('active', b.dataset.setTheme === currentTheme()));
+  buttons.forEach(btn => btn.addEventListener('click', () => applyTheme(btn.dataset.setTheme)));
 })();
 </script>
 <script>
