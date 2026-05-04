@@ -12,6 +12,13 @@ Chaptered audio narration, 13+ inline visualizations, calibration discipline thr
 
 ---
 
+### Latest Highlights
+
+- **DRT Generator — step-by-step whitepaper** · long-form prose walkthrough of a quick, arbitrary signal approximator at population scale, with full prior-art lineage and honest novelty surface. [Read →](https://norayr-m.github.io/drt-generator/whitepaper.html)
+- **DagDB Engine — BACK_EDGE primitive + AC-3 verification** · 6-bounded ranked DAG database; the BACK_EDGE primitive verified via the AC-3 Australia map-coloring problem. [Read →](https://github.com/norayr-m/dagdb-engine/wiki/back-edges)
+
+---
+
 > This is an amateur engineering project. We are not HPC professionals and make no competitive claims. Numbers speak; ego doesn't. Errors are likely.
 
 ---
