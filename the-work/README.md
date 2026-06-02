@@ -27,4 +27,4 @@ Authored with the hive of AI co-authors named on the [main profile](../README.md
 
 ## License
 
-GPLv3 (inherits from the [parent profile repo](../LICENSE)).
+Apache 2.0 (inherits from the [parent profile repo](../LICENSE)).
