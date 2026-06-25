@@ -829,7 +829,7 @@ article.slide.current-chapter.divider {
   <p>A ternary lattice running on Apple Silicon GPU, scheduling cells in seven phases via distance-2 chromatic separation on a hexagonal grid. The substrate that hits the central GCUPS number on a laptop.</p>
   <div class="thesis-hero-compact">
     <span class="thesis-number-large">14.4</span> <span class="thesis-units">GCUPS</span>
-    <p class="thesis-tag">at 1 billion hex cells · 522 ms/tick · M5 Max · 10-run published, 95% CI</p>
+    <p class="thesis-tag">at 1 billion hex cells · 522 ms/tick · M5 Max · 10-run published, 95% CI · GCUPS = cells × 7 effective passes × TPS / 1e9 (≈1.9 G full-cell CA-ticks/s)</p>
   </div>
   <p><strong>Read more:</strong> <a href="https://github.com/norayr-m/savanna-engine">Savanna Engine repo</a> · <a href="https://norayr-m.github.io/savanna-engine/whitepaper.html">Savanna white paper</a> · <a href="https://norayr-m.github.io/savanna-engine/7color_explained.html">7-coloring explained — interactive</a></p>
 </article>
@@ -845,8 +845,8 @@ article.slide.current-chapter.divider {
   <circle cx="32" cy="32" r="4" fill="currentColor"/>
 </svg></span> DagDB</h1>
   
-  <p>Every node holds a 64-bit truth table — six inputs, one output, the same primitive that lives at the heart of an FPGA. Nodes wired into a ranked acyclic graph; the engine evaluates the whole graph in parallel on the GPU each tick. Snapshots, write-ahead log, multi-version reads — durable like a real database.</p>
-  <p>The <code>BACK_EDGE</code> primitive lets state latch across tick boundaries — unlocks AC-3 constraint propagation, Hopfield-style recurrent networks, Boolean networks with feedback.</p>
+  <p>Every node holds a 64-bit truth table — six inputs, one output, the same primitive that lives at the heart of an FPGA. Nodes wired into a ranked acyclic graph; the engine evaluates the whole graph in parallel on the GPU each tick. Snapshots, write-ahead log, snapshot-on-read isolation — durable like a real database.</p>
+  <p>The <code>BACK_EDGE</code> primitive lets state latch across tick boundaries — demonstrated on a 1-bit register and a 4-bit ripple counter; AC-3 constraint propagation, Hopfield-style recurrent networks, and Boolean networks with feedback are expressible on this primitive but not yet demonstrated.</p>
   <p><strong>Read more:</strong> <a href="https://github.com/norayr-m/dagdb-engine">DagDB repo</a> · <a href="https://norayr-m.github.io/dagdb-engine/whitepaper.html">DagDB white paper</a> · <a href="https://norayr-m.github.io/dagdb-engine/site/index.html">Engine site</a> · <a href="https://norayr-m.github.io/dagdb-engine/site/sql-architecture.html">SQL architecture</a></p>
 </article>
 <article class="slide" id="sec0_4_proteins">
@@ -929,11 +929,15 @@ article.slide.current-chapter.divider {
 id="direction-4-savanna-engine-existence-proof-for-the-scale-path">Direction
 4 — Savanna Engine (existence proof for the scale path)</h1>
 <blockquote>
-<p><em>Calibration: this slide reports a VERIFIED build. Savanna ran 100
-billion cells over 9 hours on one M5 Max laptop, peaked 15.8 GCUPS,
-wrote 500 GB of state to disk. Same dispatch + Morton + 7-coloring
-machinery DagDB inherits — making this the existence proof for DagDB’s
-trillion-cell scale path. Honest framing guard: Savanna’s FLUID kernels
+<p><em>Calibration: this slide leads with the verifiable showcase — the
+Savanna app runs 100 million cells in realtime, interactive, on one M5
+Max laptop (live, runnable, demonstrable). The 100 billion-cell batch
+run (9 hours, peaked 15.8 GCUPS, 500 GB state file at the M5 thermal
+ceiling) actually happened (author-attested) and is re-runnable from
+the existing driver + engine, but the run artefacts were not committed
+— re-runnable, not currently reader-verifiable. Same dispatch + Morton
++ 7-coloring machinery DagDB inherits — making this the existence proof
+for DagDB’s trillion-cell scale path. Honest framing guard: Savanna’s FLUID kernels
 (scent, density, predator-prey, peristaltic streaming) are intentionally
 NOT in DagDB. Conflating the two is overclaim risk. See
 <code>one_pager.md</code>’s “DagDB inherits Savanna’s physics engine”
@@ -988,15 +992,18 @@ atomics.</li>
 billion cells over row-major, pure L2-cache-locality win on UMA
 hardware.</li>
 <li><strong>Lock-free chromatic dispatch</strong> — 13 kernel dispatches
-per tick, state lives in unified memory, zero CPU↔︎GPU copy.</li>
+per tick (collapsing to 7 full-grid effective passes in the GCUPS
+formula: 4 scent + 1 entity + 1 grass + 1 census), state lives in
+unified memory, zero CPU↔︎GPU copy.</li>
 </ul>
 <p>Same machinery DagDB inherits (HexGrid, Carlos Delta encoder, halo
 file format). Different per-cell state: Savanna stores fluid + scent +
 entity tables; DagDB stores Boolean LUT6 + ranked DAG metadata.</p>
 <h2 id="why-on-the-the-deck">Why on the the deck</h2>
 <p><strong>Existence proof for the trillion-cell scale path.</strong>
-The verified 100 B / 9 h Savanna run on one M5 Max laptop is the highest
-scale the substrate machinery has actually shipped. DagDB’s
+The author-attested 100 B / 9 h Savanna run on one M5 Max laptop is the
+highest scale the substrate machinery has actually shipped (re-runnable
+from the existing driver + engine; run artefacts not committed). DagDB’s
 tile-streaming spec for 10¹¹ nodes
 (<code>docs/tiled-streaming.md</code>) targets the same hardware
 envelope. Without Savanna’s existence proof, DagDB’s trillion-cell goal
@@ -1066,9 +1073,13 @@ Max, 10-run validated)</h2>
 throttled state, not headroom. Same dispatch machinery, different
 per-cell load.</li>
 </ul>
-<p><strong>Peak</strong>: 27.1 GCUPS measured at 16 M cells, 10-run
-validated, &lt; 1 % standard deviation. <strong>Sustained 100
-B</strong>: 15.8 GCUPS — figure cited on the deck.</p>
+<p><strong>Peak</strong>: 15.8 GCUPS measured at 64 M cells (Morton-Z
+layout, 10-run validated, &lt; 1 % standard deviation; at 16 M the
+corrected value is 15.1 GCUPS). The earlier "27.1 GCUPS at 16 M" figure
+used an incorrect ×13-dispatch multiplier and is retracted in
+<code>BENCHMARK_RAW.txt</code> — corrected formula is
+<code>cells × 7 effective passes × TPS / 1e9</code>.
+<strong>Sustained 100 B</strong>: 15.8 GCUPS — figure cited on the deck.</p>
 <h2 id="one-representative-engineering-overcome-type-ii-satiation">One
 representative engineering overcome — Type II satiation</h2>
 <p>Saw the predator-prey simulation collapse repeatedly to extinction:
@@ -1114,8 +1125,13 @@ Per-cell state and biology kernels NOT inherited.</li>
 </thead>
 <tbody>
 <tr>
-<td>100B-cell run, 9 hours, 15.8 GCUPS</td>
-<td>VERIFIED</td>
+<td>100 M-cell Savanna app, realtime interactive on M5 Max</td>
+<td>VERIFIED — live demo, runnable, reader can check it</td>
+</tr>
+<tr>
+<td>100 B-cell run, 9 hours, 15.8 GCUPS peak</td>
+<td>RAN (author-attested; re-runnable from driver + engine; run
+artefacts not committed → not currently reader-verifiable)</td>
 </tr>
 <tr>
 <td>7-coloring proves topological cleanness (no Euler scars)</td>
@@ -1192,12 +1208,15 @@ different.</p>
 <p><strong>Required content:</strong> - Headline: graph database where
 every node is a 64-bit truth table (LUT6); ranked DAG, evaluated on the
 GPU each tick - BACK_EDGE primitive (synchronous-circuit register
-pattern) verified via AC-3 round-trip — <strong>VERIFIED</strong>, 120+
-Swift tests green - Snapshot v4 + WAL + MVCC — durable like a real
-database - Bitwise LUT composition (<code>COMPOSE AND/OR/XOR/NOT</code>)
-for runtime graph simplification - ~2 ms per tick at 1 M nodes on M5 Max
-(engine throughput at the demo scale) - Pointer to the engine repo + the
-wiki tab at <code>github.com/norayr-m/dagdb-engine/wiki</code></p>
+pattern) demonstrated on a 1-bit register and a 4-bit ripple counter
+(Hopfield / Boolean-feedback / AC-3 expressible on the primitive, not
+yet demonstrated) — <strong>191 Swift tests green</strong> on main -
+Snapshot v5 + WAL + snapshot-on-read isolation — durable like a real
+database (full per-node MVCC is an open upgrade path, not implemented) -
+Bitwise LUT composition (<code>COMPOSE AND/OR/XOR/NOT</code>) for
+runtime graph simplification - 1 M-node tick time measured in-test on
+M5 Max (no committed benchmark artefact) - Pointer to the engine repo
++ the wiki tab at <code>github.com/norayr-m/dagdb-engine/wiki</code></p>
 <p><strong>What this slide does NOT do:</strong> - Claim “thinking
 engine” — explicitly off per <code>one_pager.md</code>. Speedboat for
 one narrow class of structured-dependency reasoning. - Mix
@@ -1209,7 +1228,7 @@ Savanna-physics framing in (those are different engines)</p>
 six inputs. Same primitive that lives at the heart of an FPGA. Nodes
 wire into a ranked acyclic graph; the engine evaluates the whole graph
 in parallel on the GPU each tick. Persistent like a real database —
-snapshots, write-ahead log, multi-version reads. One machine.</p>
+snapshots, write-ahead log, snapshot-on-read isolation. One machine.</p>
 <p><strong>The four verified pieces.</strong></p>
 <ol type="1">
 <li><em>6-bounded ranked DAG with LUT6.</em> The engine. Bounded fan-in
@@ -1220,18 +1239,22 @@ integer.</li>
 <li><em>BACK_EDGE primitive — synchronous-circuit register pattern.</em>
 Combinational logic for the within-tick pass, plus typed back-edges that
 latch state across tick boundaries. The same shape as Verilog
-<code>reg</code> / non-blocking assignments. Verified end-to-end by AC-3
-Australia 3-coloring round-trip against an independent Python reference:
-per-tick equality across 21 register nodes, converges in 2 synchronous
-ticks. <strong>120+ Swift tests green.</strong> Without BACK_EDGE the
-substrate hosts only feed-forward Boolean DAGs; with it, AC-style
-constraint propagation, Hopfield-shape recurrent networks, and any
-register-clocked dynamical system become natively expressible.</li>
-<li><em>Snapshot v4 + WAL + MVCC.</em> Power-loss-durable writes via
-<code>F_FULLFSYNC</code> + <code>replaceItemAt</code> + dir fsync
-(Apple-SSD discipline). WAL replay rolls forward through a crash. Reader
-sessions take snapshots without blocking writers — concurrent queries
-see a consistent view of the graph.</li>
+<code>reg</code> / non-blocking assignments. Demonstrated end-to-end by
+a 1-bit register toggle (per-tick equality with an independent Python
+reference across 21 register nodes; converges in 2 synchronous ticks)
+and a 4-bit ripple counter reading <code>tick % 16</code> for 16+ ticks.
+<strong>191 Swift tests green</strong> on main. AC-3 constraint
+propagation, Hopfield-shape recurrent networks, and any register-clocked
+dynamical system are expressible on this primitive (named in the engine
+docstrings as design targets), but are not yet demonstrated with
+committed tests.</li>
+<li><em>Snapshot v5 + WAL + snapshot-on-read isolation.</em>
+Power-loss-durable writes via <code>F_FULLFSYNC</code> +
+<code>replaceItemAt</code> + dir fsync (Apple-SSD discipline). WAL
+replay rolls forward through a crash. Reader sessions take a
+full-engine snapshot without blocking writers — concurrent queries see
+a consistent view of the graph. (This is snapshot-on-read isolation,
+not full per-node MVCC; the latter is an open upgrade path.)</li>
 <li><em>Bitwise LUT composition (COMPOSE).</em>
 <code>COMPOSE AND src1 src2 INTO dst</code>, plus
 <code>OR/XOR/NOT</code>. Collapses subgraphs into single LUTs without
@@ -1239,8 +1262,10 @@ re-evaluating the original tree at runtime. Useful for graph
 simplification passes and for synthesizing complex gates from
 primitives.</li>
 </ol>
-<p><strong>Throughput.</strong> ~2 ms per tick at one million nodes on
-M5 Max.</p>
+<p><strong>Throughput.</strong> 1 M-node tick time measured in-test on
+M5 Max — in-test timing, not a committed benchmark artefact. (Will
+become citable once a committed CSV/JSON results file lands in the
+tree.)</p>
 <h2 id="diagram-full-architecture">Diagram — full architecture</h2>
 <p>Lifted verbatim from
 <code>dagdb-engine/site/sql-architecture.html</code> (slide 15).</p>
@@ -1307,8 +1332,10 @@ page is the deepest written reference for the primitive.</p>
 <code>https://github.com/norayr-m/dagdb-engine</code></li>
 <li>Engine site:
 <code>https://norayr-m.github.io/dagdb-engine/site/index.html</code></li>
-<li>Calibration rows in <code>../one_pager.md</code>: BACK_EDGE/AC-3,
-Snapshot v4, MVCC, COMPOSE LUT — all VERIFIED</li>
+<li>Calibration rows in <code>../one_pager.md</code>: BACK_EDGE (toggle
++ ripple counter demonstrated; AC-3 / Hopfield / Boolean-feedback
+expressible-not-demonstrated), Snapshot v5, snapshot-on-read isolation,
+COMPOSE LUT</li>
 </ul>
 <h2 id="calibration-block-fill-at-draft-time">Calibration block (fill at
 draft time)</h2>
@@ -1329,25 +1356,51 @@ draft time)</h2>
 <td>VERIFIED</td>
 </tr>
 <tr>
-<td>BACK_EDGE primitive, AC-3 verified</td>
-<td>VERIFIED — 120+ tests, per-tick equality with Python reference</td>
+<td>BACK_EDGE primitive — 1-bit register + 4-bit ripple counter</td>
+<td>VERIFIED — committed XCTests, per-tick equality with Python
+reference</td>
 </tr>
 <tr>
-<td>Snapshot v4 + WAL + MVCC</td>
-<td>VERIFIED</td>
+<td>BACK_EDGE substrate for AC-3 / Hopfield / Boolean-feedback CA</td>
+<td>EXPRESSIBLE, NOT YET DEMONSTRATED — named as design targets in
+engine docstrings; no committed demo or test</td>
+</tr>
+<tr>
+<td>Snapshot v5 + WAL + snapshot-on-read isolation</td>
+<td>VERIFIED — crash-tail truncation, atomic save, validator. Full
+per-node MVCC is an open upgrade path, not implemented.</td>
 </tr>
 <tr>
 <td>Bitwise LUT composition (COMPOSE)</td>
 <td>VERIFIED</td>
 </tr>
 <tr>
-<td>~2 ms per tick at 1 M nodes on M5 Max</td>
-<td>VERIFIED — measured</td>
+<td>1 M-node tick time on M5 Max</td>
+<td>MEASURED IN-TEST — no committed benchmark artefact yet</td>
+</tr>
+<tr>
+<td>Test suite size on main</td>
+<td>191 Swift test functions (DagDBTests + DagDBDaemonKitTests) + ~16
+Python plugin tests</td>
+</tr>
+<tr>
+<td>evalLUT6 evaluation model</td>
+<td>Boolean LUT6 over 3-valued Kleene truth state
+{FALSE, TRUE, UNDEFINED}; UNDEFINED = paradox horizon, mapped to 0.5
+only in the weighted kernel. NOT signed −1/0/+1 ternary arithmetic at
+the eval level. (The −1/0/+1 ternary is the hive's higher-level
+primitive, not what the GPU LUT pass implements.)</td>
 </tr>
 <tr>
 <td>Substrate hosts AC-style iteration to fixed point</td>
-<td>VERIFIED via the AC-3 round-trip; substrate-class generalisation NOT
-claimed</td>
+<td>EXPRESSIBLE on BACK_EDGE; AC-3 round-trip is a design target, not a
+committed test or daemon run-log. Substrate-class generalisation NOT
+claimed.</td>
+</tr>
+<tr>
+<td>Tokyo CA on DagDB (200×200 Greenberg-Hastings)</td>
+<td>ON BRANCH <code>slvr/tokyo-prep</code>, UNMERGED — tests and demo
+live on the slvr worktree, not yet on <code>-main</code> or shipped</td>
 </tr>
 <tr>
 <td>10¹¹ tile-streaming on one M5</td>
@@ -2627,7 +2680,7 @@ LUT6 per node</text>
 <text x="300" y="120" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#a8863a">BACK_EDGE
 / AC-3</text>
 <text x="300" y="140" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" fill="#a8863a">snapshot
-v4 + WAL</text>
+v5 + WAL</text>
 <rect x="410" y="40" width="170" height="120" fill="none" stroke="#d4af37" stroke-width="2" rx="4"/>
 <text x="495" y="70" text-anchor="middle" font-family="ui-monospace,monospace" font-size="14" fill="#d4af37">Bio
 Digital Twin</text>
@@ -2646,21 +2699,27 @@ substrate</text>
 end-to-end.</strong></p>
 <ol type="1">
 <li><p><strong>Savanna Engine — ultra-scale spatial lattice on Apple
-Silicon.</strong> 100 billion cells over 9 hours on one M5 Max, 15.8
-GCUPS peak, 500 GB state file at the M5 thermal ceiling.
-<strong>VERIFIED</strong> as an existence proof for what consumer
-hardware can actually do under careful dispatch + Morton-Z-curve memory
+Silicon.</strong> 100 million cells running realtime, interactive, on
+one M5 Max laptop — <strong>VERIFIED, live demonstrable</strong>. Batch
+ceiling pushed to 100 billion cells over 9 hours, 15.8 GCUPS peak,
+500 GB state file at the M5 thermal limit — author-attested,
+re-runnable from driver + engine, run artefacts not committed (not
+currently reader-verifiable). Existence proof for what consumer
+hardware can carry under careful dispatch + Morton-Z-curve memory
 layout + 7-coloring parallel-safe scheduling.</p></li>
 <li><p><strong>DagDB engine — Boolean-circuit-as-database.</strong> A
 graph database where every node holds a 64-bit truth table (a LUT6 — the
 same primitive at the heart of an FPGA), wired into a ranked acyclic
 graph evaluated in parallel on the GPU each tick. <strong>BACK_EDGE
-primitive</strong> (synchronous-circuit register pattern) verified by
-AC-3 constraint-propagation round-trip against a Python reference:
-per-tick equality across 21 register nodes, converges in 2 synchronous
-ticks. Snapshot v4 with WAL replay, multi-version reads, atomic save
-discipline; bitwise LUT composition at runtime; honey-on-DagDB lossless
-round-trip probe. <strong>VERIFIED.</strong></p></li>
+primitive</strong> (synchronous-circuit register pattern) demonstrated
+on a 1-bit register toggle and a 4-bit ripple counter against a Python
+reference (per-tick equality across 21 register nodes, converges in 2
+synchronous ticks; AC-3 / Hopfield / Boolean-feedback expressible on the
+primitive, not yet demonstrated). Snapshot v5 with WAL replay,
+snapshot-on-read isolation, atomic save discipline; bitwise LUT
+composition at runtime; honey-on-DagDB lossless round-trip probe. 191
+Swift tests green on main. <strong>VERIFIED at the substrate
+level.</strong></p></li>
 <li><p><strong>Bio digital twin substrate.</strong> Graph-CA-on-topology
 framework that takes the Savanna throughput and the DagDB substrate and
 targets tissue-scale biological models. Hepatocyte 10⁷ Pass 2
@@ -2786,9 +2845,10 @@ operator. No magic.</p></li>
 </ol>
 <h2 id="why-this-matters-for-the-substance-below">Why this matters for
 the substance below</h2>
-<p>The throughput numbers in the rest of this deck (Savanna 100 billion
-cells, DagDB BACK_EDGE/AC-3 verified, etc.) come from work organised
-under this discipline. The discipline is not load-bearing for the
+<p>The throughput numbers in the rest of this deck (Savanna 100 M
+realtime + 100 B batch, DagDB BACK_EDGE demonstrated on 1-bit register
++ 4-bit ripple counter, etc.) come from work organised under this
+discipline. The discipline is not load-bearing for the
 <em>results</em> — the engines are real, the tests pass, the numbers are
 measurable on independent hardware. The discipline is load-bearing for
 the <em>honesty</em> of the labels around the results: distinguishing
@@ -2909,7 +2969,7 @@ signal propagation, regeneration dynamics.</li>
 <li>Query the running simulation via SQL (Postgres view layer over the
 graph, <strong>SPEC</strong>) and via the structured-knowledge MCP
 surface.</li>
-<li>Persist state durably (snapshot v4 + WAL replay,
+<li>Persist state durably (snapshot v5 + WAL replay,
 <strong>VERIFIED</strong> at the substrate level).</li>
 </ul>
 <h2 id="why">Why</h2>
@@ -2940,14 +3000,19 @@ the substrate is one ingredient.</p>
 <ul>
 <li><strong>Throughput at scale.</strong> The Savanna lineage
 (predecessor engine, same hardware, same dispatch + Morton + 7-coloring
-machinery that DagDB inherits) ran 100 billion cells in 9 hours on one
-M5 Max, hitting the M5 thermal ceiling and producing a 500 GB state
+machinery that DagDB inherits) carries 100 million cells in realtime
+interactively, and pushed the batch ceiling to 100 billion cells over
+9 hours on one M5 Max — hitting the thermal limit at 500 GB state
 file. This is the <strong>existence proof</strong> for what this
-hardware can actually carry.</li>
-<li><strong>DagDB engine.</strong> Boolean-circuit-as-database with
-BACK_EDGE primitive (verified via AC-3 round-trip) gives the
-synchronous- circuit register pattern needed for any feedback-loop
-biology. Snapshot v4 + WAL + multi-version reads make it durable like a
+hardware can actually carry (100 M realtime: reader-verifiable;
+100 B batch: author-attested, re-runnable, artefacts not committed).</li>
+<li><strong>DagDB engine.</strong> Boolean-circuit-as-database with the
+<code>BACK_EDGE</code> primitive — demonstrated on a 1-bit register
+toggle and a 4-bit ripple counter — gives the synchronous-circuit
+register pattern needed for any feedback-loop biology. AC-3 / Hopfield
+/ Boolean-feedback are expressible on this primitive and named as
+design targets, but are not yet demonstrated with committed tests.
+Snapshot v5 + WAL + snapshot-on-read isolation make it durable like a
 real database.</li>
 <li><strong>Apple Silicon UMA.</strong> Unified memory architecture
 removes the GPU/CPU copy that dominates traditional discrete-GPU bio
@@ -3551,13 +3616,17 @@ on current main (re-run benchmark) - [ ] Pub-screen pass</p>
 <p>bzz. — slvr.</p>
 </article>
 <article class="slide" id="tokyo_ca_voronoi">
-<h1 id="tokyo-ca-on-dagdb-wave-collision-voronoi-verified">Tokyo CA on
-DagDB — wave-collision Voronoi (VERIFIED)</h1>
+<h1 id="tokyo-ca-on-dagdb-wave-collision-voronoi-branch-slvr">Tokyo CA
+on DagDB — wave-collision Voronoi (branch <code>slvr/tokyo-prep</code>,
+unmerged)</h1>
 <blockquote>
-<p><em>Calibration: this slide reports a VERIFIED build. The 200×200
-Tokyo Greenberg-Hastings cellular automaton runs end-to-end on the DagDB
-substrate; convergence + dashboard + per-tick recording all measurable
-on current main. Honest framing guard: this is NOT a slime-mold network
+<p><em>Calibration: this demo lives on the <code>slvr/tokyo-prep</code>
+worktree branch and is NOT on <code>-main</code> or shipped — the
+TokyoCATests + examples/tokyo_ca/ files are on the slvr branch only.
+Will graduate to "VERIFIED on main" once the solver prince merges. The
+200×200 Tokyo Greenberg-Hastings cellular automaton runs end-to-end on
+the DagDB substrate; convergence + dashboard + per-tick recording all
+measurable on the slvr branch. Honest framing guard: this is NOT a slime-mold network
 — that’s an explicit overclaim flagged in <code>one_pager.md</code>. The
 result is a Voronoi tessellation between food sources, produced by
 wave-front collision. See <code>demos/tokyo_ca.md</code> (consolidated
@@ -3602,9 +3671,9 @@ cell updates in lock-step with no race; the 7-coloring guarantees
 distance-2 independence on the hex lattice (Molloy &amp; Salavatipour
 2005).</li>
 <li><strong>The substrate runs a recurrent computation as a database
-operation.</strong> Snapshot, replay, MVCC query against any tick — all
-with the existing engine API. Not a special-purpose simulator bolted on
-the side.</li>
+operation.</strong> Snapshot, replay, snapshot-on-read isolation against
+any tick — all with the existing engine API. Not a special-purpose
+simulator bolted on the side.</li>
 </ol>
 <hr />
 <h2 id="why-this-is-not-slime-mold">Why this is NOT slime mold</h2>
@@ -3623,12 +3692,12 @@ side slide), running on a different substrate.</li>
 <li><strong>Not new computer science.</strong> Greenberg-Hastings
 excitable CA is from 1978. The engineering contribution is having it run
 as a ranked LUT6 DAG with <code>BACK_EDGE</code> register latching, on a
-GPU substrate with WAL + multi-version reads — same ingredients as a
+GPU substrate with WAL + snapshot-on-read isolation — same ingredients as a
 real-time database, applied to a CA workload.</li>
 </ol>
 <hr />
-<h2 id="numbers-verified-on-current-main-2026-05-01">Numbers (verified
-on current main, 2026-05-01)</h2>
+<h2 id="numbers-slvr-branch-2026-05-01">Numbers (slvr/tokyo-prep
+branch, 2026-05-01 — see calibration note above)</h2>
 <table>
 <colgroup>
 <col style="width: 30%" />
@@ -3676,8 +3745,8 @@ on current main, 2026-05-01)</h2>
 <tr>
 <td>Convergence</td>
 <td style="text-align: right;"><strong>160 ticks</strong> ✓</td>
-<td><code>swift test TokyoCATests/testTokyoSolve200x200</code> re-run
-2026-05-01</td>
+<td><code>swift test TokyoCATests/testTokyoSolve200x200</code> on
+<code>slvr/tokyo-prep</code> branch, 2026-05-01</td>
 </tr>
 <tr>
 <td>Total wall</td>
@@ -3987,8 +4056,9 @@ scaling ceiling</td>
 <tr>
 <td><strong>Dag</strong></td>
 <td>Engine, DagDB internals, architecture</td>
-<td>BACK_EDGE / AC-3, snapshot v4, MVCC, COMPOSE LUT, tile-streaming
-spec, gear-level questions</td>
+<td>BACK_EDGE (toggle + ripple counter; AC-3 expressible-not-yet-
+demonstrated), snapshot v5, snapshot-on-read isolation, COMPOSE LUT,
+tile-streaming spec, gear-level questions</td>
 </tr>
 <tr>
 <td><strong>Fold</strong></td>
