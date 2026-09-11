@@ -43,3 +43,7 @@ Also: [three-basket-backup](https://github.com/norayr-m/three-basket-backup_one-
 ---
 
 Interactive demonstrations were built with AI assistants (Claude, Gemini). The mathematics is mine; the code was collaborative.
+
+---
+
+Content of this profile repository: Apache 2.0 (see `LICENSE`). Each linked project carries its own licence.
